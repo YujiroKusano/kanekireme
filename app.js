@@ -58,64 +58,66 @@ app.post('/callback', function(req, res) {
             }
         },
     ],
-    function(displayName) {
-        require('dotenv').config();
-        var messageText = 'message';
-        //ヘッダー部を定義
-        var headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
-        };
-        //返信内容を定義
-        var data = {
-            'replyToken': req.body['events'][0]['replyToken'],
-            'messages': [{
-                'type': 'text',
-                'text': displayName + messageText,
-                "quickReply": {
-                    "items": [
-                        {
-                            "type": "action",
-                            "imageUrl": "https://example.com/sushi.png",
-                            "action": {
-                                "type": "message",
-                                "label": "借りる",
-                                "text": "借りる"
-                            }
-                        },
-                          {
-                            "type": "action",
-                            "imageUrl": "https://example.com/sushi.png",
-                            "action": {
-                                "type": "message",
-                                "label": "貸す",
-                                "text": "貸す"
-                            }
-                        },
-                    ]
-                }   
-            }
-        ]};
-        
-        //オプションを定義
-        var options = {
-            url: 'https://api.line.me/v2/bot/message/reply',
-            proxy: process.env.FIXIE_URL,
-            headers: headers,
-            json: true,
-            body: data
-        };
-
-        // request.post(options, function(error, response, body) {
-        //     if(!error && response.statusCode == 200) {
-        //         console.log(body);
-        //     } else {
-        //         console.log('error: ' + JSON.stringify(response));
-        //     }
-        // });
-    });
+    stage1(displayName));
 });
 
+function stage1(displayName) {
+    require('dotenv').config();
+    var messageText = 'message';
+    //ヘッダー部を定義
+    var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+    };
+    //返信内容を定義
+    var data = {
+        'replyToken': req.body['events'][0]['replyToken'],
+        'messages': [{
+            'type': 'text',
+            'text': displayName + messageText,
+            "quickReply": {
+                "items": [
+                    {
+                        "type": "action",
+                        "imageUrl": "https://example.com/sushi.png",
+                        "action": {
+                            "type": "message",
+                            "label": "借りる",
+                            "text": "借りる"
+                        }
+                    },
+                      {
+                        "type": "action",
+                        "imageUrl": "https://example.com/sushi.png",
+                        "action": {
+                            "type": "message",
+                            "label": "貸す",
+                            "text": "貸す"
+                        }
+                    },
+                ]
+            }   
+        }
+    ]};
+    
+    //オプションを定義
+    var options = {
+        url: 'https://api.line.me/v2/bot/message/reply',
+        proxy: process.env.FIXIE_URL,
+        headers: headers,
+        json: true,
+        body: data
+    };
+
+    request.post(options, function(error, response, body) {
+        if(!error && response.statusCode == 200) {
+            console.log(body);
+            
+        } else {
+            console.log('error: ' + JSON.stringify(response));
+        }
+    });
+}
 app.listen(app.get('port'), function() {
     console.log('Node app is running');
 });
