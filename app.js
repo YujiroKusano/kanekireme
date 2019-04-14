@@ -72,17 +72,26 @@ app.post('/callback', function(req, res) {
             'messages': [{
                 'type': 'text',
                 'text': displayName + messageText,
-                "quickReply": { // ②
+                "quickReply": {
                     "items": [
-                      {
-                        "type": "action", // ③
-                        "imageUrl": "https://example.com/sushi.png",
-                        "action": {
-                          "type": "message",
-                          "label": "Sushi",
-                          "text": "Sushi"
-                        }
-                      }
+                        {
+                            "type": "action",
+                            "imageUrl": "https://example.com/sushi.png",
+                            "action": {
+                                "type": "message",
+                                "label": "借りる",
+                                "text": "誰から借りますか"
+                            }
+                        },
+                          {
+                            "type": "action",
+                            "imageUrl": "https://example.com/sushi.png",
+                            "action": {
+                                "type": "message",
+                                "label": "貸す",
+                                "text": "誰に貸しますか"
+                            }
+                        },
                     ]
                 }
                 
