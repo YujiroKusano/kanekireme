@@ -69,7 +69,7 @@ app.post('/callback', function(req, res) {
         //keywordの文字を含む場合のみ反応する
         if(req.body['events'][0]['message']['text'].indexOf(keyword1) == -1 
             || req.body['events'][0]['message']['text'].indexOf(keyword2) == -1) {
-            console.log('text ERROR');
+            console.log('text ERROR2');
             return;
         }
         //個人チャットの場合の処理
