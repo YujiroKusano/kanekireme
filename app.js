@@ -21,14 +21,17 @@ app.post('/callback', function(req, res) {
         function(callback) {
             //LINEから正式に送られてきたかを確認する
             if(!validate_signature(req.headers['x-line-signature'], req.body)) {
+                console.log('LINE ERROR');
                 return;
             }
             //TextまたはMessageが送られてきた場合のみ反応する
             if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
+                console.log('MESSAGE ERROR');
                 return;
             }
             //keywordの文字を含む場合のみ反応する
             if(req.body['events'][0]['message']['text'].indexOf(keyword) == -1) {
+                console.log('text ERROR');
                 return;
             }
             //個人チャットの場合の処理
