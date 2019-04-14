@@ -7,9 +7,6 @@ var crypto = require('crypto');
 var async = require('async');
 
 app.set('port', (process.env.PORT || 8000));
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
 
 app.use(bodyParser);
 var keyword = 'test';
