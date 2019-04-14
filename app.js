@@ -8,7 +8,11 @@ var async = require('async');
 
 app.set('port', (process.env.PORT || 8000));
 
-app.use(bodyParser);
+// JSONの送信を許可
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 var keyword = 'test';
 app.post('/callback', function(req, res) {
     require('dotenv').config();
