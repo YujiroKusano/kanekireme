@@ -59,7 +59,7 @@ app.post('/callback', function(req, res) {
         },
     ],
     function(displayName) {
-    require('dotenv').config();
+        require('dotenv').config();
         var messageText = 'message';
         //ヘッダー部を定義
         var headers = {
