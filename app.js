@@ -2,7 +2,8 @@
 
 var express = require('express');
 var app = express();
-var bodyParser = require('request');
+var bodyParser = require('body-parser');
+var request = require('request');
 var crypto = require('crypto');
 var async = require('async');
 
