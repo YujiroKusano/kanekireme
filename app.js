@@ -48,7 +48,7 @@ app.post('/callback', function(req, res) {
                 };
                 request.get(get_profile_options, function(error, response, body) {
                     if(!error && response.statusCode == 200) {
-                        callback(body['displayName']);
+                        stage1(body['displayName']);
                     }
                 });
             } 
@@ -58,8 +58,7 @@ app.post('/callback', function(req, res) {
             }
         },
     ],
-    stage1(displayName));
-});
+)});
 
 function stage1(displayName) {
     require('dotenv').config();
