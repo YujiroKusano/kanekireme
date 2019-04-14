@@ -68,7 +68,7 @@ app.post('/callback', function(req, res) {
                 'type': 'text',
                 'text': displayName + messageText,
             }]
-        },
+        };
         //オプションを定義
         var options = {
             url: 'https://api.line.me/v2/bot/message/reply',
