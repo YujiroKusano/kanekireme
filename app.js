@@ -24,7 +24,7 @@ app.post('/callback', function(req, res) {
                 return;
             }
             //TextまたはMessageが送られてきた場合のみ反応する
-            if((req.body['events'][0]['type'] != 'message') || (req.body['event'][0]['type'] != 'texy')) {
+            if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
                 return;
             }
             //keywordの文字を含む場合のみ反応する
