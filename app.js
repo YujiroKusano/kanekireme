@@ -54,10 +54,47 @@ app.post('/callback', function(req, res) {
             } 
             //グループチャットの場合の処理
             else if('room' == req.body['events'][0]['source']['type']) {
-                callback('あなた');
+                stage1('あなた', req);
             }
         },
     ],
+    function(callback) {
+        var keyword1 ='借りる';
+        var keyword2 ='貸す';
+        //TextまたはMessageが送られてきた場合のみ反応する
+        if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
+            console.log('MESSAGE ERROR');
+            return;
+        }
+        //keywordの文字を含む場合のみ反応する
+        if(req.body['events'][0]['message']['text'].indexOf(keyword1) == -1 
+            || req.body['events'][0]['message']['text'].indexOf(keyword2) == -1) {
+            console.log('text ERROR');
+            return;
+        }
+        //個人チャットの場合の処理
+        if(req.body['events'][0]['source']['type'] == 'user') {
+            //ユーザーIDからユーザー名を取得
+            var user_id = req.body['events'][0]['source']['userId'];
+            var get_profile_options = {
+                url: 'https://api.line.me/v2/bot/profile/' + user_id,
+                proxy: process.env.FIXIE_URL,
+                json: true,
+                headers: {
+                    'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}'
+                }
+            };
+            request.get(get_profile_options, function(error, response, body) {
+                if(!error && response.statusCode == 200) {
+                    stage1(body['displayName'], req);
+                }
+            });
+        } 
+        //グループチャットの場合の処理
+        else if('room' == req.body['events'][0]['source']['type']) {
+            stage1('あなた', req);
+        }
+    },
 )});
 
 function stage1(displayName, req) {
