@@ -6,9 +6,15 @@ var bodyParser = require('request');
 var crypto = require('crypto');
 var async = require('async');
 
+app.set('port', (proccess.env.port || 8000));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 app.use(bodyParser);
-var keyword = '';
+var keyword = 'test';
 app.post('/callback', function(req, res) {
+    require('dotenv').config();
     async.waterfall([
         function(callback) {
             //LINEから正式に送られてきたかを確認する
@@ -48,6 +54,7 @@ app.post('/callback', function(req, res) {
         },
     ],
     function(displayName) {
+    require('dotenv').config();
         var messageText = 'message';
         //ヘッダー部を定義
         var headers = {
