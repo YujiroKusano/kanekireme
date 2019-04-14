@@ -80,7 +80,7 @@ app.post('/callback', function(req, res) {
                             "action": {
                                 "type": "message",
                                 "label": "借りる",
-                                "text": "誰から借りますか"
+                                "text": "借りる"
                             }
                         },
                           {
@@ -89,12 +89,11 @@ app.post('/callback', function(req, res) {
                             "action": {
                                 "type": "message",
                                 "label": "貸す",
-                                "text": "誰に貸しますか"
+                                "text": "貸す"
                             }
                         },
                     ]
-                }
-                
+                }   
             }
         ]};
         
@@ -107,13 +106,13 @@ app.post('/callback', function(req, res) {
             body: data
         };
 
-        request.post(options, function(error, response, body) {
-            if(!error && response.statusCode == 200) {
-                console.log(body);
-            } else {
-                console.log('error: ' + JSON.stringify(response));
-            }
-        });
+        // request.post(options, function(error, response, body) {
+        //     if(!error && response.statusCode == 200) {
+        //         console.log(body);
+        //     } else {
+        //         console.log('error: ' + JSON.stringify(response));
+        //     }
+        // });
     });
 });
 
