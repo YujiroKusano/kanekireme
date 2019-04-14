@@ -45,7 +45,7 @@ app.post('/callback', function(req, res) {
                     headers: {
                         'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}'
                     }
-                }
+                };
                 request.get(get_profile_options, function(error, response, body) {
                     if(!error && response.statusCode == 220) {
                         callback(body['displayName']);
