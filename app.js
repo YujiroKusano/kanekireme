@@ -6,7 +6,7 @@ var bodyParser = require('request');
 var crypto = require('crypto');
 var async = require('async');
 
-app.set('port', (proccess.env.port || 8000));
+app.set('port', (proccess.env.PORT || 8000));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
