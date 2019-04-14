@@ -77,7 +77,14 @@ app.post('/callback', function(req, res) {
             json: true,
             body: data
         };
-    })
+        request.post(options, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                console.log(body);
+            } else {
+                console.log('error: ' + JSON.stringify(response));
+            }
+        });
+    });
 });
 
 app.listen(app.get('port'), function() {
