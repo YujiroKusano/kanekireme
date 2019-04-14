@@ -72,15 +72,47 @@ app.post('/callback', function(req, res) {
             'messages': [{
                 'type': 'text',
                 'text': displayName + messageText,
-            }]
-        };
+            }
+        ]};
+        message = {
+            "type": "text",
+            "text": "じゃんけんぽん！",
+            "quickReply": {
+              "items": [
+                {
+                  "type": "action",
+                  "action": {
+                    "type": "message",
+                    "label": "パー",
+                    "text": "パー"
+                  }
+                },
+                {
+                  "type": "action",
+                  "action": {
+                    "type": "message",
+                    "label": "グー",
+                    "text": "グー"
+                  }
+                },
+                {
+                  "type": "action",
+                  "action": {
+                    "type": "message",
+                    "label": "チョキ",
+                    "text": "チョキ"
+                  }
+                }
+              ]
+            }
+          }
         //オプションを定義
         var options = {
             url: 'https://api.line.me/v2/bot/message/reply',
             proxy: process.env.FIXIE_URL,
             headers: headers,
             json: true,
-            body: data
+            body: message
         };
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
