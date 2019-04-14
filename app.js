@@ -94,6 +94,6 @@ app.listen(app.get('port'), function() {
 });
 
 function validate_signature(signature, body) {
-    return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(
-        new Buffer(JSON.stringify(body), 'utf8')).digest('base64');
+    var buf1 = Buffer.from(JSON.stringify(body), 'utf8');
+    return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
