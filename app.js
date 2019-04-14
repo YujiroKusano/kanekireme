@@ -95,5 +95,5 @@ app.listen(app.get('port'), function() {
 
 function validate_signature(signature, body) {
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(
-        Buffer.form(JSON.stringify(body), 'utf8')).digest('base64');
+        new Buffer.form(JSON.stringify(body), 'utf8')).digest('base64');
 }
