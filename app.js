@@ -107,7 +107,7 @@ function stage1(displayName, req) {
         'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
     };
     var template = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
-    var data2 = template.button;
+    var data2 = template.item;
     //返信内容を定義
     var data = {
         'replyToken': req.body['events'][0]['replyToken'],
