@@ -49,7 +49,7 @@ app.post('/callback', function(req, res) {
                 request.get(get_profile_options, function(error, response, body) {
                     if(!error && response.statusCode == 200) {
                         stage1(body['displayName'], req);
-
+                        
                     }
                 });
             } 
@@ -108,56 +108,147 @@ function stage1(displayName, req) {
     };
     //返信内容を定義
     var data = {
-        'replyToken': req.body['events'][0]['replyToken'],
-        'messages': [{
-            'type': 'text',
-            'text': displayName + messageText,
-            "quickReply": {
-                "items": [
-                    {
-                        "type": "action",
-                        "imageUrl": "https://example.com/sushi.png",
-                        "action": {
-                            "type": "message",
-                            "label": "一覧",
-                            "text": "一覧"
-                        }
-                    },
-                      {
-                        "type": "action",
-                        "imageUrl": "https://example.com/sushi.png",
-                        "action": {
-                            "type": "message",
-                            "label": "借りる",
-                            "text": "借りる"
-                        }
-                    },
-                    {
-                        "type": "action",
-                        "imageUrl": "https://example.com/sushi.png",
-                        "action": {
-                            "type": "message",
-                            "label": "貸す",
-                            "text": "貸す"
-                        }
-                    },
-                    {
-                        "type": "action",
-                        "imageUrl": "https://example.com/sushi.png",
-                        "action": {
-                            "type": "message",
-                            "label": "返済",
-                            "text": "返済"
-                        }
-                    },
-                ]
-            }   
-        }
-    ]};
+        // 'replyToken': req.body['events'][0]['replyToken'],
+        // 'messages': [{
+        //     'type': 'text',
+        //     'text': displayName + messageText,
+        //     "quickReply": {
+        //         "items": [
+        //             {
+        //                 "type": "action",
+        //                 "imageUrl": "https://example.com/sushi.png",
+        //                 "action": {
+        //                     "type": "message",
+        //                     "label": "一覧",
+        //                     "text": "一覧"
+        //                 }
+        //             },
+        //               {
+        //                 "type": "action",
+        //                 "imageUrl": "https://example.com/sushi.png",
+        //                 "action": {
+        //                     "type": "message",
+        //                     "label": "借りる",
+        //                     "text": "借りる"
+        //                 }
+        //             },
+        //             {
+        //                 "type": "action",
+        //                 "imageUrl": "https://example.com/sushi.png",
+        //                 "action": {
+        //                     "type": "message",
+        //                     "label": "貸す",
+        //                     "text": "貸す"
+        //                 }
+        //             },
+        //             {
+        //                 "type": "action",
+        //                 "imageUrl": "https://example.com/sushi.png",
+        //                 "action": {
+        //                     "type": "message",
+        //                     "label": "返済",
+        //                     "text": "返済"
+        //                 }
+        //             },
+        //         ]
+        //     }   
+        // }
+    // ]
+    {
+        "size":{
+            "width":2500,
+            "height":1686
+        },
+        "selected":false,
+        "name":"Controller",
+        "chatBarText":"Controller",
+        "areas":[
+            {
+              "bounds":{
+                  "x":551,
+                  "y":325,
+                  "width":321,
+                  "height":321
+              },
+              "action":{
+                  "type":"message",
+                  "text":"up"
+              }
+            },
+            {
+              "bounds":{
+                  "x":876,
+                  "y":651,
+                  "width":321,
+                  "height":321
+              },
+              "action":{
+                  "type":"message",
+                  "text":"right"
+              }
+            },
+            {
+              "bounds":{
+                  "x":551,
+                  "y":972,
+                  "width":321,
+                  "height":321
+              },
+              "action":{
+                  "type":"message",
+                  "text":"down"
+              }
+            },
+            {
+              "bounds":{
+                  "x":225,
+                  "y":651,
+                  "width":321,
+                  "height":321
+              },
+              "action":{
+                  "type":"message",
+                  "text":"left"
+              }
+            },
+            {
+              "bounds":{
+                  "x":1433,
+                  "y":657,
+                  "width":367,
+                  "height":367
+              },
+              "action":{
+                  "type":"message",
+                  "text":"btn b"
+              }
+            },
+            {
+              "bounds":{
+                  "x":1907,
+                  "y":657,
+                  "width":367,
+                  "height":367
+              },
+              "action":{
+                  "type":"message",
+                  "text":"btn a"
+              }
+            }
+        ]
+      }
+};
     
     //オプションを定義
+    // var options = {
+    //     url: 'https://api.line.me/v2/bot/richmenu',
+    //     proxy: process.env.FIXIE_URL,
+    //     headers: headers,
+    //     json: true,
+    //     body: data
+    // };
     var options = {
-        url: 'https://api.line.me/v2/bot/user/all/richmenu/{richMenuId}',
+        url: 'https://api.line.me/v2/bot/message/reply',
         proxy: process.env.FIXIE_URL,
         headers: headers,
         json: true,
