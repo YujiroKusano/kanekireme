@@ -114,7 +114,7 @@ function stage1(displayName, req) {
         'messages': [{
             'type': 'text',
             'text': displayName + messageText,
-            "quickReply": {
+            'quickReply': {
                 template
             }
 
