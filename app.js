@@ -247,13 +247,13 @@ function stage1(displayName, req) {
         json: true,
         body: data
     };
-    var options = {
-        url: 'https://api.line.me/v2/bot/message/reply',
-        proxy: process.env.FIXIE_URL,
-        headers: headers,
-        json: true,
-        body: data
-    };
+    // var options = {
+    //     url: 'https://api.line.me/v2/bot/message/reply',
+    //     proxy: process.env.FIXIE_URL,
+    //     headers: headers,
+    //     json: true,
+    //     body: data
+    // };
 
     request.post(options, function(error, response, body) {
         if(!error && response.statusCode == 200) {
