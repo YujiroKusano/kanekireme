@@ -1,6 +1,15 @@
 {
-    
+    "quickReply": {
         "items": [
+            {
+                "type": "action",
+                "imageUrl": "",
+                "action": {
+                    "type": "message",
+                    "label": "一覧",
+                    "text": "一覧"
+                }
+            },
             {
                 "type": "action",
                 "imageUrl": "",
@@ -18,6 +27,16 @@
                     "label": "貸す",
                     "text": "貸す"
                 }
-            }
+            },
+            {
+                "type": "action",
+                "imageUrl": "",
+                "action": {
+                    "type": "message",
+                    "label": "返済",
+                    "text": "返済"
+                }
+            },
         ]
+    } 
 }
