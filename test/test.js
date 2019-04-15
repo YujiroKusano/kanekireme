@@ -51,23 +51,14 @@ app.post('/callback', function(req, res) {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
         };
-        //返信内容を定義
-        var data = {
-            'replyToken': req.body['events'][0]['replyToken'],
-            'messages': [{
-                'type': 'text',
-                'text': displayName + messageText,
-                'quickReply': btnItem.quickReply  
-            }
-        ]};
-        
+        //返信内容を定義        
         オプションを定義
         var options = {
             url: 'https://api.line.me/v2/bot/richmenu',
             proxy: process.env.FIXIE_URL,
             headers: headers,
             json: true,
-            body: data
+            body: btnItem
         };
 
         request.post(options, function(error, response, body) {
