@@ -1,0 +1,24 @@
+{
+    "": {
+        "items": [
+            {
+                "type": "action",
+                "imageUrl": "",
+                "action": {
+                    "type": "message",
+                    "label": "借りる",
+                    "text": "借りる"
+                }
+            },
+            {
+                "type": "action",
+                "imageUrl": "",
+                "action": {
+                    "type": "message",
+                    "label": "貸す",
+                    "text": "貸す"
+                }
+            }
+        ]
+    }
+}
