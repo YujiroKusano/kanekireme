@@ -17,38 +17,36 @@ app.use(bodyParser.json());
 var keyword = 'test';
 app.post('/callback', function(req, res) {
     require('dotenv').config();
-        var messageText = 'message';
-        //ヘッダー部を定義
-        var headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
-        };     
-        //オプションを定義
-        var options = {
-            url: 'https://api.line.me/v2/bot/richmenu',
-            proxy: process.env.FIXIE_URL,
-            headers: headers,
-            json: true,
-            body: btnItem
-        };
+    async.waterfall(
+        function stage1(req) {
+            require('dotenv').config();
+            var messageText = 'message';
+            //ヘッダー部を定義
+            var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+            };
+            //返信内容を定義        
+            オプションを定義
+            var options = {
+                url: 'https://api.line.me/v2/bot/richmenu',
+                proxy: process.env.FIXIE_URL,
+                headers: headers,
+                json: true,
+                body: btnItem
+            };
 
-        request.post(options, function(error, response, body) {
-            if(!error && response.statusCode == 200) {
-                console.log(body);
-                var options2 = {
-                    url: 'https://api.line.me/v2/bot/user/all/richmenu/{'+body.richMenuId+'}',
-                    proxy: process.env.FIXIE_URL,
-                    headers: headers,
-                }
-                request.post(options2, function(response2, body) {
+            request.post(options, function(error, response, body) {
+                if(!error && response.statusCode == 200) {
                     console.log(body);
-                })
-            } else {
-                console.log('error: ' + JSON.stringify(response));
-            }
-        });
-    }
-);
+                    
+                } else {
+                    console.log('error: ' + JSON.stringify(response));
+                }
+            });
+        },
+    )
+});
 
 
 app.listen(app.get('port'), function() {
