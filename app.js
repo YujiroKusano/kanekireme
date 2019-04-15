@@ -8,6 +8,7 @@ var crypto = require('crypto');
 var async = require('async');
 var fs = require('fs');
 var template = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
+var data = template.item;
 app.set('port', (process.env.PORT || 8000));
 
 // JSONの送信を許可
@@ -113,7 +114,7 @@ function stage1(displayName, req) {
             'type': 'text',
             'text': displayName + messageText,
             "quickReply": {
-                template
+                data
             }
 
         }
