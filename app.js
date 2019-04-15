@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var crypto = require('crypto');
 var async = require('async');
-var fs = require('fs');
 
 app.set('port', (process.env.PORT || 8000));
 
@@ -106,100 +105,52 @@ function stage1(displayName, req) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
     };
-    var template = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
-    //var data2 = template.item;
     //返信内容を定義
     var data = {
         'replyToken': req.body['events'][0]['replyToken'],
         'messages': [{
             'type': 'text',
             'text': displayName + messageText,
-            'quickReply': {
-                "button":{
-                    "size":{
-                       "width":2500,
-                       "height":1686
+            "quickReply": {
+                "items": [
+                    {
+                        "type": "action",
+                        "imageUrl": "https://example.com/sushi.png",
+                        "action": {
+                            "type": "message",
+                            "label": "一覧",
+                            "text": "一覧"
+                        }
                     },
-                    "selected":false,
-                    "name":"Controller",
-                    "chatBarText":"Controller",
-                    "areas":[
-                       {
-                          "bounds":{
-                             "x":551,
-                             "y":325,
-                             "width":321,
-                             "height":321
-                          },
-                          "action":{
-                             "type":"message",
-                             "text":"up"
-                          }
-                       },
-                       {
-                          "bounds":{
-                             "x":876,
-                             "y":651,
-                             "width":321,
-                             "height":321
-                          },
-                          "action":{
-                             "type":"message",
-                             "text":"right"
-                          }
-                       },
-                       {
-                          "bounds":{
-                             "x":551,
-                             "y":972,
-                             "width":321,
-                             "height":321
-                          },
-                          "action":{
-                             "type":"message",
-                             "text":"down"
-                          }
-                       },
-                       {
-                          "bounds":{
-                             "x":225,
-                             "y":651,
-                             "width":321,
-                             "height":321
-                          },
-                          "action":{
-                             "type":"message",
-                             "text":"left"
-                          }
-                       },
-                       {
-                          "bounds":{
-                             "x":1433,
-                             "y":657,
-                             "width":367,
-                             "height":367
-                          },
-                          "action":{
-                             "type":"message",
-                             "text":"btn b"
-                          }
-                       },
-                       {
-                          "bounds":{
-                             "x":1907,
-                             "y":657,
-                             "width":367,
-                             "height":367
-                          },
-                          "action":{
-                             "type":"message",
-                             "text":"btn a"
-                          }
-                       }
-                    ]
-                 }
-            }
-
+                      {
+                        "type": "action",
+                        "imageUrl": "https://example.com/sushi.png",
+                        "action": {
+                            "type": "message",
+                            "label": "借りる",
+                            "text": "借りる"
+                        }
+                    },
+                    {
+                        "type": "action",
+                        "imageUrl": "https://example.com/sushi.png",
+                        "action": {
+                            "type": "message",
+                            "label": "貸す",
+                            "text": "貸す"
+                        }
+                    },
+                    {
+                        "type": "action",
+                        "imageUrl": "https://example.com/sushi.png",
+                        "action": {
+                            "type": "message",
+                            "label": "返済",
+                            "text": "返済"
+                        }
+                    },
+                ]
+            }   
         }
     ]};
     
