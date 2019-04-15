@@ -8,7 +8,7 @@ var crypto = require('crypto');
 var async = require('async');
 var fs = require('fs');
 var template = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
-var data = template.item;
+var data = template.button;
 app.set('port', (process.env.PORT || 8000));
 
 // JSONの送信を許可
