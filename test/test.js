@@ -18,7 +18,7 @@ var keyword = 'test';
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     async.waterfall(
-        function stage1(req) {
+        function(callback) {
             require('dotenv').config();
             var messageText = 'message';
             //ヘッダー部を定義
@@ -38,13 +38,27 @@ app.post('/callback', function(req, res) {
 
             request.post(options, function(error, response, body) {
                 if(!error && response.statusCode == 200) {
-                    console.log(body);
+                    callback(body);
                     
                 } else {
                     console.log('error: ' + JSON.stringify(response));
                 }
             });
         },
+        function(body) {
+            var options = {
+                url: 'https://api.line.me/v2/bot/user/all/richmenu/'+ body.richMenuId,
+                'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+            };
+
+            request.post(options, function(error, response, body) {
+                if(!error && response.statusCode == 200) {
+                    console.log(body);
+                } else {
+                    console.log('error: ' + JSON.stringify(response));
+                }
+            });
+        }
     )
 });
 
