@@ -6,7 +6,8 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var crypto = require('crypto');
 var async = require('async');
-
+var fs = require('fs');
+var template = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
 app.set('port', (process.env.PORT || 8000));
 
 // JSONの送信を許可
@@ -112,27 +113,9 @@ function stage1(displayName, req) {
             'type': 'text',
             'text': displayName + messageText,
             "quickReply": {
-                "items": [
-                    {
-                        "type": "action",
-                        "imageUrl": "https://example.com/sushi.png",
-                        "action": {
-                            "type": "message",
-                            "label": "借りる",
-                            "text": "借りる"
-                        }
-                    },
-                      {
-                        "type": "action",
-                        "imageUrl": "https://example.com/sushi.png",
-                        "action": {
-                            "type": "message",
-                            "label": "貸す",
-                            "text": "貸す"
-                        }
-                    },
-                ]
-            }   
+                template
+            }
+
         }
     ]};
     
