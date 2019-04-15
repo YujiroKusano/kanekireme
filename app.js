@@ -7,8 +7,7 @@ var request = require('request');
 var crypto = require('crypto');
 var async = require('async');
 var fs = require('fs');
-var template = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
-var data = template.button;
+
 app.set('port', (process.env.PORT || 8000));
 
 // JSONの送信を許可
@@ -107,6 +106,8 @@ function stage1(displayName, req) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
     };
+    var template = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
+    var data2 = template.button;
     //返信内容を定義
     var data = {
         'replyToken': req.body['events'][0]['replyToken'],
@@ -114,7 +115,7 @@ function stage1(displayName, req) {
             'type': 'text',
             'text': displayName + messageText,
             "quickReply": {
-                data
+                data2
             }
 
         }
