@@ -49,6 +49,7 @@ app.post('/callback', function(req, res) {
                 request.get(get_profile_options, function(error, response, body) {
                     if(!error && response.statusCode == 200) {
                         stage1(body['displayName'], req);
+
                     }
                 });
             } 
@@ -156,7 +157,7 @@ function stage1(displayName, req) {
     
     //オプションを定義
     var options = {
-        url: 'https://api.line.me/v2/bot/message/reply',
+        url: 'https://api.line.me/v2/bot/user/all/richmenu/{richMenuId}',
         proxy: process.env.FIXIE_URL,
         headers: headers,
         json: true,
