@@ -20,7 +20,6 @@ app.post('/callback', function(req, res) {
     async.waterfall(
         function(callback) {
             require('dotenv').config();
-            var messageText = 'message';
             //ヘッダー部を定義
             var headers = {
                 'Content-Type': 'application/json',
