@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-var keyword = 'test';
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     async.waterfall(
@@ -39,7 +38,7 @@ app.post('/callback', function(req, res) {
                 if(!error && response.statusCode == 200) {
                     callback(body);
                 } else {
-                    console.log('error: ' + JSON.stringify(response));
+                    console.log('error1: ' + JSON.stringify(response));
                 }
             });
         },
@@ -53,7 +52,7 @@ app.post('/callback', function(req, res) {
                 if(!error && response.statusCode == 200) {
                     console.log(body);
                 } else {
-                    console.log('error: ' + JSON.stringify(response));
+                    console.log('error2: ' + JSON.stringify(response));
                 }
             });
         }
