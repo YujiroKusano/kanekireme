@@ -5,7 +5,7 @@ var request = require('request');
 var crypto = require('crypto');
 var async = require('async');
 var fs = require('fs');
-var button = fs.readFileSync('../config/richMenu.json', 'utf8');
+var button = fs.readFileSync('./config/richMenu.json', 'utf8');
 var btnItem = JSON.parse(button);
 app.set('port', (process.env.PORT || 8000));
 
