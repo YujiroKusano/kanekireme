@@ -22,9 +22,8 @@ app.post('/callback', function(req, res) {
         var headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
-        };
-        //返信内容を定義        
-        オプションを定義
+        };     
+        //オプションを定義
         var options = {
             url: 'https://api.line.me/v2/bot/richmenu',
             proxy: process.env.FIXIE_URL,
