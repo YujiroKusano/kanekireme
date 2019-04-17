@@ -9,7 +9,6 @@ var async = require('async');
 var fs = require('fs');
 var button = fs.readFileSync('./config/button.json', 'utf8');
 var btnItem = JSON.parse(button);
-
 app.set('port', (process.env.PORT || 8000));
 
 // JSONの送信を許可
