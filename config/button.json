@@ -1,6 +1,6 @@
 {
-    "quickReply": {
-        "items": [
+    "items": {
+        "stage1": [
             {
                 "type": "action",
                 "imageUrl": "",
