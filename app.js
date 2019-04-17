@@ -75,7 +75,7 @@ app.post('/callback', function(req, res) {
                 'type': 'text',
                 'text': displayName + messageText,
                 "quickReply": {
-                    "items": btnItem.items
+                    "items": btnItem.quickReply.items
                 }   
             }
         ]};
