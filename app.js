@@ -28,7 +28,7 @@ app.post('/callback', function(req, res) {
             }
             //TextまたはMessageが送られてきた場合のみ反応する
             if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
-                console.log(req.body);
+                console.log('MESSAGE ERROR');
                 return;
             }
             //keywordの文字を含む場合のみ反応する
