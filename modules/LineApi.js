@@ -10,8 +10,6 @@ exports.postChecker = function(req, res, callback) {
         return;
     }
     //TextまたはMessageが送られてきた場合のみ反応する
-    console.log('res' + res);
-
     if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
         console.log('MESSAGE ERROR');
         return;
@@ -45,14 +43,14 @@ exports.postChecker = function(req, res, callback) {
         request.get(get_profile_options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 callback(body['displayName'], stage);
-            } else {
-                console.log("RESPONSE ERROR")
-            }
+            } 
         });
     } 
     //グループチャットの場合の処理
     else if('room' == req.body['events'][0]['source']['type']) {
         callback('あなた', stage);
+    } else {
+        console.log('aaaaaaa');
     }
 }
 
