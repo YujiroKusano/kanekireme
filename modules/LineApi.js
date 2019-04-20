@@ -50,7 +50,7 @@ exports.postChecker = function(req, res, callback) {
 }
 
 //menu画面を返信する
-exports.postMenu = function(req, res ,displayName) {
+exports.postBtn = function(req, button ,displayName) {
     require('dotenv').config();
     var messageText = 'message';
     //ヘッダー部を定義
@@ -63,9 +63,9 @@ exports.postMenu = function(req, res ,displayName) {
         'replyToken': req.body['events'][0]['replyToken'],
         'messages': [{
             'type': 'text',
-            'text': displayName + messageText,
+            'text': displayName + " started stage1",
             "quickReply": {
-                "items": menuBtn.menu
+                "items": button
             }   
         }
     ]};

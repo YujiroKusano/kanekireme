@@ -6,7 +6,7 @@
             "action": {
                 "type": "message",
                 "label": "一覧",
-                "text": "一覧"
+                "text": "一覧　※機能は実装されていません"
             }
         },
         {
@@ -15,7 +15,7 @@
             "action": {
                 "type": "message",
                 "label": "借りる",
-                "text": "借りる"
+                "text": "借りる　※機能は実装されていません"
             }
         },
         {
@@ -33,7 +33,7 @@
             "action": {
                 "type": "message",
                 "label": "返済",
-                "text": "返済"
+                "text": "返済　※機能は実装されていません"
             }
         }
     ]

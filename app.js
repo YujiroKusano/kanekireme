@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var mongo = require('./Models/Common');
 app.set('port', (process.env.PORT || 8000));
 
+var commonjson = fs.readFileSync('./config/common.json', 'utf8');
+var stage1Btn = JSON.parse(commonjson);
+
 //送られてきた内容を確認するモジュール
 var LineApi = require('./modules/LineApi');
 
@@ -18,7 +21,7 @@ app.use(bodyParser.json());
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(displayName) {
-        LineApi.postMenu(req, res, displayName);
+        LineApi.postBtn(req, stage1Btn, displayName);
     });
 });
 
