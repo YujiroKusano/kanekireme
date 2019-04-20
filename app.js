@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.post('/callback', function(req, res) {
-    console.log('req' + req);
+    console.log('req' + JSON.parse(req));
     require('dotenv').config();
     LineApi.postChecker(req, res, function(displayName, stage) {
         if(stage == 1) {
