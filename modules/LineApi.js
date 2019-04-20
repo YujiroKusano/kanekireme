@@ -44,7 +44,7 @@ exports.textChecker = function(req, res, callback) {
     }
 }
 
-exports.postText = function(displayName) {
+exports.postText = function(req, res ,displayName) {
     require('dotenv').config();
     var messageText = 'message';
     //ヘッダー部を定義
