@@ -5,7 +5,7 @@
             "imageUrl": "",
             "action": {
                 "type": "message",
-                "label": "一覧",
+                "label": "阿曽太一",
                 "text": "一覧　※機能は実装されていません"
             }
         },
@@ -14,8 +14,8 @@
             "imageUrl": "",
             "action": {
                 "type": "message",
-                "label": "借りる",
-                "text": "借りる　※機能は実装されていません"
+                "label": "中村航太",
+                "text": "金額を入力して下さい"
             }
         },
         {
@@ -23,8 +23,8 @@
             "imageUrl": "",
             "action": {
                 "type": "message",
-                "label": "貸す",
-                "text": "貸す"
+                "label": "野川健人",
+                "text": "金額を入力して下さい"
             }
         },
         {
@@ -32,8 +32,8 @@
             "imageUrl": "",
             "action": {
                 "type": "message",
-                "label": "返済",
-                "text": "返済　※機能は実装されていません"
+                "label": "ので京平",
+                "text": "金額を入力して下さい"
             }
         }
     ]

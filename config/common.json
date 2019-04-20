@@ -24,7 +24,7 @@
             "action": {
                 "type": "message",
                 "label": "貸す",
-                "text": "貸す"
+                "text": "相手を洗濯してください"
             }
         },
         {

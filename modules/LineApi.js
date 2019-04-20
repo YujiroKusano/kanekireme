@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 var request = require('request');
 
-//POSTされた情報が正しい情報かを判定する
+//POSTされた情報を判定する
 exports.postChecker = function(req, res, callback) {
     require('dotenv').config();
     //LINEから正式に送られてきたかを確認する
@@ -16,9 +16,16 @@ exports.postChecker = function(req, res, callback) {
     }
 
     var keyword = 'test';
+    var keyword2 = '相手を選択してください';
+
+    var stage;
     //keywordの文字を含む場合のみ反応する
-    if(req.body['events'][0]['message']['text'].indexOf(keyword) == -1) {
-        console.log('text ERROR');
+    if(req.body['events'][0]['message']['text'].indexOf(keyword) == 1) {
+        stage = 1;
+    } else if(req.body['events'][0]['message']['text'].indexOf(keyword2) == 1) {
+        staeg = 2
+    } else {
+        console.log('TEXT ERROR');
         return;
     }
     //個人チャットの場合の処理
@@ -35,20 +42,19 @@ exports.postChecker = function(req, res, callback) {
         };
         request.get(get_profile_options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                callback(body['displayName']);
+                callback(body['displayName'], stage);
             }
         });
     } 
     //グループチャットの場合の処理
     else if('room' == req.body['events'][0]['source']['type']) {
-        callback('あなた');
+        callback('あなた', stage);
     }
 }
 
 //menu画面を返信する
 exports.postBtn = function(req, button ,displayName) {
     require('dotenv').config();
-    var messageText = 'message';
     //ヘッダー部を定義
     var headers = {
         'Content-Type': 'application/json',
