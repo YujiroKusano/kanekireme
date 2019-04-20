@@ -35,6 +35,50 @@
                 "label": "野手京平",
                 "text": "金額を入力して下さい"
             }
+        },        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "草野裕次朗",
+                "text": "一覧　※機能は実装されていません"
+            }
+        },
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "島森和樹",
+                "text": "金額を入力して下さい"
+            }
+        },
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "佐藤丈弘",
+                "text": "金額を入力して下さい"
+            }
+        },
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "當間雄太",
+                "text": "金額を入力して下さい"
+            }
+        },
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "栗原敦己",
+                "text": "金額を入力して下さい"
+            }
         }
     ]
 } 
