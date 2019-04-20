@@ -2,7 +2,8 @@ var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
 exports.connectUsersDb = function() {
-  MongoClient.connect(process.env.USERS_DB_URL, function(err, db) {
+    require('dotenv').config();
+    MongoClient.connect(process.env.USERS_DB_URL, function(err, db) {
     assert.equal(null, err);
     //カウンター(_id値)定義データベースを初期化
     var collection = db.collection('counters');
