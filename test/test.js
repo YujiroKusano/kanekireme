@@ -3,11 +3,6 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var fs = require('fs');
-
-//メニュー画面を取得する
-var menujson = fs.readFileSync('./config/common.json', 'utf8');
-var menuBtn = JSON.parse(menujson);
 app.set('port', (process.env.PORT || 8000));
 
 //送られてきた内容を確認するモジュール

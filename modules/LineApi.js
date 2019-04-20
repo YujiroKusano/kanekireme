@@ -1,5 +1,9 @@
 var crypto = require('crypto');
 var request = require('request');
+//メニュー画面を取得する
+var fs = require('fs');
+var menujson = fs.readFileSync('./config/common.json', 'utf8');
+var menuBtn = JSON.parse(menujson);
 
 exports.textChecker = function(req, res, callback) {
     require('dotenv').config();
