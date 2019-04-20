@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(displayName) {
-        LineApi.postBtn(req, stage1Btn, displayName);
+        LineApi.postBtn(req, stage1Btn.stage1, displayName);
     });
 });
 
