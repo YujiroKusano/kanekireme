@@ -13,7 +13,7 @@ var menuBtn = JSON.parse(menujson);
 app.set('port', (process.env.PORT || 8000));
 
 //送られてきた内容を確認するモジュール
-var LineApi = require('./modules/LineApi');
+var LineApi = require('../modules/LineApi');
 
 // JSONの送信を許可
 app.use(bodyParser.urlencoded({
