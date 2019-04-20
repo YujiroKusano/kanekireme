@@ -25,7 +25,7 @@ exports.postChecker = function(req, res, callback) {
         stage = 1;
     } else if(req.body['events'][0]['message']['text'].indexOf(keyword2) == 0) {
         console.log('stage2');
-        staeg = 2
+        stage = 2;
     } else {
         console.log('TEXT ERROR');
         return;
