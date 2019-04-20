@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient
 
 exports.connectUsersDb = function() {
     require('dotenv').config();
-    MongoClient.connect(process.env.USERS_DB_URL, function(err, db) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     assert.equal(null, err);
     //カウンター(_id値)定義データベースを初期化
     var collection = db.collection('counters');
@@ -17,7 +17,7 @@ exports.connectUsersDb = function() {
 }
 exports.getNextId = function(callback) {
     require('dotenv').config();
-    MongoClient.connect(process.env.USERS_DB_URL, function(err, db) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         collection.update({_id: "user_id"},{ $inc: {count: 1}}, function() {
             collection.find({ _id: "user_id" }).toArray(function(err, docs) {
                 db.close();
