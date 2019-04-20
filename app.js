@@ -7,8 +7,8 @@ var request = require('request');
 var crypto = require('crypto');
 var async = require('async');
 var fs = require('fs');
-var button = fs.readFileSync('./config/button.json', 'utf8');
-var btnItem = JSON.parse(button);
+var menujson = fs.readFileSync('./config/common.json', 'utf8');
+var menuBtn = JSON.parse(menujson);
 app.set('port', (process.env.PORT || 8000));
 
 // JSONの送信を許可
@@ -75,7 +75,7 @@ app.post('/callback', function(req, res) {
                 'type': 'text',
                 'text': displayName + messageText,
                 "quickReply": {
-                    "items": btnItem.items.stage1
+                    "items": menuBtn.menu
                 }   
             }
         ]};
