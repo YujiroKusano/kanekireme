@@ -21,8 +21,10 @@ exports.postChecker = function(req, res, callback) {
     var stage;
     //keywordの文字を含む場合のみ反応する
     if(req.body['events'][0]['message']['text'].indexOf(keyword) == 0) {
+        console.log('stage1');
         stage = 1;
     } else if(req.body['events'][0]['message']['text'].indexOf(keyword2) == 0) {
+        console.log('stage2');
         staeg = 2
     } else {
         console.log('TEXT ERROR');
