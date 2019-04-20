@@ -70,13 +70,6 @@ exports.postBtn = function(req, button ,displayName) {
                 "items": button
             }   
         },
-        {
-            'type': 'text',
-            'text': displayName + " started stage1",
-            "quickReply": {
-                "items": button
-            }   
-        }
     ],
         
     };
