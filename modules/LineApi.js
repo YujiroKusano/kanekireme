@@ -1,6 +1,6 @@
 var crypto = require('crypto');
+var request = require('request');
 
-var keyword = 'test';
 exports.textChecker = function(req, res, callback) {
     require('dotenv').config();
     //LINEから正式に送られてきたかを確認する

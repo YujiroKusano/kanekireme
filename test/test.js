@@ -3,8 +3,6 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var request = require('request');
-var async = require('async');
 var fs = require('fs');
 
 //メニュー画面を取得する
@@ -20,7 +18,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-var keyword = 'test';
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.textChecker(req, res, function() {
