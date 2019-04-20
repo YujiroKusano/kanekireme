@@ -7,10 +7,17 @@ var request = require('request');
 var crypto = require('crypto');
 var async = require('async');
 var fs = require('fs');
+
+//メニュー画面を取得する
 var menujson = fs.readFileSync('./config/common.json', 'utf8');
 var menuBtn = JSON.parse(menujson);
 app.set('port', (process.env.PORT || 8000));
 
+//送られてきた内容を確認するモジュール
+// var LineApi = require('./modules/LineApi');
+// LineApi.textChecker(function() {
+
+// });
 // JSONの送信を許可
 app.use(bodyParser.urlencoded({
     extended: true
