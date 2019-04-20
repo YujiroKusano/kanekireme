@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var mongo = require('./Models/Common');
 app.set('port', (process.env.PORT || 8000));
 
 //送られてきた内容を確認するモジュール
@@ -22,5 +23,6 @@ app.post('/callback', function(req, res) {
 });
 
 app.listen(app.get('port'), function() {
+    mongo.connectUsersDb();
     console.log('Node app is running');
 });

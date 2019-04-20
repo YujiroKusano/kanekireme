@@ -1,16 +1,25 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
+exports.connectUsersDb = function() {
+  MongoClient.connect(process.env.USERS_DB_URL, function(err, db) {
+    assert.equal(null, err);
+    //カウンター(_id値)定義データベースを初期化
+    var collection = db.collection('counters');
+    collection.insertMany([{
+        _id: "user_id",
+        count: 0
+    }]);
+    console.log('Connecting to MongoDB');
+    db.close();
+  });
+}
 exports.getNextId = function(callback) {
-    var CounterDb = 'mongodb://localhost:27017/counters';
-    MongoClient.connect(CounterDb, function(err, db) {
-        var collection = db.collection('counters');
-        collection.insertMany([{
-            _id: "user_id",
-            count: 0
-        }]);
+    require('dotenv').config();
+    MongoClient.connect(process.env.USERS_DB_URL, function(err, db) {
         collection.update({_id: "user_id"},{ $inc: {count: 1}}, function() {
             collection.find({ _id: "user_id" }).toArray(function(err, docs) {
+                db.close();
                 callback(docs[0].count);
             });
         });
@@ -34,10 +43,6 @@ exports.checkdDate = function(db, callback) {
     var chDate = new Date();
     collection.findOne({}).toArray(function(err, getStatus) {
         assert.equal(err, null);
-        var nowDate =  
-        if() {
-
-        }
         callback(dateResult);
     });  
 }

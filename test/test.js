@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+
+//'test'で反応するメニューボタンを生成
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(displayName) {
