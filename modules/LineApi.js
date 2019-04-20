@@ -69,14 +69,16 @@ exports.postBtn = function(req, button ,displayName) {
             "quickReply": {
                 "items": button
             }   
-        }],
-        'messages': [{
+        },
+        {
             'type': 'text',
             'text': displayName + " started stage1",
             "quickReply": {
                 "items": button
             }   
-        }]
+        }
+    ],
+        
     };
     
     //オプションを定義
