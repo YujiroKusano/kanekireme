@@ -1,10 +1,9 @@
 //yujiro.kusano.1106@gmail.com
 
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var mongo = require('./Models/Common');
-app.set('port', (process.env.PORT || 8000));
+var fs = require('fs');
 
 var commonjson = fs.readFileSync('./config/common.json', 'utf8');
 var stage1Btn = JSON.parse(commonjson);
@@ -12,6 +11,8 @@ var stage1Btn = JSON.parse(commonjson);
 //送られてきた内容を確認するモジュール
 var LineApi = require('./modules/LineApi');
 
+var app = express();
+app.set('port', (process.env.PORT || 8000));
 // JSONの送信を許可
 app.use(bodyParser.urlencoded({
     extended: true

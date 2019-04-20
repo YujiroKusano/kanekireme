@@ -1,9 +1,5 @@
 var crypto = require('crypto');
 var request = require('request');
-//メニュー画面を取得する
-var fs = require('fs');
-var menujson = fs.readFileSync('./config/common.json', 'utf8');
-var menuBtn = JSON.parse(menujson);
 
 //POSTされた情報が正しい情報かを判定する
 exports.postChecker = function(req, res, callback) {
