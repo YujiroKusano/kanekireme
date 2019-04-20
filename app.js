@@ -2,7 +2,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var mongo = require('./Models/Common');
+//var mongo = require('./Models/Common');
 var fs = require('fs');
 
 var commonjson = fs.readFileSync('./config/common.json', 'utf8');
@@ -34,6 +34,6 @@ app.post('/callback', function(req, res) {
 });
 
 app.listen(app.get('port'), function() {
-    mongo.connectUsersDb();
+    //mongo.connectUsersDb();
     console.log('Node app is running');
 });
