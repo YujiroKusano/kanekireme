@@ -64,7 +64,7 @@ exports.postBtn = function(req, button ,displayName) {
     var data = {
         'replyToken': req.body['events'][0]['replyToken'],
         'messages': [{
-            'type': 'message',
+            'type': 'text',
             'text': displayName + " started stage1",
             "quickReply": {
                 "items": button

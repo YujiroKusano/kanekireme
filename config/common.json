@@ -13,7 +13,7 @@
             "type": "action",
             "imageUrl": "",
             "action": {
-                "type": "message",
+                "type": "text",
                 "label": "借りる",
                 "text": "借りる　※機能は実装されていません"
             }
