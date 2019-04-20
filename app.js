@@ -12,11 +12,12 @@ var LineApi = require('./modules/LineApi');
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(bodyParser.json());
 app.post('/callback', function(req, res) {
     require('dotenv').config();
-    LineApi.textChecker(req, res, function(displayName) {
-        LineApi.postText(req, res, displayName);
+    LineApi.postChecker(req, res, function(displayName) {
+        LineApi.postMenu(req, res, displayName);
     });
 });
 

@@ -5,7 +5,8 @@ var fs = require('fs');
 var menujson = fs.readFileSync('./config/common.json', 'utf8');
 var menuBtn = JSON.parse(menujson);
 
-exports.textChecker = function(req, res, callback) {
+//POSTされた情報が正しい情報かを判定する
+exports.postChecker = function(req, res, callback) {
     require('dotenv').config();
     //LINEから正式に送られてきたかを確認する
     if(!validate_signature(req.headers['x-line-signature'], req.body)) {
@@ -48,7 +49,8 @@ exports.textChecker = function(req, res, callback) {
     }
 }
 
-exports.postText = function(req, res ,displayName) {
+//menu画面を返信する
+exports.postMenu = function(req, res ,displayName) {
     require('dotenv').config();
     var messageText = 'message';
     //ヘッダー部を定義
