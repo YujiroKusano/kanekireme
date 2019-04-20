@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 
+var keyword = 'test';
 exports.textChecker = function(req, res, callback) {
     require('dotenv').config();
     //LINEから正式に送られてきたかを確認する
@@ -12,6 +13,8 @@ exports.textChecker = function(req, res, callback) {
         console.log('MESSAGE ERROR');
         return;
     }
+
+    var keyword = 'test';
     //keywordの文字を含む場合のみ反応する
     if(req.body['events'][0]['message']['text'].indexOf(keyword) == -1) {
         console.log('text ERROR');
