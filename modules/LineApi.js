@@ -43,6 +43,8 @@ exports.postChecker = function(req, res, callback) {
         request.get(get_profile_options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 callback(body['displayName'], stage);
+            } else {
+                console.log("RESPONSE ERROR")
             }
         });
     } 
