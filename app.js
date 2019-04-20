@@ -8,7 +8,7 @@ var fs = require('fs');
 var commonjson = fs.readFileSync('./config/common.json', 'utf8');
 var stage1Btn = JSON.parse(commonjson);
 
-var Lendbtn = fs.readFileSync('./config/common.json', 'utf8');
+var Lendbtn = fs.readFileSync('./config/lend.json', 'utf8');
 var lendStage1 = JSON.parse(Lendbtn);
 
 //送られてきた内容を確認するモジュール
