@@ -10,7 +10,7 @@ exports.postChecker = function(req, res, callback) {
         return;
     }
     //TextまたはMessageが送られてきた場合のみ反応する
-    console.log('req' + req);
+    console.log('res' + res);
 
     if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
         console.log('MESSAGE ERROR');
