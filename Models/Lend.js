@@ -13,7 +13,7 @@ exports.stage1 = function(reqText, user_id) {
     if(reqText == '貸す'){
       mode = 3;
     }  
-    commonDb.getNextId(user_id, function(){
+    commonDb.getNextId(function(getId){
       // Insert some documents
       collection.insertMany([{  
         _id: getId,
