@@ -18,9 +18,11 @@ exports.connectUsersDb = function() {
 exports.getNextId = function(callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        var collection = db.collection('counters');
         collection.update({_id: "user_id"},{ $inc: {count: 1}}, function() {
             collection.find({ _id: "user_id" }).toArray(function(err, docs) {
                 db.close();
+                console.log('getNextId');
                 callback(docs[0].count);
             });
         });
