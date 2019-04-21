@@ -54,9 +54,7 @@ app.post('/callback', function(req, res) {
                 LineApi.postBtn(req, lendItem.stage7, stage);
             } else if(stage == 7) {
             } else {
-               
-                lendModel.stage1(user_id, reqText);
-                LineApi.postBtn(req, lendItem.stage1, stage);
+                console.log('stage情報異常');
             }
         } 
     });
