@@ -105,7 +105,7 @@ var postdbs = function(req, user_id) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
     showModels.dbs(user_id, function(result){
-        var userData = {'mode': result.mode, '相手': result.partner_name, 'タイムスタンプ': result.last_date, "金額": result.money, "詳細": result.detail};
+        var userData = {'mode': result.mode, '相手': result.partner_name, 'タイムスタンプ': result.last_date+" "+result.last_time, "金額": result.money, "詳細": result.detail};
         
         //ヘッダー部を定義
         var headers = {
