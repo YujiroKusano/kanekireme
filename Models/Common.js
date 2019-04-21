@@ -21,7 +21,6 @@ exports.getNextId = function(callback) {
         var collection = db.collection('counters');
         collection.update({_id: "user_id"},{ $inc: {count: 1}}, function() {
             collection.find({ _id: "user_id" }).toArray(function(err, docs) {
-                db.close();
                 console.log('getNextId');
                 callback(docs[0].count);
             });
@@ -41,8 +40,6 @@ exports.getStage = function(user_id, callback) {
             } else { //失敗した場合
                 callback( 0 );
             }
-            
-            
         });
         db.close();
     });
