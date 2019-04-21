@@ -41,17 +41,18 @@ app.post('/callback', function(req, res) {
                 lendModel.stage2(user_id, reqText);
                 LineApi.postBtn(req, lendItem.stage2, stage);
             } else if(stage == 2) {
-                
+                lendModel.stage3(user_id, reqText);
                 LineApi.postBtn(req, lendItem.stage3, stage);
             } else if(stage == 3) {
-            } else if(stage == 4) {
+                lendModel.stage4(user_id, reqText);
                 LineApi.postBtn(req, lendItem.stage4, stage);
-            } else if(stage == 5) {
+            } else if(stage == 4) {
                 LineApi.postBtn(req, lendItem.stage5, stage);
-            } else if(stage == 6) {
+            } else if(stage == 5) {
                 LineApi.postBtn(req, lendItem.stage6, stage);
+            } else if(stage == 6) {
+                LineApi.postBtn(req, lendItem.stage7, stage);
             } else if(stage == 7) {
-                LineApi.postBtn(req, ltenItem.stage7, stage);
             } else {
                
             }

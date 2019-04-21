@@ -59,7 +59,7 @@ exports.postBtn = function(req, button, stage) {
     } else if(stage = 1) {
         resText = '金額を入力してください'
     } else if(stage = 2) {
-        resText = '金額を入力してください'
+        resText = '詳細を入力してください'
     } else {
 
     }
