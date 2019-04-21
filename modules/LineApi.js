@@ -17,30 +17,15 @@ exports.postChecker = function(req, res, callback) {
         console.log('MESSAGE ERROR');
         return;
     }
-
-    // var keyword = 'test';
-
-    // var stage;
-    // //keywordの文字を含む場合のみ反応する
-    // if(req.body['events'][0]['message']['text'].indexOf(keyword) == 0) {
-    //     //console.log('stage1');
-    //     stage = 1;
-    // } else if(req.body['events'][0]['message']['text'].indexOf(keyword2) == 0) {
-    //     //console.log('stage2');
-    //     stage = 2;
-    // } else {
-    //     //console.log('TEXT ERROR');
-    //     return;
-    // }
+    var reqText = req.body['events'][0]['message']['text'];
+    console.log(reqText);
 
     //個人チャットの場合の処理
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
         commonDb.getStage(user_id, function(getUser) {
-            console.log('Now Stage is ' + getUser.stage);
-            console.log('Now ID is ' + getUser._id);
-        
+
             var get_profile_options = {
                 url: 'https://api.line.me/v2/bot/profile/' + user_id,
                 proxy: process.env.FIXIE_URL,
@@ -51,7 +36,8 @@ exports.postChecker = function(req, res, callback) {
             };
             request.get(get_profile_options, function(error, response, body) {
                 if(!error && response.statusCode == 200) {
-                    callback(body['displayName'], getUser.stage);
+                    // callback(body['displayName'], getUser, user_id);
+                    callback(getUser, user_id, reqText);
                 } 
             });
         })
@@ -65,7 +51,7 @@ exports.postChecker = function(req, res, callback) {
 }
 
 //menu画面を返信する
-exports.postBtn = function(req, button ,displayName) {
+exports.postBtn = function(req, button) {
     require('dotenv').config();
     //ヘッダー部を定義
     var headers = {
@@ -77,7 +63,7 @@ exports.postBtn = function(req, button ,displayName) {
         'replyToken': req.body['events'][0]['replyToken'],
         'messages': [{
             'type': 'text',
-            'text': displayName + " started stage1",
+            'text': 'runProcess',
             "quickReply": {
                 "items": button
             }   

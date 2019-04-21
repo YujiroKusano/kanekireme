@@ -1,24 +1,31 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
-exports.stage1 = function(db, status, callback) {
+var commonDb = require('./Common');
+
+exports.stage1 = function(reqText, user_id) {
+  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+    assert.equal(null, err);
     // Get the documents collection
     var collection = db.collection('users');
     var jsDate = new Date();
-    getNextId(function(getId){
+    var mode;
+    if(reqText == '貸す'){
+      mode = 3;
+    }  
+    commonDb.getNextId(user_id, function(){
       // Insert some documents
       collection.insertMany([{  
         _id: getId,
-        user_id: status.user_id, 
+        user_id: user_id, 
         stage: 1,
-        mode: status.mode,
+        mode: mode,
         last_date: jsDate
-      }], function(err, result) {
-        console.log("stage1");
-        callback(err, result);
-      });
+      }]);
     });
-  }
+    db.close();
+  })
+}
   
   //stage2
 exports.stage2 = function(db, status, callback) {

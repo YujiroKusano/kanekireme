@@ -37,4 +37,5 @@
     }
 }
 
+db.users.remove({ _id: 999 });
 db.users.insert({ _id: 999, user_id:'Uc919b5be8b15ef988bfb45ed3e292b8c', stage: 1, 'Last_date': new Date()});

@@ -6,10 +6,12 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 
 var commonjson = fs.readFileSync('./config/common.json', 'utf8');
-var stage1Btn = JSON.parse(commonjson);
+var commonItem = JSON.parse(commonjson);
 
 var Lendbtn = fs.readFileSync('./config/lend.json', 'utf8');
 var lendItem = JSON.parse(Lendbtn);
+
+var lendModel = require('./Models/Lend');
 
 //送られてきた内容を確認するモジュール
 var LineApi = require('./modules/LineApi');
@@ -25,9 +27,8 @@ app.use(bodyParser.json());
 
 app.post('/callback', function(req, res) {
     require('dotenv').config();
-    LineApi.postChecker(req, res, function(displayName, stage) {
-        if(stage == 1) {
-            LineApi.postBtn(req, stage1Btn.stage1, displayName);
+    LineApi.postChecker(req, res, function(stage, user_id, reqText) {
+        if(info.stage == 1) {
         } else if(stage == 2) {
             LineApi.postBtn(req, lendItem.stage2, displayName);
         } else if(stage == 3) {
@@ -40,6 +41,9 @@ app.post('/callback', function(req, res) {
             LineApi.postBtn(req, lendItem.stage6, displayName);
         } else if(stage == 7) {
             LineApi.postBtn(req, ltenItem.stage7, displayName);
+        } else {
+            LineApi.postBtn(req, commonItem.stage1, displayName);
+            lendModel.stage1(user_id, reqText);
         }
     });
 });
