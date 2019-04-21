@@ -29,8 +29,8 @@ app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
         if(stage == 1) {
-            LineApi.postBtn(req, lendItem.stage2, stage);
             lendModel.stage2(user_id, reqText);
+            LineApi.postBtn(req, lendItem.stage2, stage);
         } else if(stage == 2) {
             
         } else if(stage == 3) {

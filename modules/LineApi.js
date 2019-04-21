@@ -58,6 +58,8 @@ exports.postBtn = function(req, button, stage) {
         resText = '相手を選択してください';
     } else if(stage = 1) {
         resText = '金額を入力してください'
+    } else if(stage = 2) {
+        resText = '金額を入力してください'
     } else {
 
     }
