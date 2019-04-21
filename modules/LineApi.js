@@ -82,7 +82,7 @@ exports.postBtn = function(req, button) {
 
     request.post(options, function(error, response, body) {
         if(!error && response.statusCode == 200) {
-            console.log(displayName + body);
+            console.log(body);
         } else {
             console.log('error: ' + JSON.stringify(response));
         }
