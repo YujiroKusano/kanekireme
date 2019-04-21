@@ -30,7 +30,7 @@ app.post('/callback', function(req, res) {
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
         if(stage == 1) {
             lendModel.stage2(user_id, reqText);
-            LineApi.postBtn(req, lendItem.stage2, stage);
+            LineApi.postBtn(req, lendItem.stage3, stage);
         } else if(stage == 2) {
             
         } else if(stage == 3) {
