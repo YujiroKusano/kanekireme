@@ -23,7 +23,6 @@ exports.stage1 = function(reqText, user_id) {
         last_date: jsDate
       }]);
     });
-    db.close();
   })
 }
   
