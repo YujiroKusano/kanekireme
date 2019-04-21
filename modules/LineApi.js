@@ -19,11 +19,13 @@ exports.postChecker = function(req, res, callback) {
     }
     var reqText = req.body['events'][0]['message']['text'];
     console.log(reqText);
-
     //個人チャットの場合の処理
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
+        if(reqText == '一覧'){
+            postdbs(req, user_id);
+        }
         commonDb.getStage(user_id, function(getUser) {
 
             var get_profile_options = {
@@ -78,8 +80,7 @@ exports.postBtn = function(req, button, stage) {
                 "items": button
             }   
         },
-    ],
-};
+    ]};
     
     //オプションを定義
     var options = {
@@ -97,6 +98,44 @@ exports.postBtn = function(req, button, stage) {
             console.log('error: ' + JSON.stringify(response));
         }
     });
+}
+
+//menu画面を返信する
+var postdbs = function(req, user_id) {
+    require('dotenv').config();
+    var showModels = require('../Models/Show');
+    showModels.dbs(user_id, function(result){
+        //ヘッダー部を定義
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+        };
+        //返信内容を定義
+        var data = {
+            'replyToken': req.body['events'][0]['replyToken'],
+            "messages": [{
+                "type": "text",
+                "text": result
+            }
+        ]};
+        
+        //オプションを定義
+        var options = {
+            url: 'https://api.line.me/v2/bot/message/reply',
+            proxy: process.env.FIXIE_URL,
+            headers: headers,
+            json: true,
+            body: data
+        };
+
+        request.post(options, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                console.log(body);
+            } else {
+                console.log('error: ' + JSON.stringify(response));
+            }
+        });
+    })
 }
 
 
