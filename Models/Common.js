@@ -35,7 +35,7 @@ exports.getStage = function(user_id, callback) {
         // Find some documents if user_id and not stage
         collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
             assert.equal(err, null);
-            callback( JSON.parse(getStatus) );
+            callback( getStatus );
         });
     })      
 }
