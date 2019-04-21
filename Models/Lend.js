@@ -8,7 +8,7 @@ exports.stage1 = function(user_id, reqText) {
     assert.equal(null, err);
     // Get the documents collection
     var collection = db.collection('users');
-    var jsDate = new Date().toDateString;
+    var jsDate = Date().toDateString;
     var mode;
     if(reqText == '貸す'){
       mode = 3;
@@ -28,18 +28,20 @@ exports.stage1 = function(user_id, reqText) {
   
   //stage2
 exports.stage2 = function(db, status, callback) {
-    // Get the documents collection
-    var collection = db.collection('users');
-    // Update document where status is 1, set partner_id equal to 1
-    collection.update({ 'status' : { $ne: 0 } },
-    { 
-      $inc: { stage: 1 },
-      $set: { partner_name: status.partner_name } 
-    },
-    function(err, result) {
-      assert.equal(err, null);
-      assert.equal(1, result.result.n);
-      console.log("Updated partner_name");
-      callback(result);
-    })
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+      // Get the documents collection
+      var collection = db.collection('users');
+      // Update document where status is 1, set partner_id equal to 1
+      collection.update({ 'status' : { $ne: 0 } },
+      { 
+        $inc: { stage: 1 },
+        $set: { partner_name: status.partner_name } 
+      },
+      function(err, result) {
+        assert.equal(err, null);
+        assert.equal(1, result.result.n);
+        console.log("Updated partner_name");
+        callback(result);
+      })
+    }
 };
