@@ -29,9 +29,9 @@ app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
         if(stage == 1) {
+            LineApi.postBtn(req, lendItem.stage2);
             if(reqText != '相手を選択してください') {
-                lendModel.stage1(user_id, reqText);
-                LineApi.postBtn(req, lendItem.stage2);
+                lendModel.stage2(user_id, reqText);
             }
         } else if(stage == 2) {
             
