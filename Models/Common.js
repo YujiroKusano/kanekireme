@@ -36,7 +36,7 @@ exports.getStage = function(user_id, callback) {
         collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
             assert.equal(err, null);
             console.log("status: " + getStatus.stage );
-            callback( getStatus );
+            callback( JSON.stringify(getStatus) );
         });
     })      
 }
