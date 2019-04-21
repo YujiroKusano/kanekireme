@@ -45,9 +45,6 @@ exports.stage2 = function(user_id, reqText) {
           last_date: jsDate.toDateString(),
           last_time: jsDate.toLocaleTimeString()
          } 
-      }, function(err, result) {
-        if (err!=null) { console.log(err)}
-        else { console.log(result)}
       })
     })
 };
