@@ -30,19 +30,19 @@ app.post('/callback', function(req, res) {
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
         if(stage == 1) {
         } else if(stage == 2) {
-            LineApi.postBtn(req, lendItem.stage2, displayName);
+            LineApi.postBtn(req, lendItem.stage2, );
         } else if(stage == 3) {
-            LineApi.postBtn(req, lendItem.stage3, displayName);
+            LineApi.postBtn(req, lendItem.stage3, );
         } else if(stage == 4) {
-            LineApi.postBtn(req, lendItem.stage4, displayName);
+            LineApi.postBtn(req, lendItem.stage4, );
         } else if(stage == 5) {
-            LineApi.postBtn(req, lendItem.stage5, displayName);
+            LineApi.postBtn(req, lendItem.stage5, );
         } else if(stage == 6) {
-            LineApi.postBtn(req, lendItem.stage6, displayName);
+            LineApi.postBtn(req, lendItem.stage6, );
         } else if(stage == 7) {
-            LineApi.postBtn(req, ltenItem.stage7, displayName);
+            LineApi.postBtn(req, ltenItem.stage7, );
         } else {
-            LineApi.postBtn(req, commonItem.stage1, displayName);
+            LineApi.postBtn(req, commonItem.stage1);
             lendModel.stage1(user_id, reqText);
         }
     });
