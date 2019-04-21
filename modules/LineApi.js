@@ -37,11 +37,10 @@ exports.postChecker = function(req, res, callback) {
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
-        commonDb.getStage(user_id, function(result) {
-            console.log('Now Stage is ' + result.stage);
-            console.log('Now ID is ' + result._id);
+        commonDb.getStage(user_id, function(getUser) {
+            console.log('Now Stage is ' + getUser.stage);
+            console.log('Now ID is ' + getUser._id);
         
-            console.log(user_id);
             var get_profile_options = {
                 url: 'https://api.line.me/v2/bot/profile/' + user_id,
                 proxy: process.env.FIXIE_URL,
@@ -52,7 +51,7 @@ exports.postChecker = function(req, res, callback) {
             };
             request.get(get_profile_options, function(error, response, body) {
                 if(!error && response.statusCode == 200) {
-                    callback(body['displayName'], stage);
+                    callback(body['displayName'], getUser.stage);
                 } 
             });
         })
