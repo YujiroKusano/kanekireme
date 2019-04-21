@@ -8,7 +8,8 @@ exports.stage1 = function(user_id, reqText) {
     assert.equal(null, err);
     // Get the documents collection
     var collection = db.collection('users');
-    var jsDate = new Date("+9:00:00");
+    var jsDate = new Date();
+    jsDate.setHours(jsDate.getHours() + 9);
     var mode;
     if(reqText == '貸す'){
       mode = 3;
@@ -21,7 +22,7 @@ exports.stage1 = function(user_id, reqText) {
         stage: 1,
         mode: mode,
         last_date: jsDate.toDateString(),
-        last_time: jsDate.toLocaleTimeString()+9
+        last_time: jsDate.toLocaleTimeString()
       }]);
     });
   })
