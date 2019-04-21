@@ -18,43 +18,44 @@ exports.postChecker = function(req, res, callback) {
         return;
     }
 
-    var keyword = 'test';
-    var keyword2 = '相手を選択してください';
+    // var keyword = 'test';
 
-    var stage;
-    //keywordの文字を含む場合のみ反応する
-    if(req.body['events'][0]['message']['text'].indexOf(keyword) == 0) {
-        //console.log('stage1');
-        stage = 1;
-    } else if(req.body['events'][0]['message']['text'].indexOf(keyword2) == 0) {
-        //console.log('stage2');
-        stage = 2;
-    } else {
-        //console.log('TEXT ERROR');
-        return;
-    }
+    // var stage;
+    // //keywordの文字を含む場合のみ反応する
+    // if(req.body['events'][0]['message']['text'].indexOf(keyword) == 0) {
+    //     //console.log('stage1');
+    //     stage = 1;
+    // } else if(req.body['events'][0]['message']['text'].indexOf(keyword2) == 0) {
+    //     //console.log('stage2');
+    //     stage = 2;
+    // } else {
+    //     //console.log('TEXT ERROR');
+    //     return;
+    // }
+
     //個人チャットの場合の処理
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
         commonDb.getStage(user_id, function(result) {
             console.log('Now Stage is ' + result.stage);
-            console.log('Now Stage is ' + result._id);
+            console.log('Now ID is ' + result._id);
+        
+            console.log(user_id);
+            var get_profile_options = {
+                url: 'https://api.line.me/v2/bot/profile/' + user_id,
+                proxy: process.env.FIXIE_URL,
+                json: true,
+                headers: {
+                    'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}'
+                }
+            };
+            request.get(get_profile_options, function(error, response, body) {
+                if(!error && response.statusCode == 200) {
+                    callback(body['displayName'], stage);
+                } 
+            });
         })
-        console.log(user_id);
-        var get_profile_options = {
-            url: 'https://api.line.me/v2/bot/profile/' + user_id,
-            proxy: process.env.FIXIE_URL,
-            json: true,
-            headers: {
-                'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}'
-            }
-        };
-        request.get(get_profile_options, function(error, response, body) {
-            if(!error && response.statusCode == 200) {
-                callback(body['displayName'], stage);
-            } 
-        });
     } 
     //グループチャットの場合の処理
     else if('room' == req.body['events'][0]['source']['type']) {
