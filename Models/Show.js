@@ -1,3 +1,6 @@
+var MongoClient = require('mongodb').MongoClient
+  , assert = require('assert');
+
 exports.dbs = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
