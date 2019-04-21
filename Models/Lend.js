@@ -29,21 +29,20 @@ exports.stage1 = function(user_id, reqText) {
 }
   
   //stage2
-exports.stage2 = function(db, status, callback) {
+exports.stage2 = function(user_id, reqText) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
       var collection = db.collection('users');
       // Update document where status is 1, set partner_id equal to 1
-      collection.update({ 'status' : { $ne: 0 } },
+      collection.update({ 'user_id': user_id, 'status': 1},
       { 
         $inc: { stage: 1 },
-        $set: { partner_name: status.partner_name } 
-      },
-      function(err, result) {
-        assert.equal(err, null);
-        assert.equal(1, result.result.n);
-        console.log("Updated partner_name");
-        callback(result);
+        $set: { 
+          partner_name: reqText,
+          last_date: jsDate.toDateString(),
+          last_time: jsDate.toLocaleTimeString()
+
+         } 
       })
     })
 };
