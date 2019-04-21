@@ -30,33 +30,29 @@ app.use(bodyParser.json());
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
-        if(reqText == '一覧') {
-
-        } else if(reqText == '貸す') {
-            if(stage == 0) {
-                // LineApi.postBtn(req, commonItem.stage1);
-                lendModel.stage1(user_id, reqText);
-                LineApi.postBtn(req, lendItem.stage1, stage);
-            } else if(stage == 1) {
-                lendModel.stage2(user_id, reqText);
-                LineApi.postBtn(req, lendItem.stage2, stage);
-            } else if(stage == 2) {
-                lendModel.stage3(user_id, reqText);
-                LineApi.postBtn(req, lendItem.stage3, stage);
-            } else if(stage == 3) {
-                lendModel.stage4(user_id, reqText);
-                LineApi.postBtn(req, lendItem.stage4, stage);
-            } else if(stage == 4) {
-                LineApi.postBtn(req, lendItem.stage5, stage);
-            } else if(stage == 5) {
-                LineApi.postBtn(req, lendItem.stage6, stage);
-            } else if(stage == 6) {
-                LineApi.postBtn(req, lendItem.stage7, stage);
-            } else if(stage == 7) {
-            } else {
-                console.log('stage情報異常');
-            }
-        } 
+        if(stage == 0) {
+            // LineApi.postBtn(req, commonItem.stage1);
+            lendModel.stage1(user_id, reqText);
+            LineApi.postBtn(req, lendItem.stage1, stage);
+        } else if(stage == 1) {
+            lendModel.stage2(user_id, reqText);
+            LineApi.postBtn(req, lendItem.stage2, stage);
+        } else if(stage == 2) {
+            lendModel.stage3(user_id, reqText);
+            LineApi.postBtn(req, lendItem.stage3, stage);
+        } else if(stage == 3) {
+            lendModel.stage4(user_id, reqText);
+            LineApi.postBtn(req, lendItem.stage4, stage);
+        } else if(stage == 4) {
+            LineApi.postBtn(req, lendItem.stage5, stage);
+        } else if(stage == 5) {
+            LineApi.postBtn(req, lendItem.stage6, stage);
+        } else if(stage == 6) {
+            LineApi.postBtn(req, lendItem.stage7, stage);
+        } else if(stage == 7) {
+        } else {
+            console.log('stage情報異常');
+        }
     });
 });
 
