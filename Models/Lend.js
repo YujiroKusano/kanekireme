@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient
 
 var commonDb = require('./Common');
 
-exports.stage1 = function(reqText, user_id) {
+exports.stage1 = function(user_id, reqText) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     assert.equal(null, err);
     // Get the documents collection
