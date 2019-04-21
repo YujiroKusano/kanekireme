@@ -24,7 +24,7 @@ exports.postChecker = function(req, res, callback) {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
         if(reqText == '一覧'){
-            postdbs(req, user_id);
+            callback(postdbs(req, user_id));
         }
         commonDb.getStage(user_id, function(getUser) {
 
@@ -100,7 +100,7 @@ exports.postBtn = function(req, button, stage) {
     });
 }
 
-//menu画面を返信する
+//一覧を返信する
 var postdbs = function(req, user_id) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
