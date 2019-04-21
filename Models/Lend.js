@@ -43,5 +43,5 @@ exports.stage2 = function(db, status, callback) {
         console.log("Updated partner_name");
         callback(result);
       })
-    }
+    })
 };
