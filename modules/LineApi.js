@@ -127,7 +127,7 @@ var postdbs = function(req, user_id) {
             json: true,
             body: data
         };
-
+        console.log(result);
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 console.log(body);
