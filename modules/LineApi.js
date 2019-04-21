@@ -38,7 +38,8 @@ exports.postChecker = function(req, res, callback) {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
         commonDb.getStage(user_id, function(result) {
-            console.log('Now Stage is ' + result);
+            console.log('Now Stage is ' + result.stage);
+            console.log('Now Stage is ' + result._id);
         })
         console.log(user_id);
         var get_profile_options = {
