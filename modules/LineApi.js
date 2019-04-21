@@ -118,11 +118,7 @@ var postdbs = function(req, user_id) {
             "messages": [{
                 "type": "text",
                 "text": userData
-            },{
-                "type": "text",
-                "text": JSON.stringify(result)
             }
-            
         ]};
         
         //オプションを定義
