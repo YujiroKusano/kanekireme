@@ -8,7 +8,7 @@ exports.stage1 = function(reqText, user_id) {
     assert.equal(null, err);
     // Get the documents collection
     var collection = db.collection('users');
-    var jsDate = new Date();
+    var jsDate = new Date().toDateString;
     var mode;
     if(reqText == '貸す'){
       mode = 3;
