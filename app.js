@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
-        if(info.stage == 1) {
+        if(stage == 1) {
         } else if(stage == 2) {
             LineApi.postBtn(req, lendItem.stage2, displayName);
         } else if(stage == 3) {
