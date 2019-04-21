@@ -17,7 +17,7 @@ exports.connectUsersDb = function() {
 }
 exports.getNextId = function(callback) {
     require('dotenv').config();
-    MongoClient.connect(process.env.MONGODB_URI + '/Users', function(err, db) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         collection.update({_id: "user_id"},{ $inc: {count: 1}}, function() {
             collection.find({ _id: "user_id" }).toArray(function(err, docs) {
                 db.close();
@@ -27,16 +27,19 @@ exports.getNextId = function(callback) {
     });
 }
 
-exports.getStage = function(db, getStatus, callback) {
-    // Get the documents collection
+exports.getStage = function(user_id, callback) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        assert.equal(null, err);
+        // Get the documents collection
         var collection = db.collection('users');
         // Find some documents if user_id and not stage
-        collection.findOne({'user_id': getStatus.user_id, 'stage': { $ne: getStatus.stage }}).toArray(function(err, getStatus) {
+        collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}).toArray(function(err, getStatus) {
             assert.equal(err, null);
             console.log("status: " + getStatus.stage );
             callback( getStatus.stage );
-        });      
-    }
+        });
+    })      
+}
 
 exports.checkdDate = function(db, callback) {
     var collection = db.collection('users');

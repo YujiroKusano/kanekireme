@@ -1,6 +1,9 @@
 var crypto = require('crypto');
 var request = require('request');
 
+var commonDb = require('../Models/Common');
+
+
 //POSTされた情報を判定する
 exports.postChecker = function(req, res, callback) {
     require('dotenv').config();
@@ -34,6 +37,9 @@ exports.postChecker = function(req, res, callback) {
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
+        commonDb.getStage(user_id, function(result) {
+            console.log('Now Stage is ' + result);
+        })
         console.log(user_id);
         var get_profile_options = {
             url: 'https://api.line.me/v2/bot/profile/' + user_id,
@@ -76,8 +82,7 @@ exports.postBtn = function(req, button ,displayName) {
             }   
         },
     ],
-        
-    };
+};
     
     //オプションを定義
     var options = {
@@ -102,3 +107,4 @@ function validate_signature(signature, body) {
     var buf1 = Buffer.from(JSON.stringify(body), 'utf8');
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
+
