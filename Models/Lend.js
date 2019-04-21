@@ -20,7 +20,7 @@ exports.stage1 = function(user_id, reqText) {
         user_id: user_id, 
         stage: 1,
         mode: mode,
-        last_date: jsDate.toTimeString() + jsDate.toLocaleTimeString()
+        last_date: jsDate.toDateString() + jsDate.toTimeString()
       }]);
     });
   })
