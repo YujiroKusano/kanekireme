@@ -6,7 +6,7 @@
             "action": {
                 "type": "message",
                 "label": "阿曽太一",
-                "text": "金額を入力して下さい"
+                "text": "阿曽太一"
             }
         },
         {
@@ -15,7 +15,7 @@
             "action": {
                 "type": "message",
                 "label": "中村航太",
-                "text": "金額を入力して下さい"
+                "text": "中村航太"
             }
         },
         {
@@ -24,7 +24,7 @@
             "action": {
                 "type": "message",
                 "label": "野川健人",
-                "text": "金額を入力して下さい"
+                "text": "野川健人"
             }
         },
         {
@@ -33,7 +33,7 @@
             "action": {
                 "type": "message",
                 "label": "野手京平",
-                "text": "金額を入力して下さい"
+                "text": "野手京平"
             }
         },        {
             "type": "action",
@@ -41,7 +41,7 @@
             "action": {
                 "type": "message",
                 "label": "草野裕次朗",
-                "text": "金額を入力して下さい"
+                "text": "草野裕次朗"
             }
         },
         {
@@ -50,7 +50,7 @@
             "action": {
                 "type": "message",
                 "label": "島森和樹",
-                "text": "金額を入力して下さい"
+                "text": "島森和樹"
             }
         },
         {
@@ -59,7 +59,7 @@
             "action": {
                 "type": "message",
                 "label": "佐藤丈弘",
-                "text": "金額を入力して下さい"
+                "text": "佐藤丈弘"
             }
         },
         {
@@ -68,7 +68,7 @@
             "action": {
                 "type": "message",
                 "label": "當間雄太",
-                "text": "金額を入力して下さい"
+                "text": "當間雄太"
             }
         },
         {
@@ -77,7 +77,7 @@
             "action": {
                 "type": "message",
                 "label": "栗原敦己",
-                "text": "金額を入力して下さい"
+                "text": "栗原敦己"
             }
         }
     ],
@@ -88,7 +88,7 @@
             "action": {
                 "type": "message",
                 "label": "戻る",
-                "text": "金額を入力して下さい"
+                "text": "戻る"
             }
         },
         {
@@ -97,7 +97,7 @@
             "action": {
                 "type": "message",
                 "label": "取り消し",
-                "text": "金額を入力して下さい"
+                "text": "取り消し"
             }
         }
     ],
@@ -108,7 +108,7 @@
             "action": {
                 "type": "message",
                 "label": "戻る",
-                "text": "金額を入力して下さい"
+                "text": "戻る"
             }
         },
         {
@@ -117,7 +117,7 @@
             "action": {
                 "type": "message",
                 "label": "取り消し",
-                "text": "金額を入力して下さい"
+                "text": "取り消し"
             }
         }
     ]
