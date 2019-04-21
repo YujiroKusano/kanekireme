@@ -29,24 +29,23 @@ app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
         if(stage == 1) {
-            LineApi.postBtn(req, lendItem.stage2);
-            if(reqText != '相手を選択してください') {
-                lendModel.stage2(user_id, reqText);
-            }
+            LineApi.postBtn(req, lendItem.stage2, stage);
+            lendModel.stage2(user_id, reqText);
         } else if(stage == 2) {
             
         } else if(stage == 3) {
-            LineApi.postBtn(req, lendItem.stage3, );
+            LineApi.postBtn(req, lendItem.stage3, stage);
         } else if(stage == 4) {
-            LineApi.postBtn(req, lendItem.stage4, );
+            LineApi.postBtn(req, lendItem.stage4, stage);
         } else if(stage == 5) {
-            LineApi.postBtn(req, lendItem.stage5, );
+            LineApi.postBtn(req, lendItem.stage5, stage);
         } else if(stage == 6) {
-            LineApi.postBtn(req, lendItem.stage6, );
+            LineApi.postBtn(req, lendItem.stage6, stage);
         } else if(stage == 7) {
-            LineApi.postBtn(req, ltenItem.stage7, );
+            LineApi.postBtn(req, ltenItem.stage7, stage);
         } else {
-            LineApi.postBtn(req, commonItem.stage1);
+            LineApi.postBtn(req, lendItem.stage2, stage);
+            // LineApi.postBtn(req, commonItem.stage1);
             lendModel.stage1(user_id, reqText);
         }
     });

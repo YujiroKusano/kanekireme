@@ -51,8 +51,14 @@ exports.postChecker = function(req, res, callback) {
 }
 
 //menu画面を返信する
-exports.postBtn = function(req, button) {
+exports.postBtn = function(req, button, stage) {
     require('dotenv').config();
+    var resText = 'default';
+    if(stage == 1) {
+        resText = '相手を選択してください';
+    } else if(stage = 1) {
+        resText = '金額を入力してください'
+    }
     //ヘッダー部を定義
     var headers = {
         'Content-Type': 'application/json',
@@ -63,7 +69,7 @@ exports.postBtn = function(req, button) {
         'replyToken': req.body['events'][0]['replyToken'],
         'messages': [{
             'type': 'text',
-            'text': 'runProcess',
+            'text': resText,
             "quickReply": {
                 "items": button
             }   
