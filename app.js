@@ -28,9 +28,13 @@ app.use(bodyParser.json());
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, function(stage, user_id, reqText) {
-        if(stage == 1) {
+        if(stage == 0) {
+            // LineApi.postBtn(req, commonItem.stage1);
+            lendModel.stage1(user_id, reqText);
+            LineApi.postBtn(req, lendItem.stage1, stage);
+        } else if(stage == 1) {
             lendModel.stage2(user_id, reqText);
-            LineApi.postBtn(req, lendItem.stage3, stage);
+            LineApi.postBtn(req, lendItem.stage2, stage);
         } else if(stage == 2) {
             
         } else if(stage == 3) {
@@ -44,9 +48,7 @@ app.post('/callback', function(req, res) {
         } else if(stage == 7) {
             LineApi.postBtn(req, ltenItem.stage7, stage);
         } else {
-            // LineApi.postBtn(req, commonItem.stage1);
-            lendModel.stage1(user_id, reqText);
-            LineApi.postBtn(req, lendItem.stage2, stage);
+           
         }
     });
 });

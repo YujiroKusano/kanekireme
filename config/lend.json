@@ -1,5 +1,5 @@
 {
-    "stage2": [
+    "stage1": [
         {
             "type": "action",
             "imageUrl": "",
@@ -81,7 +81,7 @@
             }
         }
     ],
-    "stage3": [
+    "stage2": [
         {
             "type": "action",
             "imageUrl": "",
@@ -101,7 +101,7 @@
             }
         }
     ],
-    "stage4": [
+    "stage3": [
         {
             "type": "action",
             "imageUrl": "",
@@ -110,7 +110,9 @@
                 "label": "戻る",
                 "text": "戻る"
             }
-        },
+        }
+    ],
+    "stage4": [
         {
             "type": "action",
             "imageUrl": "",
