@@ -8,7 +8,7 @@ exports.stage1 = function(user_id, reqText) {
     assert.equal(null, err);
     // Get the documents collection
     var collection = db.collection('users');
-    var jsDate = Date().toDateString;
+    var jsDate = new Date();
     var mode;
     if(reqText == '貸す'){
       mode = 3;
@@ -20,7 +20,7 @@ exports.stage1 = function(user_id, reqText) {
         user_id: user_id, 
         stage: 1,
         mode: mode,
-        last_date: jsDate
+        last_date: jsDate.toDateString()
       }]);
     });
   })
