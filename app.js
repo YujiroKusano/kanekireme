@@ -44,9 +44,9 @@ app.post('/callback', function(req, res) {
         } else if(stage == 7) {
             LineApi.postBtn(req, ltenItem.stage7, stage);
         } else {
-            LineApi.postBtn(req, lendItem.stage2, stage);
             // LineApi.postBtn(req, commonItem.stage1);
             lendModel.stage1(user_id, reqText);
+            LineApi.postBtn(req, lendItem.stage2, stage);
         }
     });
 });

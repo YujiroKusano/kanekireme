@@ -56,8 +56,10 @@ exports.postBtn = function(req, button, stage) {
     var resText = 'default';
     if(stage == 1) {
         resText = '相手を選択してください';
-    } else if(stage = 1) {
+    } else if(stage = 2) {
         resText = '金額を入力してください'
+    } else {
+
     }
     //ヘッダー部を定義
     var headers = {
