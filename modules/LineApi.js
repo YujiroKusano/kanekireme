@@ -34,6 +34,7 @@ exports.postChecker = function(req, res, callback) {
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
+        console.log(user_id);
         var get_profile_options = {
             url: 'https://api.line.me/v2/bot/profile/' + user_id,
             proxy: process.env.FIXIE_URL,

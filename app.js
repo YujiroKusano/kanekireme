@@ -9,7 +9,7 @@ var commonjson = fs.readFileSync('./config/common.json', 'utf8');
 var stage1Btn = JSON.parse(commonjson);
 
 var Lendbtn = fs.readFileSync('./config/lend.json', 'utf8');
-var lendStage1 = JSON.parse(Lendbtn);
+var lendItem = JSON.parse(Lendbtn);
 
 //送られてきた内容を確認するモジュール
 var LineApi = require('./modules/LineApi');
@@ -29,7 +29,17 @@ app.post('/callback', function(req, res) {
         if(stage == 1) {
             LineApi.postBtn(req, stage1Btn.stage1, displayName);
         } else if(stage == 2) {
-            LineApi.postBtn(req, lendStage1.stage1, displayName);
+            LineApi.postBtn(req, lendItem.stage2, displayName);
+        } else if(stage == 3) {
+            LineApi.postBtn(req, lendItem.stage3, displayName);
+        } else if(stage == 4) {
+            LineApi.postBtn(req, lendItem.stage4, displayName);
+        } else if(stage == 5) {
+            LineApi.postBtn(req, lendItem.stage5, displayName);
+        } else if(stage == 6) {
+            LineApi.postBtn(req, lendItem.stage6, displayName);
+        } else if(stage == 7) {
+            LineApi.postBtn(req, ltenItem.stage7, displayName);
         }
     });
 });

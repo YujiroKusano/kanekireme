@@ -29,7 +29,7 @@ exports.getNextId = function(callback) {
 
 exports.getStage = function(db, getStatus, callback) {
     // Get the documents collection
-        var collection = db.collection('Users');
+        var collection = db.collection('users');
         // Find some documents if user_id and not stage
         collection.findOne({'user_id': getStatus.user_id, 'stage': { $ne: getStatus.stage }}).toArray(function(err, getStatus) {
             assert.equal(err, null);
@@ -39,7 +39,7 @@ exports.getStage = function(db, getStatus, callback) {
     }
 
 exports.checkdDate = function(db, callback) {
-    var collection = db.collection('Users');
+    var collection = db.collection('users');
     var nwDate = new Date();
     var chDate = new Date();
     collection.findOne({}).toArray(function(err, getStatus) {

@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient
 
 exports.stage1 = function(db, status, callback) {
     // Get the documents collection
-    var collection = db.collection('Users');
+    var collection = db.collection('users');
     var jsDate = new Date();
     getNextId(function(getId){
       // Insert some documents
@@ -23,7 +23,7 @@ exports.stage1 = function(db, status, callback) {
   //stage2
 exports.stage2 = function(db, status, callback) {
     // Get the documents collection
-    var collection = db.collection('Users');
+    var collection = db.collection('users');
     // Update document where status is 1, set partner_id equal to 1
     collection.update({ 'status' : { $ne: 0 } },
     { 

@@ -1,12 +1,12 @@
 {
-    "stage1": [
+    "stage2": [
         {
             "type": "action",
             "imageUrl": "",
             "action": {
                 "type": "message",
                 "label": "阿曽太一",
-                "text": "一覧　※機能は実装されていません"
+                "text": "金額を入力して下さい"
             }
         },
         {
@@ -41,7 +41,7 @@
             "action": {
                 "type": "message",
                 "label": "草野裕次朗",
-                "text": "一覧　※機能は実装されていません"
+                "text": "金額を入力して下さい"
             }
         },
         {
@@ -77,6 +77,46 @@
             "action": {
                 "type": "message",
                 "label": "栗原敦己",
+                "text": "金額を入力して下さい"
+            }
+        }
+    ],
+    "stage3": [
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "戻る",
+                "text": "金額を入力して下さい"
+            }
+        },
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "取り消し",
+                "text": "金額を入力して下さい"
+            }
+        }
+    ],
+    "stage4": [
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "戻る",
+                "text": "金額を入力して下さい"
+            }
+        },
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "取り消し",
                 "text": "金額を入力して下さい"
             }
         }

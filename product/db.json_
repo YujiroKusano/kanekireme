@@ -1,0 +1,40 @@
+{
+    "UsersCollection" :{
+        “_id”: {  //stage1
+            type: Number,  //countersコレクションから最新番号を取得1〜
+            required: true
+        },
+        “user_id”:  {    //stage1
+            type: String,
+        },
+        “stage”: {  //各stage
+            type: Number,
+            default: 1,
+            min: 1,
+            max: 7,
+        }, 
+        “Last_date”: { //各stage
+            type: String,     //js内で操作するため
+        },
+        “mode”: { //satage1
+            enum: [“一覧表示”, “借りる”, “貸す”, “返済”]
+         },
+        “partner_name”: {  //stage2
+            type: String,
+        },
+        “cache”{  //stage3
+            type: Number,
+            min: 1,
+            max: 20,000,
+        },
+        “date”: {  //stage4
+            type: Date,    //mongodb内でソートするため
+        },
+        “detail” { //stage5
+            type: String,
+            maxLength: 30,
+        },
+    }
+}
+
+db.users.insert({ _id: 999, user_id:10, gender:'m', hobbies:['programming']});
