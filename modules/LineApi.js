@@ -117,7 +117,7 @@ var postdbs = function(req, user_id) {
             'replyToken': req.body['events'][0]['replyToken'],
             "messages": [{
                 "type": "text",
-                "text": userData
+                "text": JSON.stringify(userData)
             }
         ]};
         
