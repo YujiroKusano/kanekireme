@@ -21,7 +21,7 @@ exports.stage1 = function(user_id, reqText) {
         stage: 1,
         mode: mode,
         last_date: jsDate.toDateString(),
-        last_time: jsDate.toTimeString()
+        last_time: jsDate.toLocaleTimeString()
       }]);
     });
   })
