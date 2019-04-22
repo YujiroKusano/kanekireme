@@ -42,7 +42,7 @@ exports.postBtn = function(req, user_id ,callback) {
         //返信処理
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                console.log(body);
+                console.log('Lend ' + body);
 
                 console.log(JSON.stringify(button[stage+1]));
                 callback(true);

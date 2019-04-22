@@ -33,7 +33,7 @@ exports.postdbs = function(req, user_id, callback) {
 
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                console.log(body);
+                console.log('show ' + body);
                 callback(ture);
             } else {
                 console.log('error: ' + JSON.stringify(response));
