@@ -1,8 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
-var commonDb = require('./Common');
-  
   //stage2
 exports.stage2 = function(user_id, reqText) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
