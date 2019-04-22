@@ -7,7 +7,7 @@ var commondb = require('../Models/Common');
 var request = require('request');
 
 //menu画面を返信する
-exports.postBtn = function(req, user_id, mode ,callback) {
+exports.postBtn = function(req, user_id ,callback) {
     require('dotenv').config();
     commondb.getStage(user_id, (stage) => {
 
@@ -45,7 +45,7 @@ exports.postBtn = function(req, user_id, mode ,callback) {
                 console.log(body);
 
                 console.log(JSON.stringify(button[stage+1]));
-                callback(ture);
+                callback(true);
             } else {
                 console.log('error: ' + JSON.stringify(response));
                 callback(false);

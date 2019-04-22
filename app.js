@@ -34,9 +34,9 @@ app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, (result) => {
         if(result == true) {
-            console.log('正常終了');
+            console.log('app: 正常終了');
         } else {
-            console.log('異常終了');
+            console.log('app: 異常終了');
         }
     });
 });

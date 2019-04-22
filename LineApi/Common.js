@@ -33,6 +33,7 @@ exports.postChecker = function(req, res, callback) {
                 });
             } else if(mode == 0) { //初回処理
                 commonDb.stage1(user_id, reqMode[reqText]);
+
             } else if(mode == 2) { //借りる処理
 
             } else if(mode == 3) { //貸す処理
@@ -55,9 +56,11 @@ exports.postChecker = function(req, res, callback) {
 
         request.get(get_profile_options, function(err, res, body) {
             if(!err && res.statusCode == 200) {
-                console.log('返信正常' + body);
+                console.log('response: 返信正常' + body);
                 callback(true);
-            } 
+            } else {
+                console.log('response: 返信異常' + body);
+            }
         });
     
     } 

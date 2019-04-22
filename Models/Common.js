@@ -49,7 +49,7 @@ exports.stage1 = function(user_id, mode) {
           last_time: jsDate.toLocaleTimeString()
         }]);
       });
-    })
+    });
   }
 
 
