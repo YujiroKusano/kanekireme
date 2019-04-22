@@ -24,6 +24,7 @@ exports.postChecker = function(req, res, callback) {
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
+        var reqMode = {'一覧': 1, '借りる': 2, '貸す': 3, '返済': 4};
 
         commonDb.getMode(user_id, (mode) => {
             if(reqText == '一覧'){ //一覧表示処理
@@ -31,13 +32,13 @@ exports.postChecker = function(req, res, callback) {
                     callback(result);
                 });
             } else if(mode == 0) { //初回処理
-                commonDb.stage1(user_id, mode);
-            }else if(mode == 2) { //借りる処理
+                commonDb.stage1(user_id, reqMode[reqText]);
+            } else if(mode == 2) { //借りる処理
 
             } else if(mode == 3) { //貸す処理
                 lend.postBtn(req, user_id, (result) => {
                     callback(result);
-                })
+                });
             } else if(mode == 4) { //返済処理
 
             }
