@@ -7,7 +7,7 @@ var commondb = require('../Models/Common');
 var request = require('request');
 
 //menu画面を返信する
-exports.postBtn = function(req, user_id, callback) {
+exports.postBtn = function(req, user_id, mode ,callback) {
     require('dotenv').config();
     commondb.getStage(user_id, (stage) => {
 
@@ -26,7 +26,7 @@ exports.postBtn = function(req, user_id, callback) {
                 'type': 'text',
                 'text': resText[stage],
                 'quickReply': {
-                    "items": button[stage]
+                    "items": button[stage+1]
                 }   
             },
         ]};
