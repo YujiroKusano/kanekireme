@@ -1,3 +1,5 @@
+
+var request = require('request');
 //一覧を返信する
 exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
@@ -28,7 +30,7 @@ exports.postdbs = function(req, user_id, callback) {
             json: true,
             body: data
         };
-        
+
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 console.log(body);

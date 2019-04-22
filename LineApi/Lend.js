@@ -3,6 +3,9 @@ var button = JSON.parse(fs.readFileSync('./config/lend.json', 'utf8'));
 
 var commondb = require('../Models/Common');
 
+
+var request = require('request');
+
 //menu画面を返信する
 exports.postBtn = function(req, user_id, callback) {
     require('dotenv').config();
