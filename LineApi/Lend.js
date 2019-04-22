@@ -41,11 +41,8 @@ exports.postBtn = function(req, user_id ,callback) {
         
         //返信処理
         request.post(options, function(error, response, body) {
-            console.log(button[stage])
             if(!error && response.statusCode == 200) {
                 console.log('Lend ' + body);
-
-                console.log(JSON.stringify(button));
                 callback(true);
             } else {
                 console.log('error: ' + JSON.stringify(response));
