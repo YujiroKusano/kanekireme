@@ -1,7 +1,8 @@
 var fs = require('fs');
-var button = JSON.parse(fs.readFileSync('../config/lend'));
+var button = JSON.parse(fs.readFileSync('../config/lend.json'));
 
 var commondb = require('../Models/Common');
+
 //menu画面を返信する
 exports.postBtn = function(req, user_id, callback) {
     require('dotenv').config();
