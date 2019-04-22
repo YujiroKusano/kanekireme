@@ -45,7 +45,7 @@ exports.postBtn = function(req, user_id ,callback) {
             if(!error && response.statusCode == 200) {
                 console.log('Lend ' + body);
 
-                console.log(JSON.stringify(button[stage+1]));
+                console.log(JSON.stringify(button));
                 callback(true);
             } else {
                 console.log('error: ' + JSON.stringify(response));
