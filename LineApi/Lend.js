@@ -1,5 +1,5 @@
 var fs = require('fs');
-var button = JSON.parse(fs.readFileSync('../config/lend.json', 'utf8'));
+var button = JSON.parse(fs.readFileSync('./config/lend.json', 'utf8'));
 
 var commondb = require('../Models/Common');
 
