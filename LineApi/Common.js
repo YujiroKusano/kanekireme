@@ -54,8 +54,8 @@ exports.postChecker = function(req, res, callback) {
 
         request.get(get_profile_options, function(err, res, body) {
             if(!err && res.statusCode == 200) {
-                console.log(body);
-                callback(result);
+                console.log('返信正常' + body);
+                callback(true);
             } 
         });
     
