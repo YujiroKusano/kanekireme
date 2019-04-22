@@ -30,7 +30,7 @@ exports.postBtn = function(req, user_id, mode ,callback) {
                 }   
             },
         ]};
-        
+        console.log(button[stage+1]);
         //オプションを定義
         var options = {
             url: 'https://api.line.me/v2/bot/message/reply',
