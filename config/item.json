@@ -1,0 +1,19 @@
+{
+    "response": {
+        "options" : {
+            "url": "https://api.line.me/v2/bot/message/reply",
+            "proxy": process.env.FIXIE_URL,
+            "headers": {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+            },
+            "json": true,
+            "body": data
+        }
+    },
+    "item": {
+        "message": {
+            
+        }
+    }
+}

@@ -1,6 +1,10 @@
 {
-    "stage1": [
-        {
+    "stage": [ 
+        [
+            
+        ],
+        [
+            {
             "type": "action",
             "imageUrl": "",
             "action": {
@@ -79,9 +83,18 @@
                 "label": "栗原敦己",
                 "text": "栗原敦己"
             }
+        },
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "栗原敦己",
+                "text": "栗原敦己"
         }
+    }
     ],
-    "stage2": [
+    [
         {
             "type": "action",
             "imageUrl": "",
@@ -101,7 +114,7 @@
             }
         }
     ],
-    "stage3": [
+    [
         {
             "type": "action",
             "imageUrl": "",
@@ -112,7 +125,7 @@
             }
         }
     ],
-    "stage4": [
+    [
         {
             "type": "action",
             "imageUrl": "",
@@ -123,4 +136,4 @@
             }
         }
     ]
-} 
+]} 
