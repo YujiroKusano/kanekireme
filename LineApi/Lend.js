@@ -30,7 +30,6 @@ exports.postBtn = function(req, user_id, mode ,callback) {
                 }   
             },
         ]};
-        console.log(button[stage+1]);
         //オプションを定義
         var options = {
             url: 'https://api.line.me/v2/bot/message/reply',
@@ -44,6 +43,8 @@ exports.postBtn = function(req, user_id, mode ,callback) {
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 console.log(body);
+
+                console.log(JSON.stringify(button[stage+1]));
                 callback(ture);
             } else {
                 console.log('error: ' + JSON.stringify(response));
