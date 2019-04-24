@@ -1,6 +1,5 @@
 var fs = require('fs');
-var button = fs.readFileSync('./config/lend.json', 'utf8');
-var stage1btn = JSON.parse(button);
+var button = JSON.parse(fs.readFileSync('./config/lend.json', 'utf8'));
 
 var commondb = require('../Models/Common');
 var lenddb = require('../Models/Lend');
