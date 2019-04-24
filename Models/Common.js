@@ -23,7 +23,6 @@ getNextId = function(callback) {
         var collection = db.collection('counters');
         collection.update({_id: "user_id"},{ $inc: {count: 1}}, function() {
             collection.find({ _id: "user_id" }).toArray(function(err, docs) {
-                console.log('getNextId');
                 db.close();
                 callback(docs[0].count);
             });
