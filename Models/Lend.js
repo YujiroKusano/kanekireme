@@ -75,9 +75,7 @@ exports.stage5 = function(user_id, reqText) {
     collection.update(
     { 'user_id': user_id, 'stage': 4},
     { 
-      $set: { 
-        stage: 0
-      }
+      $inc: { stage: -4 },
     })
   })
 };
