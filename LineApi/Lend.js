@@ -10,7 +10,7 @@ var request = require('request');
 exports.postBtn = function(req, user_id, reqText, callback) {
     require('dotenv').config();
     commondb.getStage(user_id, (stage) => {
-        var resText = ['相手を選択してください', '金額を入力してください', '詳細を入力してください', '処理が完了しました'];
+        var resText = ['相手を選択してください', '金額を入力してください', '詳細を入力してください', '処理が完了しました', ''];
         //ヘッダー部を定義
         var headers = {
             'Content-Type': 'application/json',
