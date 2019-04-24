@@ -75,7 +75,7 @@ exports.stage5 = function(user_id, reqText) {
     jsDate.setHours(jsDate.getHours() + 9);
     // Update document where status is 1, set partner_id equal to 1
     collection.update(
-    { 'user_id': user_id, 'stage': 3},
+    { 'user_id': user_id, 'stage': 4},
     { 
       $set: { 
         stage: 0,
