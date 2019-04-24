@@ -1,8 +1,8 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
-  //stage2
-exports.stage2 = function(user_id, reqText) {
+  //stage1
+exports.stage1 = function(user_id, reqText) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
       console.log(user_id + ': stage2');
@@ -23,8 +23,8 @@ exports.stage2 = function(user_id, reqText) {
     })
 };
 
- //stage3
- exports.stage3 = function(user_id, reqText) {
+ //stage2
+ exports.stage2 = function(user_id, reqText) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     // Get the documents collection
     var collection = db.collection('users');
@@ -44,8 +44,8 @@ exports.stage2 = function(user_id, reqText) {
   })
 };
 
-//stage4
-exports.stage4 = function(user_id, reqText) {
+//stage3
+exports.stage3 = function(user_id, reqText) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     // Get the documents collection
     var collection = db.collection('users');
