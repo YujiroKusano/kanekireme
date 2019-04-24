@@ -25,7 +25,7 @@ exports.postChecker = function(req, res, callback) {
         //ユーザーIDからユーザー名を取得
         var user_id = req.body['events'][0]['source']['userId'];
         var reqMode = {'一覧': 1, '借りる': 2, '貸す': 3, '返済': 4};
-
+        if(reqMode[reqText] == null || reqMode[reqText] == undefined) {return}
         commonDb.getMode(user_id, (mode) => {
             if(reqText == '一覧'){ //一覧表示処理
                 show.postdbs(req, user_id, (result) => {
