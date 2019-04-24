@@ -82,6 +82,7 @@ function validate_signature(signature, body) {
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
 
+var fs = require('fs');
 var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
 
 postBtn = function(req, user_id, reqText, callback) {
