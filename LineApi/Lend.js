@@ -7,7 +7,7 @@ var lenddb = require('../Models/Lend');
 var request = require('request');
 
 //menu画面を返信する
-exports.postBtn = function(req, user_id ,callback) {
+exports.postBtn = function(req, user_id, reqText, callback) {
     require('dotenv').config();
     commondb.getStage(user_id, (stage) => {
         var resText = ['default', '相手を選択してください', '金額を入力してください', '詳細を入力してください'];
@@ -41,11 +41,11 @@ exports.postBtn = function(req, user_id ,callback) {
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 if(stage == 1) {
-                    lenddb.stage1(user_id, resText[stage]);
+                    lenddb.stage1(user_id, reqText);
                 } else if(stage == 2) {
-                    lenddb.stage2(user_id, resText[stage]);
+                    lenddb.stage2(user_id, reqText);
                 } else if(stage == 3) {
-                    lenddb.stage3(user_id, resText[stage]);
+                    lenddb.stage3(user_id, reqText);
                 } 
                 console.log('LINEAPI:LEND::INFO: 正常終了')
                 callback(true);

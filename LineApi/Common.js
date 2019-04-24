@@ -37,7 +37,7 @@ exports.postChecker = function(req, res, callback) {
             } else if(mode == 2) { //借りる処理
 
             } else if(mode == 3) { //貸す処理
-                lend.postBtn(req, user_id, (result) => {
+                lend.postBtn(req, user_id, reqText, (result) => {
                     callback(result);
                 });
             } else if(mode == 4) { //返済処理
