@@ -2,11 +2,6 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-//var mongo = require('./Models/Common');
-var fs = require('fs');
-
-var commonjson = fs.readFileSync('./config/common.json', 'utf8');
-var commonItem = JSON.parse(commonjson);
 
 //送られてきた内容を確認するモジュール
 var LineApi = require('./LineApi/Common');

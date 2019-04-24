@@ -56,10 +56,13 @@ exports.postChecker = function(req, res, callback) {
 
         request.get(get_profile_options, function(err, res, body) {
             if(!err && res.statusCode == 200) {
-                console.log('response: 返信正常' + body);
+                console.log('COMMON::response: 返信正常' + body);
                 callback(true);
             } else {
-                console.log('response: 返信異常' + body);
+                console.log('COMMON::response: 返信異常' + body);
+                console.log('COMMON::response: 返信異常' + res);
+                console.log('COMMON::response: 返信異常' + err);
+                callback(false);
             }
         });
     

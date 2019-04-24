@@ -1,5 +1,6 @@
 {
     "stage": [ 
+        [],
         [{
             "type": "action",
             "imageUrl": "",
@@ -79,16 +80,7 @@
                 "label": "栗原敦己",
                 "text": "栗原敦己"
             }
-        },
-        {
-            "type": "action",
-            "imageUrl": "",
-            "action": {
-                "type": "message",
-                "label": "栗原敦己",
-                "text": "栗原敦己"
         }
-    }
     ],
     [
         {

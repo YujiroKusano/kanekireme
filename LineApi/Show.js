@@ -33,10 +33,10 @@ exports.postdbs = function(req, user_id, callback) {
 
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                console.log('show ' + body);
-                callback(ture);
+                console.log('LINAPI:SHOW ' + body);
+                callback(true);
             } else {
-                console.log('error: ' + JSON.stringify(response));
+                console.log('LINEAPI:SHOW::ERROR: ' + JSON.stringify(response));
                 callback(false);
             }
         });

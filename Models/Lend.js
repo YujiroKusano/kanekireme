@@ -5,6 +5,7 @@ var MongoClient = require('mongodb').MongoClient
 exports.stage2 = function(user_id, reqText) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
+      console.log(user_id + ': stage2');
       var collection = db.collection('users');
       var jsDate = new Date();
       jsDate.setHours(jsDate.getHours() + 9);
