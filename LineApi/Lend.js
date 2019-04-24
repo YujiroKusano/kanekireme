@@ -11,8 +11,8 @@ var request = require('request');
 exports.postBtn = function(req, user_id ,callback) {
     require('dotenv').config();
     commondb.getStage(user_id, (stage) => {
-        console.log("stage: " + stage)
         var resText = ['default', '相手を選択してください', '金額を入力してください', '詳細を入力してください'];
+        console.log(button);
         //ヘッダー部を定義
         var headers = {
             'Content-Type': 'application/json',
