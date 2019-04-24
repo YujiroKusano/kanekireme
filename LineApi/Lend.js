@@ -48,7 +48,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                     lenddb.stage3(user_id, reqText);
                 } else if(stage == 3) {
                     lenddb.stage4(user_id, reqText);
-                } else {
+                } else if(stage == 4){
                     lenddb.stage5(user_id, reqText);
                 }
                 callback(true);
