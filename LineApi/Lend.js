@@ -26,7 +26,7 @@ exports.postBtn = function(req, user_id ,callback) {
                 'type': 'text',
                 'text': resText[stage],
                 'quickReply': {
-                    "items": button[stage]
+                    "items": button.stage[stage]
                 }   
             },
         ]};
