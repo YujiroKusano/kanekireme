@@ -33,7 +33,9 @@ exports.postChecker = function(req, res, callback) {
                 });
             } else if(mode == 0) { //初回処理
                 commonDb.stage1(user_id, reqMode[reqText]);
-
+                postBtn(req, user_id, reqText, (result) => {
+                    callback(result);
+                });
             } else if(mode == 2) { //借りる処理
 
             } else if(mode == 3) { //貸す処理
@@ -80,3 +82,43 @@ function validate_signature(signature, body) {
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
 
+var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
+
+postBtn = function(req, user_id, reqText, callback) {
+    require('dotenv').config();
+    var resText = ['相手を選択してください'];
+    //ヘッダー部を定義
+    var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+    };
+
+    //返信内容を定義
+    var data = {
+        'replyToken': req.body['events'][0]['replyToken'],
+        'messages': [{
+            'type': 'text',
+            'text': resText[0],
+            'quickReply': {
+                "items": button['stage1'][1]
+            }   
+        },
+    ]};
+    //オプションを定義
+    var options = {
+        url: 'https://api.line.me/v2/bot/message/reply',
+        proxy: process.env.FIXIE_URL,
+        headers: headers,
+        json: true,
+        body: data
+    };
+    
+    //返信処理
+    request.post(options, function(error, response, body) {
+        if(!error && response.statusCode == 200) {
+            callback(true);
+        } else {
+            callback(false);
+        }
+    });
+}

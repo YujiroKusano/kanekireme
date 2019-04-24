@@ -40,17 +40,17 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         //返信処理
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                if(stage == 1) {
-                    lenddb.stage1(user_id, reqText);
-                } else if(stage == 2) {
+                if(stage == 0) {
+
+                }else if(stage == 1) {
                     lenddb.stage2(user_id, reqText);
-                } else if(stage == 3) {
+                } else if(stage == 2) {
                     lenddb.stage3(user_id, reqText);
+                } else if(stage == 3) {
+                    lenddb.stage4(user_id, reqText);
                 } 
-                console.log('LINEAPI:LEND::INFO: 正常終了')
                 callback(true);
             } else {
-                console.log('LINEAPI:LEND::ERROR: ' + response);        
                 callback(false);
             }
         });
