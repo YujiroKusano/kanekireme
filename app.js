@@ -8,16 +8,6 @@ var fs = require('fs');
 var commonjson = fs.readFileSync('./config/common.json', 'utf8');
 var commonItem = JSON.parse(commonjson);
 
-//"貸す"ボタン
-var Lendbtn = fs.readFileSync('./config/lend.json', 'utf8');
-var lendItem = JSON.parse(Lendbtn);
-
-//"貸す"データベース操作モジュール
-var lendModel = require('./Models/Lend');
-
-//"一覧"データベース操作モジュール
-var showModel = require('./Models/Show');
-
 //送られてきた内容を確認するモジュール
 var LineApi = require('./LineApi/Common');
 
