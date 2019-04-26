@@ -24,7 +24,7 @@ exports.postChecker = function(req, res, callback) {
     //     return;
     // }
     var user_id = req.body['events'][0]['source']['userId'];
-
+    console.log(req.body['events'][0]['type']);
     if(req.body['events'][0]['type'] == 'message'){
         var reqText = req.body['events'][0]['message']['text'];
     }
