@@ -7,7 +7,7 @@ var lenddb = require('../Models/Lend');
 var request = require('request');
 
 //menu画面を返信する
-exports.postBtn = function(req, user_id, reqText, callback) {
+exports.postBtn = function(req, user_id, callback) {
     require('dotenv').config();
     commondb.getStage(user_id, (stage) => {
         var resText = ['相手を選択してください', '金額を入力してください', '詳細を入力してください',  '', '処理が完了しました',];
@@ -69,6 +69,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 callback(true);
             } else {
                 console.log('LineApi.POSTBUTTON:異常終了');
+                console.log(date);
                 console.log(error);
                 callback(false);
             }

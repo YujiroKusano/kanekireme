@@ -86,8 +86,8 @@ var stage4 = function(user_id, reqText) {
   });
 };
 
-//stage3
-var stage5 = function(user_id, reqText) {
+//stage4
+var stage5 = function(user_id, reqDate) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     // Get the documents collection
     var collection = db.collection('users');
@@ -100,7 +100,7 @@ var stage5 = function(user_id, reqText) {
      // $inc: {  },
       $set: { 
         stage: 0,
-        date: reqText,
+        date: reqDate,
         last_date: jsDate.toDateString(),
         last_time: jsDate.toLocaleTimeString()
        } 
