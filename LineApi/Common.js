@@ -23,10 +23,17 @@ exports.postChecker = function(req, res, callback) {
     var user_id = req.body['events'][0]['source']['userId'];
     var reqDate = req.body['events'][0].postback.params.date;
 
-    //戻るボタン押下時はstageを一つ戻す
-    if(reqText == '戻る') { commonDb.cancelStage(user_id) }
+    // 戻るボタン押下時はstageを一つ戻す
+    // if(reqText == '戻る') { 
+    //     commonDb.cancelStage(user_id);
+    //  }
     //取り消しボタン押下時には
-    if(reqText == '取り消し') { commonDb.resetStage(user_id) }
+    if(reqText == '取り消し') { 
+        commonDb.resetStage(user_id);
+        postMsg(req, '取り消し完了', function(result) {
+            console.log('取り消し完了');
+        });
+    }
     //完了ボタン押下時は処理なし
     if(reqText == '完了' || reqText == '取り消し') { return }
 
@@ -136,7 +143,7 @@ postBtn = function(req, user_id, reqText, callback) {
     });
 }
 
-postMsg = function(req, user_id, resText, callback) {
+postMsg = function(req, resText, callback) {
     require('dotenv').config();
     //ヘッダー部を定義
     var headers = {
