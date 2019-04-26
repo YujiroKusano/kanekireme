@@ -18,11 +18,10 @@ app.use(bodyParser.json());
 app.post('/callback', function(req, res) {
     require('dotenv').config();
     LineApi.postChecker(req, res, (result) => {
-        var text = req.body['events'][0]['message']['text'];
         if(result == true) {
-            console.log('app: ' + text + ':: 正常終了');
+            console.log('app:: 正常終了');
         } else {
-            console.log('app: ' + text + ':: 異常終了');
+            console.log('app:: 異常終了');
         }
     });
 });
