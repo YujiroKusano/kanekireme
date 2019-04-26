@@ -19,9 +19,11 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
         var data;
         //返信内容を定義
-        if(stage == 4) {
+        if(stage != 4) {
             //返信内容を定義
             data = {
+                'replyToken': req.body['events'][0]['replyToken'],
+                'messages': [{
                     "type": "template",
                     "altText": "this is a buttons template",
                     "template": {
@@ -37,7 +39,8 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                             }
                         ]
                     }
-                }
+                },
+            ]};
         } else {
             data = {
                 'replyToken': req.body['events'][0]['replyToken'],
