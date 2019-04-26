@@ -47,12 +47,12 @@ exports.postChecker = function(req, res, callback) {
             } else if(mode == 2) { //借りる処理
 
             } else if(mode == 3) { //貸す処理
-                //Database登録処理
-                lendDb.runLendStage(user_id, reqText);
                 //Button表示処理＆返信テキスト処理
                 lend.postBtn(req, user_id, reqText, (result) => {
                     callback(result);
                 });
+                //Database登録処理
+                lendDb.runLendStage(user_id, reqText);
             } else if(mode == 4) { //返済処理
 
             }
