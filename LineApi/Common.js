@@ -19,11 +19,14 @@ exports.postChecker = function(req, res, callback) {
         || (req.body['events'][0]['message']['type'] != 'text') 
             && (req.body['events'][0]['postback'] != 'text')) {
         console.log('MESSAGE ERROR');
-        var reqDate = req.body['events'][0]['postback']['params']['date'];
         return;
     }
     var reqText = req.body['events'][0]['message']['text'];
     var user_id = req.body['events'][0]['source']['userId'];
+    
+    if(req.body['events'][0]['postback'] == 'text') {
+        var reqText = req.body['events'][0]['postback']['params']['date'];
+    }
     
 
     // 戻るボタン押下時はstageを一つ戻す
