@@ -21,6 +21,7 @@ exports.postChecker = function(req, res, callback) {
     }
     var reqText = req.body['events'][0]['message']['text'];
     var user_id = req.body['events'][0]['source']['userId'];
+    var reqDate = req.body['events'][0].postback.params.date;
 
     //戻るボタン押下時はstageを一つ戻す
     if(reqText == '戻る') { commonDb.cancelStage(user_id) }
@@ -116,6 +117,41 @@ postBtn = function(req, user_id, reqText, callback) {
             }   
         },
     ]};
+    //オプションを定義
+    var options = {
+        url: 'https://api.line.me/v2/bot/message/reply',
+        proxy: process.env.FIXIE_URL,
+        headers: headers,
+        json: true,
+        body: data
+    };
+    
+    //返信処理
+    request.post(options, function(error, response, body) {
+        if(!error && response.statusCode == 200) {
+            callback(true);
+        } else {
+            callback(false);
+        }
+    });
+}
+
+postMsg = function(req, user_id, resText, callback) {
+    require('dotenv').config();
+    //ヘッダー部を定義
+    var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+    };
+
+    //返信内容を定義
+    var data = {
+        'replyToken': req.body['events'][0]['replyToken'],
+        'messages': [{
+            "type": "text",
+            "text": resText
+        }]
+    };
     //オプションを定義
     var options = {
         url: 'https://api.line.me/v2/bot/message/reply',
