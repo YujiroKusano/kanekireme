@@ -40,7 +40,7 @@ exports.postChecker = function(req, res, callback) {
                 });
             } else if(mode == 0) { //初回処理
                 var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
-                lend.postBtn(req, user_id, reqText, (result) => {
+                postBtn(req, user_id, reqText, (result) => {
                     callback(result);
                 });
                 commonDb.stage1(user_id, reqMode[reqText]);
@@ -48,7 +48,7 @@ exports.postChecker = function(req, res, callback) {
 
             } else if(mode == 3) { //貸す処理
                 //Button表示処理＆返信テキスト処理
-                lend.postBtn(req, user_id, (result) => {
+                lend.postBtn(req, user_id, function(result) {
                     callback(result);
                 });
                 //Database登録処理
