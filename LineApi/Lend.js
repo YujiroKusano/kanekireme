@@ -51,9 +51,11 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 } else if(stage == 4){
                     lenddb.stage5(user_id, reqText);
                 }
-                callback(true, 'LineApi.Lend:正常終了');
+                console.log('LineApi.Lend:正常終了');
+                callback(true, );
             } else {
-                callback(false, 'LineApi.Lend:異常終了');
+                console.log('LineApi.Lend:異常終了')
+                callback(false);
             }
         });
     })
