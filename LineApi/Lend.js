@@ -19,7 +19,7 @@ exports.postBtn = function(req, user_id, callback) {
 
         var data ={};
         //返信内容を定義
-        if(stage == 4) {
+        if(stage == 3) {
             //返信内容を定義
             data = {
                 'replyToken': req.body['events'][0]['replyToken'],
