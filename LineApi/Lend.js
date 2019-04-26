@@ -20,12 +20,11 @@ exports.postBtn = function(req, user_id, callback) {
 
         //返信内容を定義
         if(stage == 3) {
-            //返信内容を定義
             var data = {
                 'replyToken': req.body['events'][0]['replyToken'],
                 'messages': [{
                     "type": "template",
-                    "altText": "this is a buttons template",
+                    "altText": '日付ピッカー',
                     "template": {
                         "type": "buttons",
                         "title": '貸した日付',
@@ -68,7 +67,7 @@ exports.postBtn = function(req, user_id, callback) {
                 console.log('LineApi.POSTBUTTON:正常終了');
                 callback(true);
             } else {
-                console.log('LineApi.POSTBUTTON:異常終了 '+ JSON.stringify(data));
+                console.log('LineApi.POSTBUTTON:異常終了 '+ JSON.stringify(options));
                 console.log('LineApi.POSTBUTTON:異常終了' + response.statusCode);
                 callback(false);
             }
