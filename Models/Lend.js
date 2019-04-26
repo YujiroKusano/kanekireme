@@ -19,8 +19,8 @@ exports.stage2 = function(user_id, reqText) {
           last_date: jsDate.toDateString(),
           last_time: jsDate.toLocaleTimeString()
          } 
-      })
-    })
+      });
+    });
 };
 
  //stage2
@@ -40,8 +40,8 @@ exports.stage2 = function(user_id, reqText) {
         last_date: jsDate.toDateString(),
         last_time: jsDate.toLocaleTimeString()
        } 
-    })
-  })
+    });
+  });
 };
 
 //stage3
@@ -62,21 +62,6 @@ exports.stage4 = function(user_id, reqText) {
         last_date: jsDate.toDateString(),
         last_time: jsDate.toLocaleTimeString()
        } 
-    })
-  })
-};
-
-
-//stage4
-exports.stage5 = function(user_id, reqText) {
-  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-    // Get the documents collection
-    var collection = db.collection('users');
-    // Update document where status is 1, set partner_id equal to 1
-    collection.update(
-    { 'user_id': user_id, 'stage': 4},
-    { 
-      $set: { stage: 0 },
-    })
-  })
+    });
+  });
 };

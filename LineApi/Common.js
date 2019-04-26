@@ -19,13 +19,19 @@ exports.postChecker = function(req, res, callback) {
         return;
     }
     var reqText = req.body['events'][0]['message']['text'];
-    if(reqText == '完了') { return }
+    var user_id = req.body['events'][0]['source']['userId'];
+    
+    //戻るボタン押下時はstageを一つ戻す
+    if(reqText == '戻る') { commonDb.cancelStage(user_id) }
+    //取り消しボタン押下時には
+    if(reqText == '取り消し') { commonDb.resetStage(user_id) }
+    //完了ボタン押下時は処理なし
+    if(reqText == '完了' || reqText == '取り消し' || reqText == '戻る') { return }
 
     console.log('Text: ' + reqText);
     //個人チャットの場合の処理
     if(req.body['events'][0]['source']['type'] == 'user') {
         //ユーザーIDからユーザー名を取得
-        var user_id = req.body['events'][0]['source']['userId'];
         var reqMode = {'一覧': 1, '借りる': 2, '貸す': 3, '返済': 4};
         commonDb.getMode(user_id, (mode) => {
             if(reqText == '一覧'){ //一覧表示処理

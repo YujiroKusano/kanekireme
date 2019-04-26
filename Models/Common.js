@@ -85,6 +85,40 @@ exports.getMode = function(user_id, callback) {
     });
 }
 
+exports.resetStage() = function(user_id){
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        assert.equal(null, err);
+        // Get the documents collection
+        var collection = db.collection('users');
+        // Find some documents if user_id and not stage
+        collection.remove({ 'user_id': user_id, 'stage': { $ne: 0 }}, 
+            function(err, result) {
+                if (err) {
+                    console.log('reset::ERROR')
+                } else {
+                    console.log('Success: ' + result + ' document(s) deleted');
+                }
+            }
+        )}
+        
+    );
+}
+    
+exports.cancelStage() = function(user_id){
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        assert.equal(null, err);
+        // Get the documents collection
+        var collection = db.collection('users');
+        // Find some documents if user_id and not stage
+        collection.update(
+            { 'user_id': user_id, 'stage': { $ne: 0 }},
+            { 
+              $inc: { 
+                stage: -1,
+               } 
+            });
+    });
+}
 
 exports.checkdDate = function(db, callback) {
     var collection = db.collection('users');
