@@ -85,7 +85,7 @@ exports.getMode = function(user_id, callback) {
     });
 }
 
-exports.resetStage() = function(user_id){
+exports.resetStage = function(user_id){
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
         // Get the documents collection
@@ -104,7 +104,7 @@ exports.resetStage() = function(user_id){
     );
 }
     
-exports.cancelStage() = function(user_id){
+exports.cancelStage = function(user_id){
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
         // Get the documents collection
