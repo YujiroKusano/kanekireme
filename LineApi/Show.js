@@ -5,8 +5,7 @@ exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
     showModels.getUserInfo(user_id, function(result){
-        var userData = {'mode': result.mode, '相手': result.partner_name, 'タイムスタンプ': result.last_date+" "+result.last_time, "金額": result.money, "詳細": result.detail};
-        
+
         //ヘッダー部を定義
         var headers = {
             'Content-Type': 'application/json',
@@ -18,7 +17,7 @@ exports.postdbs = function(req, user_id, callback) {
             'replyToken': req.body['events'][0]['replyToken'],
             "messages": [{
                 "type": "text",
-                "text": JSON.stringify(userData)
+                "text": result
             }
         ]};
         
