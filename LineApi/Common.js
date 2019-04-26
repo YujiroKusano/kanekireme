@@ -19,6 +19,8 @@ exports.postChecker = function(req, res, callback) {
         return;
     }
     var reqText = req.body['events'][0]['message']['text'];
+    if(reqText == '完了') { return }
+
     console.log('Text: ' + reqText);
     //個人チャットの場合の処理
     if(req.body['events'][0]['source']['type'] == 'user') {

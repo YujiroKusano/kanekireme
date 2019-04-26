@@ -49,7 +49,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 } else if(stage == 3) {
                     lenddb.stage4(user_id, reqText);
                 } else if(stage == 4){
-                    lenddb.stage5(user_id, reqText);
+                    //lenddb.stage5(user_id, reqText);
                 }
                 console.log('LineApi.Lend:正常終了');
                 callback(true, );
