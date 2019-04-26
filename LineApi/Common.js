@@ -20,13 +20,13 @@ exports.postChecker = function(req, res, callback) {
     }
     var reqText = req.body['events'][0]['message']['text'];
     var user_id = req.body['events'][0]['source']['userId'];
-    
+
     //戻るボタン押下時はstageを一つ戻す
     if(reqText == '戻る') { commonDb.cancelStage(user_id) }
     //取り消しボタン押下時には
     if(reqText == '取り消し') { commonDb.resetStage(user_id) }
     //完了ボタン押下時は処理なし
-    if(reqText == '完了' || reqText == '取り消し' || reqText == '戻る') { return }
+    if(reqText == '完了' || reqText == '取り消し') { return }
 
     console.log('Text: ' + reqText);
     //個人チャットの場合の処理
