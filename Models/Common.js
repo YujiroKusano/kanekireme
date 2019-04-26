@@ -77,7 +77,6 @@ exports.getMode = function(user_id, callback) {
         collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
             if(getStatus != null) { //成功した場合
                 callback( getStatus.mode );
-                console.log(getStatus.mode);
             } else { //失敗した場合
                 callback( 0 );
             }
