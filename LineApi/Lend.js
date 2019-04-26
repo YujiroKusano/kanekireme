@@ -17,16 +17,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
         };
 
-        var data = {
-            'replyToken': req.body['events'][0]['replyToken'],
-            'messages': [{
-                'type': 'text',
-                'text': resText[stage],
-                'quickReply': {
-                    "items": button['stage'][stage]
-                }   
-            },
-        ]};
+        var data;
         //返信内容を定義
         if(stage == 4) {
             //返信内容を定義
@@ -48,6 +39,17 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                             }
                         ]
                     }
+                },
+            ]};
+        } else {
+            data = {
+                'replyToken': req.body['events'][0]['replyToken'],
+                'messages': [{
+                    'type': 'text',
+                    'text': resText[stage],
+                    'quickReply': {
+                        "items": button['stage'][stage]
+                    }   
                 },
             ]};
         }
