@@ -15,7 +15,9 @@ exports.postChecker = function(req, res, callback) {
         return;
     }
     //TextまたはMessageが送られてきた場合のみ反応する
-    if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
+    if((req.body['events'][0]['type'] != 'message') 
+        || (req.body['events'][0]['message']['type'] != 'text') 
+            && (req.body['events'][0]['postback'] != 'text')) {
         console.log('MESSAGE ERROR');
         var reqDate = req.body['events'][0]['postback']['params']['date'];
         return;
