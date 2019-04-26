@@ -136,17 +136,8 @@
             "imageUrl": "",
             "action": {
                 "type": "message",
-                "label": "戻る",
-                "text": "戻る"
-            }
-        },
-        {
-            "type": "action",
-            "imageUrl": "",
-            "action": {
-                "type": "message",
-                "label": "取り消し",
-                "text": "取り消し"
+                "label": "完了",
+                "text": "完了"
             }
         }
     ]
