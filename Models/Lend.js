@@ -19,6 +19,9 @@ exports.runLendStage = function(user_id, reqText)  {
     } else if(stage == 4) {
       console.log('Lend::stage4:: stage5実行: ' + reqText);
       stage5(user_id, reqText);
+    } else if(stage == 5) {
+      console.log('Lend::stage5:: stage6実行: ' + reqText);
+      stage6(user_id, reqText);
     }
   });
 }
@@ -97,10 +100,32 @@ var stage5 = function(user_id, reqDate) {
     collection.update(
     { 'user_id': user_id, 'stage': 4},
     { 
+      $inc: { 
+        stage: 1, 
+      },
+      $set: { 
+        date: reqDate,
+        last_date: jsDate.toDateString(),
+        last_time: jsDate.toLocaleTimeString()
+       } 
+    });
+  });
+};
+
+//stage5
+var stage6 = function(user_id, reqDate) {
+  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+    // Get the documents collection
+    var collection = db.collection('users');
+    var jsDate = new Date();
+    jsDate.setHours(jsDate.getHours() + 9);
+    // Update document where status is 1, set partner_id equal to 1
+    collection.update(
+    { 'user_id': user_id, 'stage': 4},
+    { 
      // $inc: {  },
       $set: { 
         stage: 0,
-        date: reqDate,
         last_date: jsDate.toDateString(),
         last_time: jsDate.toLocaleTimeString()
        } 
