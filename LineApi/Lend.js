@@ -67,20 +67,15 @@ exports.postDate = function(req, user_id, reqText, callback) {
                 "altText": "this is a buttons template",
                 "template": {
                     "type": "buttons",
-                    "title": "空いてる日程教えてよ",
-                    "text": "Please select",
+                    "title": '借りた日付',
+                    "text": "ボタンを押下してください",
                     "actions": [
                         {
                           "type": "datetimepicker",
-                          "label": "いいよ",
-                          "mode": "date",
+                          "label": "日付を入力する",
+                          "mode": 'time',
                           "data": "action=datetemp&selectId=1"
-                        },
-                        {
-                          "type": "postback",
-                          "label": "やっぱりやめたい",
-                          "data": "action=cancel&selectId=2"
-                        },
+                        }
                     ]
                 }
             },
