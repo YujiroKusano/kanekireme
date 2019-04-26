@@ -17,11 +17,12 @@ exports.postChecker = function(req, res, callback) {
     //TextまたはMessageが送られてきた場合のみ反応する
     if((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
         console.log('MESSAGE ERROR');
+        var reqDate = req.body['events'][0]['postback']['params']['date'];
         return;
     }
     var reqText = req.body['events'][0]['message']['text'];
     var user_id = req.body['events'][0]['source']['userId'];
-    var reqDate = req.body['events'][0].postback.params.date;
+    
 
     // 戻るボタン押下時はstageを一つ戻す
     // if(reqText == '戻る') { 
