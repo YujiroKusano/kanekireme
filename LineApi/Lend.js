@@ -17,11 +17,11 @@ exports.postBtn = function(req, user_id, callback) {
             'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
         };
 
-        var data ={};
+
         //返信内容を定義
         if(stage == 3) {
             //返信内容を定義
-            data = {
+            var data = {
                 'replyToken': req.body['events'][0]['replyToken'],
                 'messages': [{
                     "type": "template",
@@ -42,7 +42,7 @@ exports.postBtn = function(req, user_id, callback) {
                 },
             ]};
         } else {
-            data = {
+            var data = {
                 'replyToken': req.body['events'][0]['replyToken'],
                 'messages': [{
                     'type': 'text',
