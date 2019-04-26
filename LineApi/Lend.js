@@ -17,9 +17,9 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
         };
 
-        var data;
+        var data ={};
         //返信内容を定義
-        if(stage != 4) {
+        if(stage == 4) {
             //返信内容を定義
             data = {
                 'replyToken': req.body['events'][0]['replyToken'],
