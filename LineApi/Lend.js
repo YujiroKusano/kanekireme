@@ -69,7 +69,7 @@ exports.postBtn = function(req, user_id, callback) {
                 callback(true);
             } else {
                 console.log('LineApi.POSTBUTTON:異常終了 '+ JSON.stringify(data));
-                console.log('LineApi.POSTBUTTON:異常終了 '+ stage);
+                console.log('LineApi.POSTBUTTON:異常終了 '+ JSON.stringify(button['stage'][4]));
                 callback(false);
             }
         });
