@@ -1,8 +1,26 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
+
+var commondb = require('./Common');
+exports.runLendStage = function(user_id, reqText)  {
+  commondb.getStage(user_id, (stage) => {
+    if(stage == 0) {
+      console.log('Lend::stage情報不正: ' + reqText);
+    } else if(stage == 1) {
+      console.log('Lend::stage１:: stage2実行: ' + reqText);
+      stage2(user_id, reqText);
+    } else if(stage == 2) {
+      console.log('Lend::stage2:: stage3実行: ' + reqText);
+      stage3(user_id, reqText);
+    } else if(stage == 3) {
+      console.log('Lend::stage3:: stage4実行: ' + reqText);
+      stage4(user_id, reqText);
+    }
+  });
+}
   //stage2
-exports.stage2 = function(user_id, reqText) {
+var stage2 = function(user_id, reqText) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
       console.log(user_id + ': stage1');
@@ -24,7 +42,7 @@ exports.stage2 = function(user_id, reqText) {
 };
 
  //stage2
- exports.stage3 = function(user_id, reqText) {
+var stage3 = function(user_id, reqText) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     // Get the documents collection
     var collection = db.collection('users');
@@ -45,7 +63,7 @@ exports.stage2 = function(user_id, reqText) {
 };
 
 //stage3
-exports.stage4 = function(user_id, reqText) {
+var stage4 = function(user_id, reqText) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     // Get the documents collection
     var collection = db.collection('users');

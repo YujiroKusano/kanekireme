@@ -2,6 +2,7 @@ var crypto = require('crypto');
 var request = require('request');
 
 var commonDb = require('../Models/Common');
+var lendDb = require('../Models/Lend');
 var lend = require('./Lend');
 var show = require('./Show');
 
@@ -31,21 +32,24 @@ exports.postChecker = function(req, res, callback) {
     console.log('Text: ' + reqText);
     //個人チャットの場合の処理
     if(req.body['events'][0]['source']['type'] == 'user') {
-        //ユーザーIDからユーザー名を取得
-        var reqMode = {'一覧': 1, '借りる': 2, '貸す': 3, '返済': 4};
+        //modeごとの分岐
         commonDb.getMode(user_id, (mode) => {
             if(reqText == '一覧'){ //一覧表示処理
                 show.postdbs(req, user_id, (result) => {
                     callback(result);
                 });
             } else if(mode == 0) { //初回処理
-                commonDb.stage1(user_id, reqMode[reqText]);
+                var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
                 postBtn(req, user_id, reqText, (result) => {
                     callback(result);
                 });
+                commonDb.stage1(user_id, reqMode[reqText]);
             } else if(mode == 2) { //借りる処理
 
             } else if(mode == 3) { //貸す処理
+                //Database登録処理
+                lendDb.runLendStage(user_id, reqText);
+                //Button表示処理＆返信テキスト処理
                 lend.postBtn(req, user_id, reqText, (result) => {
                     callback(result);
                 });

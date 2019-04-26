@@ -20,15 +20,14 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         //返信内容を定義
         var data = {
             'replyToken': req.body['events'][0]['replyToken'],
-            'messages': messageObject
-            // [{
-            //     'type': 'text',
-            //     'text': resText[stage],
-            //     'quickReply': {
-            //         "items": button['stage'][stage]
-            //     }   
-            // },]
-            };
+            'messages': [{
+                'type': 'text',
+                'text': resText[stage],
+                'quickReply': {
+                    "items": button['stage'][stage]
+                }   
+            },
+        ]};
         //オプションを定義
         var options = {
             url: 'https://api.line.me/v2/bot/message/reply',
@@ -41,46 +40,13 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         //返信処理
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                if(stage == 0) {
-
-                } else if(stage == 1) {
-                    lenddb.stage2(user_id, reqText);
-                } else if(stage == 2) {
-                    lenddb.stage3(user_id, reqText);
-                } else if(stage == 3) {
-                    lenddb.stage4(user_id, reqText);
-                } else if(stage == 4){
-                    //lenddb.stage5(user_id, reqText);
-                }
-                console.log('LineApi.Lend:正常終了');
+                console.log('LineApi.POSTBUTTON:正常終了');
                 callback(true);
             } else {
-                console.log('LineApi.Lend:異常終了')
+                console.log('LineApi.POSTBUTTON:異常終了')
                 callback(false);
             }
         });
     })
 }
 
-const messageObject = {
-    "type": "template",
-    "altText": "this is a buttons template",
-    "template": {
-        "type": "buttons",
-        "title": "日付",
-        "text": "",
-        "actions": [
-            {
-              "type": "datetimepicker",
-              "label": "いいよ",
-              "mode": "date",
-              "data": "action=datetemp&selectId=1"
-            },
-            {
-              "type": "postback",
-              "label": "やっぱりやめたい",
-              "data": "action=cancel&selectId=2"
-            },
-        ]
-    }
-};
