@@ -19,7 +19,7 @@ exports.postChecker = function(req, res, callback) {
         || (req.body['events'][0]['message']['type'] != 'text') 
             && (req.body['events'][0]['postback'] != 'text')) {
         console.log('MESSAGE ERROR');
-        console.log(req);
+        console.log(req.body);
         return;
     }
     var reqText = req.body['events'][0]['message']['text'];
