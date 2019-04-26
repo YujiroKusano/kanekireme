@@ -113,7 +113,17 @@
         }
     ],
     [],
-    [],
+    [
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "完了",
+                "text": "完了"
+            }
+        }
+    ],
     [
         {
             "type": "action",
