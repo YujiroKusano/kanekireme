@@ -16,6 +16,9 @@ exports.runLendStage = function(user_id, reqText)  {
     } else if(stage == 3) {
       console.log('Lend::stage3:: stage4実行: ' + reqText);
       stage4(user_id, reqText);
+    } else if(stage == 4) {
+      console.log('Lend::stage4:: stage5実行: ' + reqText);
+      stage4(user_id, reqText);
     }
   });
 }
@@ -75,7 +78,6 @@ var stage4 = function(user_id, reqText) {
     { 
       $inc: { stage: 1 },
       $set: { 
-        stage: 0,
         detail: reqText,
         last_date: jsDate.toDateString(),
         last_time: jsDate.toLocaleTimeString()
