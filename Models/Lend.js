@@ -18,7 +18,7 @@ exports.runLendStage = function(user_id, reqText)  {
       stage4(user_id, reqText);
     } else if(stage == 4) {
       console.log('Lend::stage4:: stage5実行: ' + reqText);
-      stage4(user_id, reqText);
+      stage5(user_id, reqText);
     }
   });
 }
