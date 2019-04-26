@@ -17,7 +17,7 @@ exports.postdbs = function(req, user_id, callback) {
             'replyToken': req.body['events'][0]['replyToken'],
             "messages": [{
                 "type": "text",
-                "text": result
+                "text": JSON.stringify(result)
             }
         ]};
         
