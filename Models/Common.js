@@ -129,6 +129,10 @@ exports.checkdDate = function(user_id, callback) {
         //-8分を設定してそれを下回った場合8分以上経過したと判定
         jsDate.setMinutes(jsDate.getMinutes() - 8);
         collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }},function(err, getStatus) {
+            if(getStatus == null) {
+                console.log('CheckDate:: Stage情報なし');
+                callback(true);
+            }
             if(jsDate < getStatus.timeStamp) {
                 console.log('CheckDate::' + jsDate + ' < ' + getStatus.timeStamp);
                 callback(true);
