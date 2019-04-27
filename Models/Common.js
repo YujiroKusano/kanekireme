@@ -132,13 +132,16 @@ exports.checkdDate = function(user_id, callback) {
             if(getStatus == null) {
                 console.log('CheckDate:: Stage情報なし');
                 callback(true);
+                return;
             }
             if(jsDate < getStatus.timeStamp) {
                 console.log('CheckDate::' + jsDate + ' < ' + getStatus.timeStamp);
                 callback(true);
+                return;
             } else {
                 console.log('CheckDate::' + jsDate + ' => ' + getStatus.timeStamp);
                 callback(false);
+                return;
             }
         });  
     });
