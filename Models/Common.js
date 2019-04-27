@@ -44,8 +44,9 @@ exports.stage1 = function(user_id, mode) {
           user_id: user_id, 
           stage: 1,
           mode: mode,
-          last_date: jsDate.toDateString(),
-          last_time: jsDate.toLocaleTimeString()
+          timeStamp: jsDate
+          //last_date: jsDate.toDateString(),
+          //last_time: jsDate.toLocaleTimeString()
         }]);
       });
     });
