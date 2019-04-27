@@ -111,11 +111,8 @@ exports.cancelStage = function(user_id){
         // Find some documents if user_id and not stage
         collection.update(
             { 'user_id': user_id, 'stage': { $ne: 0 }},
-            { 
-              $inc: { 
-                stage: -1,
-               } 
-            });
+            { $inc: { stage: -1 } }
+        );
     });
 }
 
@@ -123,13 +120,22 @@ exports.cancelStage = function(user_id){
  * 詳細: 操作中のドキュメントが時間経過していないかを判定
  * 戻値: 8分以上経過していた場合false,それ以外の場合はtrue
  */
-exports.checkdDate = function(db, callback) {
-    var collection = db.collection('users');
-    var nwDate = new Date();
-    var chDate = new Date();
+exports.checkdDate = function(user_id, callback) {
 
-    collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }},function(err, getStatus) {
-        var getDate = new String(getStatus.date);
-        getDate.split()
-    });  
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        var collection = db.collection('users');
+        var jsDate = new Date();
+        jsDate.setHours(jsDate.getHours() + 9);
+        //-8分を設定してそれを下回った場合8分以上経過したと判定
+        jsDate.setMinutes(jsDate.getMinutes() - 8);
+        collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }},function(err, getStatus) {
+            if(jsDate < getStatus.timeStamp) {
+                console.log('CheckDate::' + jsDate + ' < ' + getStatus.timeStamp);
+                callback(true);
+            } else {
+                console.log('CheckDate::' + jsDate + ' => ' + getStatus.timeStamp);
+                callback(false);
+            }
+        });  
+    });
 }

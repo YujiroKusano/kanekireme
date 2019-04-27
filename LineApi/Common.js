@@ -14,22 +14,14 @@ exports.postChecker = function(req, res, callback) {
         console.log('LINE ERROR');
         return;
     }
-    //TextまたはMessageが送られてきた場合のみ反応する
-    // if((req.body['events'][0]['type'] != 'message') 
-    //     || (req.body['events'][0]['message']['type'] != 'text') 
-    //         && (req.body['events'][0]['type'] != 'postback') 
-    //             || (req.body['events'][0]['postback'] != 'date')) {
-    //     console.log('MESSAGE ERROR');
-    //     console.log(req.body['events'][0]['type']);
-    //     return;
-    // }
     var user_id = req.body['events'][0]['source']['userId'];
     console.log(req.body['events'][0]['type']);
     if(req.body['events'][0]['type'] === 'message'){
         var reqText = req.body['events'][0]['message']['text'];
-    }
-    if(req.body['events'][0]['type'] === 'postback') {
+    } else if (req.body['events'][0]['type'] === 'postback') {
         var reqText = req.body['events'][0]['postback']['params']['date'];
+    } else {
+        console.log('MessageError:: データ不正');
     }
     
 
@@ -40,13 +32,24 @@ exports.postChecker = function(req, res, callback) {
     //取り消しボタン押下時には
     if(reqText == '取り消し') { 
         commonDb.resetStage(user_id);
-        postMsg(req, '取り消し完了', function(result) {
+        var deleteText = '取り消し完了';
+        postMsg(req, deleteText, function(result) {
             console.log('取り消し完了');
         });
     }
     //完了ボタン押下時は処理なし
     if(reqText == '完了' || reqText == '取り消し') { return }
 
+    //日付を確認してfalseが帰ってきた場合stage情報をリセット
+    commonDb.checkdDate(user_id, function(result) {
+        if(result == false) {
+            commonDb.resetStage(user_id);
+            var deleteText = '取り消し完了';
+            postMsg(req, deleteText, function(result) {
+                console.log('取り消し完了');
+            });
+        }
+    });
     console.log('Text: ' + reqText);
     //個人チャットの場合の処理
     if(req.body['events'][0]['source']['type'] == 'user') {
@@ -58,6 +61,10 @@ exports.postChecker = function(req, res, callback) {
                 });
             } else if(mode == 0) { //初回処理
                 var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
+                if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
+                    console.log('LineApi.common:Mode0: 対象外のモードです。');
+                    return;
+                }
                 postBtn(req, user_id, reqText, (result) => {
                     callback(result);
                 });
