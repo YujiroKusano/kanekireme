@@ -22,6 +22,7 @@ exports.postChecker = function(req, res, callback) {
         var reqText = req.body['events'][0]['postback']['params']['date'];
     } else {
         console.log('MessageError:: データ不正');
+        return;
     }
     
 
@@ -48,6 +49,7 @@ exports.postChecker = function(req, res, callback) {
             postMsg(req, deleteText, function(result) {
                 console.log('取り消し完了');
             });
+            return;
         }
     });
     console.log('Text: ' + reqText);
