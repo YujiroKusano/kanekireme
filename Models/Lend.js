@@ -40,8 +40,9 @@ var stage2 = function(user_id, reqText) {
         $inc: { stage: 1 },
         $set: { 
           partner_name: reqText,
-          last_date: jsDate.toDateString(),
-          last_time: jsDate.toLocaleTimeString()
+          timeStamp: jsDate
+          //last_date: jsDate.toDateString(),
+          //last_time: jsDate.toLocaleTimeString()
          } 
       });
     });
@@ -61,8 +62,9 @@ var stage3 = function(user_id, reqText) {
       $inc: { stage: 1 },
       $set: { 
         money: reqText,
-        last_date: jsDate.toDateString(),
-        last_time: jsDate.toLocaleTimeString()
+        timeStamp: jsDate
+        //last_date: jsDate.toDateString(),
+        //last_time: jsDate.toLocaleTimeString()
        } 
     });
   });
@@ -82,8 +84,9 @@ var stage4 = function(user_id, reqText) {
       $inc: { stage: 1 },
       $set: { 
         detail: reqText,
-        last_date: jsDate.toDateString(),
-        last_time: jsDate.toLocaleTimeString()
+        timeStamp: jsDate
+        //last_date: jsDate.toDateString(),
+        //last_time: jsDate.toLocaleTimeString()
        } 
     });
   });
@@ -106,8 +109,9 @@ var stage5 = function(user_id, reqDate) {
       $set: { 
         stage: 0, 
         date: reqDate,
-        last_date: jsDate.toDateString(),
-        last_time: jsDate.toLocaleTimeString()
+        timeStamp: jsDate
+        //last_date: jsDate.toDateString(),
+        //last_time: jsDate.toLocaleTimeString()
        } 
     });
   });

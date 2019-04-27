@@ -119,12 +119,17 @@ exports.cancelStage = function(user_id){
     });
 }
 
+/**
+ * 詳細: 操作中のドキュメントが時間経過していないかを判定
+ * 戻値: 8分以上経過していた場合false,それ以外の場合はtrue
+ */
 exports.checkdDate = function(db, callback) {
     var collection = db.collection('users');
     var nwDate = new Date();
     var chDate = new Date();
-    collection.findOne({}).toArray(function(err, getStatus) {
-        assert.equal(err, null);
-        callback(dateResult);
+
+    collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }},function(err, getStatus) {
+        var getDate = new String(getStatus.date);
+        getDate.split()
     });  
 }
