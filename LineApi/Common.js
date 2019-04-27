@@ -47,9 +47,9 @@ exports.postChecker = function(req, res, callback) {
             commonDb.resetStage(user_id);
             var deleteText = '取り消し完了';
             postMsg(req, deleteText, function(result) {
-                console.log('取り消し完了');
+                console.log(deleteText);
+                return;
             });
-            return;
         }
     });
     console.log('Text: ' + reqText);
@@ -100,8 +100,6 @@ exports.postChecker = function(req, res, callback) {
                 callback(true);
             } else {
                 console.log('COMMON::response: 返信異常' + body);
-                console.log('COMMON::response: 返信異常' + res);
-                console.log('COMMON::response: 返信異常' + err);
                 callback(false);
             }
         });
