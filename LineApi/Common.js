@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 var request = require('request');
+var async = require('async');
 
 var commonDb = require('../Models/Common');
 var lendDb = require('../Models/Lend');
@@ -9,6 +10,7 @@ var show = require('./Show');
 //POSTされた情報を判定する
 exports.postChecker = function(req, res, callback) {
     require('dotenv').config();
+
     //LINEから正式に送られてきたかを確認する
     if(!validate_signature(req.headers['x-line-signature'], req.body)) {
         console.log('LINE ERROR');
@@ -25,11 +27,6 @@ exports.postChecker = function(req, res, callback) {
         return;
     }
     
-
-    // 戻るボタン押下時はstageを一つ戻す
-    // if(reqText == '戻る') { 
-    //     commonDb.cancelStage(user_id);
-    //  }
     //取り消しボタン押下時には
     if(reqText == '取り消し') { 
         commonDb.resetStage(user_id);
@@ -45,11 +42,11 @@ exports.postChecker = function(req, res, callback) {
     commonDb.checkdDate(user_id, function(result) {
         if(result == false) {
             commonDb.resetStage(user_id);
-            var deleteText = '取り消し完了';
+            var deleteText = '前の操作から一定時間経過したため前の操作を取り消しました。';
             postMsg(req, deleteText, function(result) {
                 console.log(deleteText);
-                return;
             });
+            return;
         }
     });
     console.log('Text: ' + reqText);
@@ -63,13 +60,16 @@ exports.postChecker = function(req, res, callback) {
                 });
             } else if(mode == 0) { //初回処理
                 var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
+                //モード選択時に対象外の文字が入力された時の判定処理
                 if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
                     console.log('LineApi.common:Mode0: 対象外のモードです。');
                     return;
                 }
+                //相手を選択してくださいボタンを表示
                 postBtn(req, user_id, reqText, (result) => {
                     callback(result);
                 });
+                //stageを1に進めるための処理
                 commonDb.stage1(user_id, reqMode[reqText]);
             } else if(mode == 2) { //借りる処理
 
@@ -188,8 +188,10 @@ postMsg = function(req, resText, callback) {
     //返信処理
     request.post(options, function(error, response, body) {
         if(!error && response.statusCode == 200) {
+            console.log('POST::Message: 正常終了');
             callback(true);
         } else {
+            console.log('POST::Message: 異常終了');
             callback(false);
         }
     });
