@@ -134,10 +134,10 @@ exports.checkdDate = function(user_id, callback) {
                 console.log('CheckDate:: Stage情報なし');
                 callback(true);
             } else if(jsDate < getStatus.timeStamp) {
-                console.log('CheckDate::' + jsDate + ' < ' + getStatus.timeStamp);
+                //console.log('CheckDate::' + jsDate + ' < ' + getStatus.timeStamp);
                 callback(true);
             } else {
-                console.log('CheckDate::' + jsDate + ' => ' + getStatus.timeStamp);
+                console.log('CheckDate:: 8分経過');
                 callback(false);
             }
         });  

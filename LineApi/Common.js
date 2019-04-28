@@ -1,6 +1,5 @@
 var crypto = require('crypto');
 var request = require('request');
-var async = require('async');
 
 var commonDb = require('../Models/Common');
 var lendDb = require('../Models/Lend');
@@ -50,69 +49,69 @@ exports.postChecker = function(req, res, callback) {
             }
         }
   
-    console.log('Text: ' + reqText);
-    //個人チャットの場合の処理
-    if(req.body['events'][0]['source']['type'] == 'user') {
-        //modeごとの分岐
-        commonDb.getMode(user_id, (mode) => {
-            if(reqText == '一覧'){ //一覧表示処理
-                show.postdbs(req, user_id, (result) => {
-                    callback(result);
-                });
-            } else if(mode == 0) { //初回処理
-                var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
-                //モード選択時に対象外の文字が入力された時の判定処理
-                if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
-                    console.log('LineApi.common:Mode0: 対象外のモードです。');
-                    return;
+        console.log('Text: ' + reqText);
+        //個人チャットの場合の処理
+        if(req.body['events'][0]['source']['type'] == 'user') {
+            //modeごとの分岐
+            commonDb.getMode(user_id, (mode) => {
+                if(reqText == '一覧'){ //一覧表示処理
+                    show.postdbs(req, user_id, (result) => {
+                        callback(result);
+                    });
+                } else if(mode == 0) { //初回処理
+                    var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
+                    //モード選択時に対象外の文字が入力された時の判定処理
+                    if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
+                        console.log('LineApi.common:Mode0: 対象外のモードです。');
+                        return;
+                    }
+                    //相手を選択してくださいボタンを表示
+                    postBtn(req, user_id, reqText, (result) => {
+                        callback(result);
+                    });
+                    //stageを1に進めるための処理
+                    commonDb.stage1(user_id, reqMode[reqText]);
+                } else if(mode == 2) { //借りる処理
+
+                } else if(mode == 3) { //貸す処理
+                    //Button表示処理＆返信テキスト処理
+                    lend.postBtn(req, user_id, function(result) {
+                        callback(result);
+                    });
+                    //Database登録処理
+                    lendDb.runLendStage(user_id, reqText);
+                } else if(mode == 4) { //返済処理
+
                 }
-                //相手を選択してくださいボタンを表示
-                postBtn(req, user_id, reqText, (result) => {
-                    callback(result);
-                });
-                //stageを1に進めるための処理
-                commonDb.stage1(user_id, reqMode[reqText]);
-            } else if(mode == 2) { //借りる処理
+            });
 
-            } else if(mode == 3) { //貸す処理
-                //Button表示処理＆返信テキスト処理
-                lend.postBtn(req, user_id, function(result) {
-                    callback(result);
-                });
-                //Database登録処理
-                lendDb.runLendStage(user_id, reqText);
-            } else if(mode == 4) { //返済処理
+            var get_profile_options = {
+                url: 'https://api.line.me/v2/bot/profile/' + user_id,
+                proxy: process.env.FIXIE_URL,
+                json: true,
+                headers: {
+                    'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}'
+                }
+            };
 
-            }
-        });
-
-        var get_profile_options = {
-            url: 'https://api.line.me/v2/bot/profile/' + user_id,
-            proxy: process.env.FIXIE_URL,
-            json: true,
-            headers: {
-                'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}'
-            }
-        };
-
-        request.get(get_profile_options, function(err, res, body) {
-            if(!err && res.statusCode == 200) {
-                console.log('COMMON::response: 返信正常' + body);
-                callback(true);
-            } else {
-                console.log('COMMON::response: 返信異常' + body);
-                callback(false);
-            }
-        });
-    
-    } 
-    //グループチャットの場合の処理
-    else if('room' == req.body['events'][0]['source']['type']) {
-        callback('あなた', stage);
-    } else {
-        console.log('aaaaaaa');
+            request.get(get_profile_options, function(err, res, body) {
+                if(!err && res.statusCode == 200) {
+                    console.log('COMMON::response: 返信正常' + body);
+                    callback(true);
+                } else {
+                    console.log('COMMON::response: 返信異常' + body);
+                    callback(false);
+                }
+            });
+        
+        } 
+        //グループチャットの場合の処理
+        else if('room' == req.body['events'][0]['source']['type']) {
+            callback('あなた', stage);
+        } else {
+            console.log('aaaaaaa');
+        }
     }
-}
 )}
 function validate_signature(signature, body) {
     var buf1 = Buffer.from(JSON.stringify(body), 'utf8');

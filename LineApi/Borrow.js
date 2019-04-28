@@ -27,7 +27,7 @@ exports.postBtn = function(req, user_id, callback) {
                     "altText": '日付ピッカー',
                     "template": {
                         "type": "buttons",
-                        "title": '貸した日付',
+                        "title": '借りた日付',
                         "text": resText[stage],
                         "actions": [
                             {
@@ -64,10 +64,10 @@ exports.postBtn = function(req, user_id, callback) {
         //返信処理
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                console.log('LineApi.POST:LEND:BUTTON:正常終了');
+                console.log('LineApi.POST:BORROW:BUTTON:正常終了');
                 callback(true);
             } else {
-                console.log('LineApi.POST:LEND:BUTTON:異常終了' + button['stage'][stage]);
+                console.log('LineApi.POST:BORROW:BUTTON:異常終了' + button['stage'][stage]);
                 callback(false);
             }
         });
