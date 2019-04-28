@@ -43,11 +43,11 @@ exports.postChecker = function(req, res, callback) {
         if(result == false) {
             commonDb.resetStage(user_id);
             var deleteText = '前の操作から一定時間経過したため前の操作を取り消しました。';
-            postMsg(req, deleteText, function(result) {
+            if(postMsg(req, deleteText) == false){
                 console.log(deleteText);
                 callback(true);
-            });
-            return;
+                return;
+            }
         }
     });
     console.log('Text: ' + reqText);
@@ -161,7 +161,7 @@ postBtn = function(req, user_id, reqText, callback) {
     });
 }
 
-postMsg = function(req, resText, callback) {
+postMsg = function(req, resText) {
     require('dotenv').config();
     //ヘッダー部を定義
     var headers = {
@@ -190,10 +190,10 @@ postMsg = function(req, resText, callback) {
     request.post(options, function(error, response, body) {
         if(!error && response.statusCode == 200) {
             console.log('POST::Message: 正常終了');
-            callback(true);
+            return true;
         } else {
             console.log('POST::Message: 異常終了');
-            callback(false);
+            return false;
         }
     });
 }
