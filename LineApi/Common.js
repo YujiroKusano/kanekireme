@@ -48,6 +48,7 @@ exports.postChecker = function(req, res, callback) {
                 callback(true);
                 return;
             }
+        }
   
     console.log('Text: ' + reqText);
     //個人チャットの場合の処理
@@ -112,8 +113,7 @@ exports.postChecker = function(req, res, callback) {
         console.log('aaaaaaa');
     }
 }
-
-});
+)}
 function validate_signature(signature, body) {
     var buf1 = Buffer.from(JSON.stringify(body), 'utf8');
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
