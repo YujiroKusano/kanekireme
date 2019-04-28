@@ -45,8 +45,8 @@ exports.postChecker = function(req, res, callback) {
             var deleteText = '前の操作から一定時間経過したため前の操作を取り消しました。';
             postMsg(req, deleteText, function(result) {
                 console.log(deleteText);
+                callback(true);
             });
-            callback(true);
             return;
         }
     });
