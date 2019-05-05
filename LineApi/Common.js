@@ -39,6 +39,9 @@ exports.postChecker = function(req, res, callback) {
     //完了ボタン押下時は処理なし
     if(reqText == '完了' || reqText == '取り消し') { return }
 
+    //アカウント登録処理
+    registAcount(user_id);
+
     //日付を確認してfalseが帰ってきた場合stage情報をリセット
     commonDb.checkdDate(user_id, function(result) {
         if(result == false) {
@@ -61,29 +64,7 @@ exports.postChecker = function(req, res, callback) {
                     show.postdbs(req, user_id, (result) => {
                         callback(result);
                     });
-                } else if(reqText == '登録') {
-                    console.log('登録処理');
-                    regist.getName(user_id, function(name) { //LINEAPIから名前を取得
-                        console.log('COMMON:LINEAPI: name: ' + name);
-                        registDb.alreadyId(user_id, function(result) { //既に登録されているuser_idか判断
-                            if(result == true) {
-                                registDb.alreadyName(name, function(result) { //名前に変更がないか判断
-                                    if(result == true) {
-                                        //変更なし(名前もIDも両方登録されている状態);
-                                        console.log('名前,idに変更ありません。');
-                                    } else {
-                                        registDb.updateAcount(user_id, name);
-                                        console.log(name + 'の名前を変更しました');
-                                    }
-                                })                               
-                            } else {
-                                registDb.insertAcount(user_id, name);
-                                console.log('新規に' + name + 'を登録しました。');
-                            }
-                        });
-                        ;
-                    });
-                }else if(mode == 0) { //初回処理
+                } else if(mode == 0) { //初回処理
                     var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
                     //モード選択時に対象外の文字が入力された時の判定処理
                     if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
@@ -142,15 +123,17 @@ exports.postChecker = function(req, res, callback) {
         }
     }
 )}
+
+//LINEメッセージ整合性確認処理
 function validate_signature(signature, body) {
     var buf1 = Buffer.from(JSON.stringify(body), 'utf8');
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
 
-
 var fs = require('fs');
 var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
 
+//LINEボタン発生処理
 postBtn = function(req, user_id, reqText, callback) {
     require('dotenv').config();
     var resText = ['相手を選択してください'];
@@ -190,6 +173,7 @@ postBtn = function(req, user_id, reqText, callback) {
     });
 }
 
+//LINEメッセージ送信処理
 postMsg = function(req, resText) {
     require('dotenv').config();
     //ヘッダー部を定義
@@ -227,3 +211,25 @@ postMsg = function(req, resText) {
     });
 }
 
+//アカウント登録処理
+registAcount = function(user_id) {
+    regist.getName(user_id, function(name) { //LINEAPIから名前を取得
+        console.log('COMMON:LINEAPI: name: ' + name);
+        registDb.alreadyId(user_id, function(result) { //既に登録されているuser_idか判断
+            if(result == true) {
+                registDb.alreadyName(name, function(result) { //名前に変更がないか判断
+                    if(result == true) {
+                        //変更なし(名前もIDも両方登録されている状態);
+                        console.log('名前,idに変更ありません。');
+                    } else {
+                        registDb.updateAcount(user_id, name);
+                        console.log(name + 'の名前を変更しました');
+                    }
+                })                               
+            } else {
+                registDb.insertAcount(user_id, name);
+                console.log('新規に' + name + 'を登録しました。');
+            }
+        });
+    });
+}
