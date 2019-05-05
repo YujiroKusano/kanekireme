@@ -64,7 +64,7 @@ exports.alreadyName = function(name, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
         collection.find({ 'name': name }).toArray(function(err, docs) {
-            if(docs != null) {
+            if(docs.name != null) {
                 callback(true);
             } else {
                 callback(false);
@@ -77,8 +77,7 @@ exports.alreadyId = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
         collection.find({ 'user_id': user_id }).toArray(function(err, docs) {
-            if(docs != null) {
-                console.log(docs.user_id);
+            if(docs.user_id != null) {
                 callback(true);
             } else {
                 callback(false);
