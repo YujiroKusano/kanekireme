@@ -15,6 +15,8 @@ exports.getName = function(user_id, callback) {
             callback(body['displayName']);
         } else {
             console.log('getName:: ERROR:  ' + error);
+            console.log('getName:: response:  ' + response);
+            console.log('getName:: body:  ' + body);
         }
     })
 }
