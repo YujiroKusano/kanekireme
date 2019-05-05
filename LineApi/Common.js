@@ -66,7 +66,6 @@ exports.postChecker = function(req, res, callback) {
                     regist.getName(user_id, function(name) { //LINEAPIから名前を取得
                         console.log('COMMON:LINEAPI: name: ' + name);
                         registDb.alreadyId(user_id, function(result) { //既に登録されているuser_idか判断
-                            console.log('id Result: ' + result);
                             if(result == true) {
                                 registDb.alreadyName(name, function(result) { //名前に変更がないか判断
                                     if(result == true) {
