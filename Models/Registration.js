@@ -65,9 +65,10 @@ exports.alreadyName = function(name, callback) {
         var collection = db.collection(acount);
         collection.find({ 'name': name }),function(err, docs) {
             if(docs != null) {
+                console.log('true');
                 callback(true);
             } else {
-                console.log('false')
+                console.log('false');
                 callback(false);
             }
         };
@@ -79,8 +80,10 @@ exports.alreadyId = function(user_id, callback) {
         var collection = db.collection(acount);
         collection.find({ 'user_id': user_id }),function(err, docs) {
             if(docs != null) {
+                console.log('true');
                 callback(true);
             } else {
+                console.log('false');
                 callback(false);
             }
         };
