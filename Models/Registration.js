@@ -79,9 +79,10 @@ exports.alreadyId = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
         collection.find({ 'user_id': user_id }),function(err, docs) {
+
+            console.log('connectErr'+ err);        
             if(docs != null) {
                 console.log('true');
-                console.log('connectErr'+ err);        
                 callback(true);
             } else {
                 console.log('false');
