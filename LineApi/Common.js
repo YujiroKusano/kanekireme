@@ -67,14 +67,32 @@ exports.postChecker = function(req, res, callback) {
                         console.log('LineApi.common:Mode0: 対象外のモードです。');
                         return;
                     } else if(reqMode[reqText] == 5) {
+                        regist.getName(user_id, function(name) { //LINEAPIから名前を取得
+                            registDb.alreadyId(function(result) { //既に登録されているuser_idか判断
+                                if(result == true) {
+                                    registDb.alreadyName(function(result) { //名前に変更がないか判断
+                                        if(result == true) {
+                                            //変更なし(名前もIDも両方登録されている状態);
+                                            console.log('名前,idに変更ありません。');
+                                        } else {
+                                            registDB.updateAcount(user_id, name);
+                                            console.log(name + 'の名前を変更しました');
+                                        }
+                                    })
+                                    
+                                } else {
+                                    registDb.insertAcount(user_id, name);
+                                    console.log('新規に' + name + 'を登録しました。');
+                                }
+                            });
+                        });
+                    } else {
                         //相手を選択してくださいボタンを表示
                         postBtn(req, user_id, reqText, (result) => {
                             callback(result);
                         });
                         //stageを1に進めるための処理
                         commonDb.stage1(user_id, reqMode[reqText]);
-                    } else {
-
                     }
   
                 } else if(mode == 2) { //借りる処理
@@ -89,25 +107,7 @@ exports.postChecker = function(req, res, callback) {
                 } else if(mode == 4) { //返済処理
 
                 } else if(mode == 5) { //アカウント登録ボタン
-                    regist.getName(user_id, function(name) { //LINEAPIから名前を取得
-                        registDb.alreadyId(function(result) { //既に登録されているuser_idか判断
-                            if(result == true) {
-                                registDb.alreadyName(function(result) { //名前に変更がないか判断
-                                    if(result == true) {
-                                        //変更なし(名前もIDも両方登録されている状態);
-                                        console.log('名前,idに変更ありません。');
-                                    } else {
-                                        registDB.updateAcount(user_id, name);
-                                        console.log(name + 'の名前を変更しました');
-                                    }
-                                })
-                                
-                            } else {
-                                registDb.insertAcount(user_id, name);
-                                console.log('新規に' + name + 'を登録しました。');
-                            }
-                        });
-                    });
+                    
                 }
             });
 
