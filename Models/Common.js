@@ -1,12 +1,16 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
+var counters = 'counters';
+var users = 'users';
+var acount = 'acount';
+
 exports.connectUsersDb = function() {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     assert.equal(null, err);
     //カウンター(_id値)定義データベースを初期化
-    var collection = db.collection('counters');
+    var collection = db.collection(counters);
     collection.insertMany([{
         _id: "user_id",
         count: 0
@@ -20,7 +24,7 @@ exports.connectUsersDb = function() {
 getNextId = function(callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-        var collection = db.collection('counters');
+        var collection = db.collection(counters);
         collection.update({_id: "user_id"},{ $inc: {count: 1}}, function() {
             collection.find({ _id: "user_id" }).toArray(function(err, docs) {
                 db.close();
@@ -34,7 +38,7 @@ exports.stage1 = function(user_id, mode) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       assert.equal(null, err);
       // Get the documents collection
-      var collection = db.collection('users');
+      var collection = db.collection(users);
       var jsDate = new Date();
       jsDate.setHours(jsDate.getHours() + 9);
       getNextId(function(getId){
@@ -57,7 +61,7 @@ exports.getStage = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
         // Get the documents collection
-        var collection = db.collection('users');
+        var collection = db.collection(users);
         // Find some documents if user_id and not stage
         collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
             if(getStatus != null) { //成功した場合
@@ -73,7 +77,7 @@ exports.getMode = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
         // Get the documents collection
-        var collection = db.collection('users');
+        var collection = db.collection(users);
         // Find some documents if user_id and not stage
         collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
             if(getStatus != null) { //成功した場合
@@ -89,7 +93,7 @@ exports.resetStage = function(user_id){
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
         // Get the documents collection
-        var collection = db.collection('users');
+        var collection = db.collection(users);
         // Find some documents if user_id and not stage
         collection.remove({ 'user_id': user_id, 'stage': { $ne: 0 }}, 
             function(err, result) {
@@ -108,7 +112,7 @@ exports.cancelStage = function(user_id){
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
         // Get the documents collection
-        var collection = db.collection('users');
+        var collection = db.collection(users);
         // Find some documents if user_id and not stage
         collection.update(
             { 'user_id': user_id, 'stage': { $ne: 0 }},
@@ -122,9 +126,8 @@ exports.cancelStage = function(user_id){
  * 戻値: 8分以上経過していた場合false,それ以外の場合はtrue
  */
 exports.checkdDate = function(user_id, callback) {
-
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-        var collection = db.collection('users');
+        var collection = db.collection(users);
         var jsDate = new Date();
         jsDate.setHours(jsDate.getHours() + 9);
         //-8分を設定してそれを下回った場合8分以上経過したと判定

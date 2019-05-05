@@ -2,9 +2,11 @@ var crypto = require('crypto');
 var request = require('request');
 
 var commonDb = require('../Models/Common');
+var registDb = require('../Models/Registration');
 var lendDb = require('../Models/Lend');
 var lend = require('./Lend');
 var show = require('./Show');
+var regist = require('./Registration');
 
 //POSTされた情報を判定する
 exports.postChecker = function(req, res, callback) {
@@ -82,6 +84,26 @@ exports.postChecker = function(req, res, callback) {
                     lendDb.runLendStage(user_id, reqText);
                 } else if(mode == 4) { //返済処理
 
+                } else if(mode == 5) { //アカウント登録ボタン
+                    regist.getName(user_id, function(name) { //LINEAPIから名前を取得
+                        registDb.alreadyId(function(result) { //既に登録されているuser_idか判断
+                            if(result == true) {
+                                registDb.alreadyName(function(result) { //名前に変更がないか判断
+                                    if(result == true) {
+                                        //変更なし(名前もIDも両方登録されている状態);
+                                        console.log('名前,idに変更ありません。');
+                                    } else {
+                                        registDB.updateAcount(user_id, name);
+                                        console.log(name + 'の名前を変更しました');
+                                    }
+                                })
+                                
+                            } else {
+                                registDb.insertAcount(user_id, name);
+                                console.log('新規に' + name + 'を登録しました。');
+                            }
+                        });
+                    });
                 }
             });
 
@@ -117,6 +139,7 @@ function validate_signature(signature, body) {
     var buf1 = Buffer.from(JSON.stringify(body), 'utf8');
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
+
 
 var fs = require('fs');
 var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
@@ -196,3 +219,4 @@ postMsg = function(req, resText) {
         }
     });
 }
+
