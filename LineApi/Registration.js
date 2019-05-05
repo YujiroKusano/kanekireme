@@ -13,6 +13,8 @@ exports.getName = function(user_id, callback) {
         if (!error && response.statusCode == 200) {
             console.log(body['displayName']);
             callback(body['displayName']);
+        } else {
+            console.log('getName:: ERROR:  ' + error);
         }
     })
 }

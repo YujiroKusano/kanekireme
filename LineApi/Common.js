@@ -48,6 +48,7 @@ exports.postChecker = function(req, res, callback) {
                 return;
             }
             console.log(deleteText);
+            callback(true);
             return;
         }
   
