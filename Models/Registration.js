@@ -63,7 +63,7 @@ exports.alreadyName = function(name, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
-        collection.findOne({ name: name }).toArray(function(err, docs) {
+        collection.findOne({ name: name },function(err, docs) {
             if(docs != null) {
                 callback(true);
             } else {
@@ -76,7 +76,7 @@ exports.alreadyId = function(user_id, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
-        collection.findOne({ user_id: user_id }).toArray(function(err, docs) {
+        collection.findOne({ user_id: user_id },function(err, docs) {
             if(docs != null) {
                 callback(true);
             } else {
