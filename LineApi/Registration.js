@@ -11,7 +11,6 @@ exports.getName = function(user_id, callback) {
     };
     request.get(get_profile_options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body['displayName']);
             callback(body['displayName']);
         } else {
             console.log('getName:: ERROR:  ' + error);
