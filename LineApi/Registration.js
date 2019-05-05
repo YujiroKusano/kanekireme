@@ -1,4 +1,3 @@
-var fs = require('fs');
 var request = require('request');
 
 exports.getName = function(user_id, callback) {
