@@ -63,7 +63,7 @@ exports.alreadyName = function(name, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
-        collection.find({ 'name': name }),function(err, docs) {
+        collection.find({ 'name': name },function(err, docs) {
             if(docs != null) {
                 console.log('true');
                 callback(true);
@@ -71,14 +71,14 @@ exports.alreadyName = function(name, callback) {
                 console.log('false');
                 callback(false);
             }
-        };
+        });
     });
 }
 exports.alreadyId = function(user_id, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
-        collection.find({ 'user_id': user_id }),function(err, docs) {
+        collection.find({ 'user_id': user_id },function(err, docs) {
 
             console.log('connectErr'+ err);        
             if(docs != null) {
@@ -88,6 +88,6 @@ exports.alreadyId = function(user_id, callback) {
                 console.log('false');
                 callback(false);
             }
-        };
+        });
     });
 }
