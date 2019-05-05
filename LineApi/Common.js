@@ -11,7 +11,7 @@ var regist = require('./Registration');
 //POSTされた情報を判定する
 exports.postChecker = function(req, res, callback) {
     require('dotenv').config();
-    console.log('req: ' + req.body);
+    console.log('req: ' + JSON.stringify(req.body));
     //LINEから正式に送られてきたかを確認する
     if(!validate_signature(req.headers['x-line-signature'], req.body)) {
         console.log('LINE ERROR');
