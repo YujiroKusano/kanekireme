@@ -63,7 +63,7 @@ exports.postChecker = function(req, res, callback) {
                         callback(result);
                     });
                 } else if(mode == 0) { //初回処理
-                    var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
+                    var reqMode = {'借りる': 2, '貸す': 3, '返済': 4, '登録': 5};
                     //モード選択時に対象外の文字が入力された時の判定処理
                     if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
                         console.log('LineApi.common:Mode0: 対象外のモードです。');

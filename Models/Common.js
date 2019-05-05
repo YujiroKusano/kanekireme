@@ -3,7 +3,6 @@ var MongoClient = require('mongodb').MongoClient
 
 var counters = 'counters';
 var users = 'users';
-var acount = 'acount';
 
 exports.connectUsersDb = function() {
     require('dotenv').config();
