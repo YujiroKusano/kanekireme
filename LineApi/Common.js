@@ -60,32 +60,33 @@ exports.postChecker = function(req, res, callback) {
                     show.postdbs(req, user_id, (result) => {
                         callback(result);
                     });
-                } else if(mode == 0) { //初回処理
-                    var reqMode = {'借りる': 2, '貸す': 3, '返済': 4, '登録': 5};
+                } else if(reqText == '登録') {
+                    regist.getName(user_id, function(name) { //LINEAPIから名前を取得
+                        registDb.alreadyId(function(result) { //既に登録されているuser_idか判断
+                            if(result == true) {
+                                registDb.alreadyName(function(result) { //名前に変更がないか判断
+                                    if(result == true) {
+                                        //変更なし(名前もIDも両方登録されている状態);
+                                        console.log('名前,idに変更ありません。');
+                                    } else {
+                                        registDB.updateAcount(user_id, name);
+                                        console.log(name + 'の名前を変更しました');
+                                    }
+                                })
+                                
+                            } else {
+                                registDb.insertAcount(user_id, name);
+                                console.log('新規に' + name + 'を登録しました。');
+                            }
+                        });
+                        ;
+                    });
+                }else if(mode == 0) { //初回処理
+                    var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
                     //モード選択時に対象外の文字が入力された時の判定処理
                     if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
                         console.log('LineApi.common:Mode0: 対象外のモードです。');
                         return;
-                    } else if(reqMode[reqText] == 5) {
-                        regist.getName(user_id, function(name) { //LINEAPIから名前を取得
-                            registDb.alreadyId(function(result) { //既に登録されているuser_idか判断
-                                if(result == true) {
-                                    registDb.alreadyName(function(result) { //名前に変更がないか判断
-                                        if(result == true) {
-                                            //変更なし(名前もIDも両方登録されている状態);
-                                            console.log('名前,idに変更ありません。');
-                                        } else {
-                                            registDB.updateAcount(user_id, name);
-                                            console.log(name + 'の名前を変更しました');
-                                        }
-                                    })
-                                    
-                                } else {
-                                    registDb.insertAcount(user_id, name);
-                                    console.log('新規に' + name + 'を登録しました。');
-                                }
-                            });
-                        });
                     } else {
                         //相手を選択してくださいボタンを表示
                         postBtn(req, user_id, reqText, (result) => {
