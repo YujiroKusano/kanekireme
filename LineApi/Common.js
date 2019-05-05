@@ -63,6 +63,7 @@ exports.postChecker = function(req, res, callback) {
                 } else if(reqText == '登録') {
                     console.log('登録処理');
                     regist.getName(user_id, function(name) { //LINEAPIから名前を取得
+                        console.log('name: ' + name);
                         registDb.alreadyId(function(result) { //既に登録されているuser_idか判断
                             if(result == true) {
                                 registDb.alreadyName(function(result) { //名前に変更がないか判断
