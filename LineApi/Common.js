@@ -72,11 +72,10 @@ exports.postChecker = function(req, res, callback) {
                                         //変更なし(名前もIDも両方登録されている状態);
                                         console.log('名前,idに変更ありません。');
                                     } else {
-                                        registDB.updateAcount(user_id, name);
+                                        registDb.updateAcount(user_id, name);
                                         console.log(name + 'の名前を変更しました');
                                     }
-                                })
-                                
+                                })                               
                             } else {
                                 registDb.insertAcount(user_id, name);
                                 console.log('新規に' + name + 'を登録しました。');
