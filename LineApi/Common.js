@@ -45,11 +45,9 @@ exports.postChecker = function(req, res, callback) {
             commonDb.resetStage(user_id);
             var deleteText = '前の操作から一定時間経過したため前の操作を取り消しました。';
             if(postMsg(req, deleteText) == false){
-                console.log(deleteText);
-                callback(true);
                 return;
             }
-            callback(true);
+            console.log(deleteText);
             return;
         }
   
@@ -63,18 +61,22 @@ exports.postChecker = function(req, res, callback) {
                         callback(result);
                     });
                 } else if(mode == 0) { //初回処理
-                    var reqMode = {'借りる': 2, '貸す': 3, '返済': 4, '登録': 5};
+                    var reqMode = {'借りる': 2, '貸す': 3, '返済': 4};
                     //モード選択時に対象外の文字が入力された時の判定処理
                     if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
                         console.log('LineApi.common:Mode0: 対象外のモードです。');
                         return;
+                    } else if(reqMode[reqText] == 5) {
+                        //相手を選択してくださいボタンを表示
+                        postBtn(req, user_id, reqText, (result) => {
+                            //stageを1に進めるための処理
+                            commonDb.stage1(user_id, reqMode[reqText]);
+                            callback(result);
+                        });
+                    } else {
+
                     }
-                    //相手を選択してくださいボタンを表示
-                    postBtn(req, user_id, reqText, (result) => {
-                        callback(result);
-                    });
-                    //stageを1に進めるための処理
-                    commonDb.stage1(user_id, reqMode[reqText]);
+  
                 } else if(mode == 2) { //借りる処理
 
                 } else if(mode == 3) { //貸す処理
