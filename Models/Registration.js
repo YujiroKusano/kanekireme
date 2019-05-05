@@ -67,6 +67,7 @@ exports.alreadyName = function(name, callback) {
             if(docs != null) {
                 callback(true);
             } else {
+                console.log('false')
                 callback(false);
             }
         };
