@@ -6,7 +6,7 @@ exports.getName = function(user_id, callback) {
         proxy: process.env.FIXIE_URL,
         json: true,
         headers: {
-            'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS_TOKEN + '}'
+            'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}'
         }
     };
     request.get(get_profile_options, function(error, response, body) {
