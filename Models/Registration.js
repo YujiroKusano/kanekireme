@@ -78,6 +78,7 @@ exports.alreadyId = function(user_id, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
+        console.log('connectErr'+ err);        
         collection.find({ 'user_id': user_id }),function(err, docs) {
             if(docs != null) {
                 console.log('true');
