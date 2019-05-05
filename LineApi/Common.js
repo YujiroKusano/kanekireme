@@ -69,10 +69,10 @@ exports.postChecker = function(req, res, callback) {
                     } else if(reqMode[reqText] == 5) {
                         //相手を選択してくださいボタンを表示
                         postBtn(req, user_id, reqText, (result) => {
-                            //stageを1に進めるための処理
-                            commonDb.stage1(user_id, reqMode[reqText]);
                             callback(result);
                         });
+                        //stageを1に進めるための処理
+                        commonDb.stage1(user_id, reqMode[reqText]);
                     } else {
 
                     }
