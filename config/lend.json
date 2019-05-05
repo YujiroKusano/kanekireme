@@ -3,6 +3,7 @@
         [{
             "type": "action",
             "imageUrl": "",
+            "user_id": "aaaaaaaaa",
             "action": {
                 "type": "message",
                 "label": "阿曽太一",

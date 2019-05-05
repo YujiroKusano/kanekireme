@@ -49,6 +49,8 @@ exports.postChecker = function(req, res, callback) {
                 callback(true);
                 return;
             }
+            callback(true);
+            return;
         }
   
         console.log('Text: ' + reqText);
