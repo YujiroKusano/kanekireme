@@ -98,9 +98,7 @@ exports.resetStage = function(user_id){
             function(err, result) {
                 if (err) {
                     console.log('reset::ERROR')
-                } else {
-                    console.log('Success: ' + result + ' document(s) deleted');
-                }
+                } 
             }
         )}
         
