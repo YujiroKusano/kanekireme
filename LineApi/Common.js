@@ -136,8 +136,7 @@ function validate_signature(signature, body) {
 
     //LINEボタン発生処理
     postBtn = function(req, callback) {
-        nameButton.getUserButton((result) => {
-            var button = result;
+        nameButton.getUserButton((button) => {
         
         require('dotenv').config();
         var resText = ['相手を選択してください'];
