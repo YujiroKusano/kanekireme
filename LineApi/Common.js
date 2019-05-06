@@ -73,9 +73,7 @@ exports.postChecker = function(req, res, callback) {
                         return;
                     } else {
                         //相手を選択してくださいボタンを表示
-                        postBtn(req, user_id, reqText, function(result){
-                            callback(result);
-                        });
+                        postBtn(req, user_id, reqText);
                         //stageを1に進めるための処理
                         commonDb.stage1(user_id, reqMode[reqText]);
                     }
@@ -135,7 +133,7 @@ function validate_signature(signature, body) {
 // var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
 
     //LINEボタン発生処理
-    postBtn = function(req, callback) {
+    postBtn = function(req) {
         nameButton.getUserButton(function(button) {
         
         require('dotenv').config();
@@ -171,7 +169,7 @@ function validate_signature(signature, body) {
             if(!error && response.statusCode == 200) {
                 return(true);
             } else {
-                callback(false);
+                return(false);
             }
         })
     })
