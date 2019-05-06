@@ -134,7 +134,7 @@ function validate_signature(signature, body) {
 // var fs = require('fs');
 // var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
 
-nameButton.getUserButton(user_id, (result) => {
+nameButton.getUserButton((result) => {
     var button = JSON.parse(result);
 
     //LINEボタン発生処理
