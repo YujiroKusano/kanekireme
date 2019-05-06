@@ -73,7 +73,13 @@ exports.postChecker = function(req, res, callback) {
                         return;
                     } else {
                         //相手を選択してくださいボタンを表示
-                        postBtn(req, user_id, reqText);
+                        postBtn(req, user_id, function(result){
+                            if(result == ture) {
+                                callback(true);
+                            } else {
+                                callback(false);
+                            }
+                        });
                         //stageを1に進めるための処理
                         commonDb.stage1(user_id, reqMode[reqText]);
                     }
@@ -134,7 +140,7 @@ function validate_signature(signature, body) {
 
     //LINEボタン発生処理
     postBtn = function(req, user_id, callback) {
-        nameButton.getUserButton(function(button) {
+        nameButton.getUserButton(user_id, function(button) {
         
         require('dotenv').config();
         var resText = ['相手を選択してください'];
@@ -171,7 +177,7 @@ function validate_signature(signature, body) {
             } else {
                 callback(false);
             }
-        })
+        });
     })
     }
 
