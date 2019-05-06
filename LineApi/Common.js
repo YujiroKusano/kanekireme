@@ -73,7 +73,7 @@ exports.postChecker = function(req, res, callback) {
                         return;
                     } else {
                         //相手を選択してくださいボタンを表示
-                        postBtn(req, user_id, reqText, (result) => {
+                        postBtn(req, user_id, reqText, function(result){
                             callback(result);
                         });
                         //stageを1に進めるための処理
@@ -136,7 +136,7 @@ function validate_signature(signature, body) {
 
     //LINEボタン発生処理
     postBtn = function(req, callback) {
-        nameButton.getUserButton((button) => {
+        nameButton.getUserButton(function(button) {
         
         require('dotenv').config();
         var resText = ['相手を選択してください'];
