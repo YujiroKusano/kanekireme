@@ -61,7 +61,7 @@ exports.updateButtonName = function(user_id, name) {
 exports.getUserButton = function(callback) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
-      var collection = db.collection('users');
+      var collection = db.collection(userButton);
       // Find some documents if user_id and not stage
       collection.find({}).toArray(function(err, getButton) {
           if(getButton != null) { //成功した場合

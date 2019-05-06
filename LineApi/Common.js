@@ -60,9 +60,9 @@ exports.postChecker = function(req, res, callback) {
         //個人チャットの場合の処理
         if(req.body['events'][0]['source']['type'] == 'user') {
             //modeごとの分岐
-            commonDb.getMode(user_id, (mode) => {
+            commonDb.getMode(user_id, function(mode) {
                 if(reqText == '一覧'){ //一覧表示処理
-                    show.postdbs(req, user_id, (result) => {
+                    show.postdbs(req, user_id, function(result) {
                         callback(result);
                     });
                 } else if(mode == 0) { //初回処理
