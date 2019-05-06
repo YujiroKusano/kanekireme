@@ -138,7 +138,7 @@ nameButton.getUserButton(user_id, (result) => {
     var button = JSON.parse(result);
 
     //LINEボタン発生処理
-    postBtn = function(req, user_id, reqText, callback) {
+    postBtn = function(req, callback) {
         require('dotenv').config();
         var resText = ['相手を選択してください'];
         //ヘッダー部を定義
