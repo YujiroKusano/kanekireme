@@ -14,6 +14,7 @@ exports.insertAcount = function(user_id, name) {
                 [{
                     type: "action",
                     imageUrl: "",
+                    user_id: user_id,
                     action: {
                         type: "message",
                         label: name,
@@ -26,13 +27,38 @@ exports.insertAcount = function(user_id, name) {
   }
 
 
-exports.updateButton = function(beforName, afterName) {
+exports.updateButtonId = function(user_id, name) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(userButton);
         // Find some documents if user_id and not stage
         collection.update(
-            { name: beforName },
-            { $set: { name  : afterName } }
+            { user_id: user_id },
+            { $set: {
+              action: {
+                  type: "message",
+                  label: name,
+                  text: name
+              } 
+            } 
+          }
         );
     });
+}
+exports.updateButtonName = function(user_id, name) {
+  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+      var collection = db.collection(userButton);
+      // Find some documents if user_id and not stage
+      collection.update(
+          { name: name },
+          { $set: {
+            user_id: user_id,
+            action: {
+                type: "message",
+                label: name,
+                text: name
+            } 
+          } 
+        }
+      );
+  });
 }

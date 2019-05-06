@@ -3,6 +3,7 @@ var request = require('request');
 
 var commonDb = require('../Models/Common');
 var registDb = require('../Models/Registration');
+var nameButton = require('../Models/UserBtn');
 var lendDb = require('../Models/Lend');
 var lend = require('./Lend');
 var show = require('./Show');
@@ -227,7 +228,9 @@ registAcount = function(user_id) {
                     }
                 })                               
             } else {
+                nameButton.insertAcount(user_id, name);
                 registDb.insertAcount(user_id, name);
+
                 console.log('新規に' + name + 'を登録しました。');
             }
         });
