@@ -74,7 +74,7 @@ exports.postChecker = function(req, res, callback) {
                     } else {
                         //相手を選択してくださいボタンを表示
                         postBtn(req, user_id, function(result){
-                            if(result == ture) {
+                            if(result == true) {
                                 callback(true);
                             } else {
                                 callback(false);
