@@ -133,7 +133,7 @@ function validate_signature(signature, body) {
 // var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
 
     //LINEボタン発生処理
-    postBtn = function(req) {
+    postBtn = function(req, user_id, callback) {
         nameButton.getUserButton(function(button) {
         
         require('dotenv').config();
@@ -167,9 +167,9 @@ function validate_signature(signature, body) {
         //返信処理
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                return(true);
+                callback(true);
             } else {
-                return(false);
+                callback(false);
             }
         })
     })
