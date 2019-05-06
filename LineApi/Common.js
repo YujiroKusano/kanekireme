@@ -134,11 +134,11 @@ function validate_signature(signature, body) {
 // var fs = require('fs');
 // var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
 
-nameButton.getUserButton((result) => {
-    var button = result;
-
     //LINEボタン発生処理
     postBtn = function(req, callback) {
+        nameButton.getUserButton((result) => {
+            var button = result;
+        
         require('dotenv').config();
         var resText = ['相手を選択してください'];
         //ヘッダー部を定義
@@ -175,8 +175,9 @@ nameButton.getUserButton((result) => {
                 callback(false);
             }
         });
+    });
     }
-});
+
 //LINEメッセージ送信処理
 postMsg = function(req, resText) {
     require('dotenv').config();
