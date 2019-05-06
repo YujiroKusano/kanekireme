@@ -63,9 +63,9 @@ exports.getUserButton = function(callback) {
       // Get the documents collection
       var collection = db.collection('users');
       // Find some documents if user_id and not stage
-      collection.find({}).toArray(function(err, getStatus) {
-          if(getStatus != null) { //成功した場合
-              callback( getStatus );
+      collection.find({}).toArray(function(err, getButton) {
+          if(getButton != null) { //成功した場合
+              callback( getButton );
           } else { //失敗した場合
               callback( 0 );
           }
