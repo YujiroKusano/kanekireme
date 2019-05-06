@@ -169,7 +169,7 @@ function validate_signature(signature, body) {
         //返信処理
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
-                callback(true);
+                return(true);
             } else {
                 callback(false);
             }
