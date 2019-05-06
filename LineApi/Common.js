@@ -166,16 +166,15 @@ function validate_signature(signature, body) {
             body: data
         };
         
-        var result = false;
         //返信処理
         request.post(options, function(error, response, body) {
-            
             if(!error && response.statusCode == 200) {
-                result = true;
+                callback(true);
+            } else {
+                callback(false);
             }
-        });
-        callback(result);
-    });
+        })
+    })
     }
 
 //LINEメッセージ送信処理
