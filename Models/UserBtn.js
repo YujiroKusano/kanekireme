@@ -10,19 +10,15 @@ exports.insertAcount = function(user_id, name) {
       var collection = db.collection(userButton);
         // Insert some documents
         collection.insertMany([{  
-            stage: [ 
-                [{
-                    type: "action",
-                    imageUrl: "",
-                    user_id: user_id,
-                    action: {
-                        type: "message",
-                        label: name,
-                        text: name
-                    }
-                }]
-            ]
-      }]);
+          type: "action",
+          imageUrl: "",
+          user_id: user_id,
+          action: {
+              type: "message",
+              label: name,
+              text: name
+          }
+      }])
     });
   }
 
@@ -60,5 +56,20 @@ exports.updateButtonName = function(user_id, name) {
           } 
         }
       );
+  });
+}
+exports.getUserInfo = function(user_id, callback) {
+  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+      assert.equal(null, err);
+      // Get the documents collection
+      var collection = db.collection('users');
+      // Find some documents if user_id and not stage
+      collection.find({ 'user_id': user_id }).toArray(function(err, getStatus) {
+          if(getStatus != null) { //成功した場合
+              callback( getStatus );
+          } else { //失敗した場合
+              callback( 0 );
+          }
+      });
   });
 }
