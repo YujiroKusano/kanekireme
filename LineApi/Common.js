@@ -166,14 +166,15 @@ function validate_signature(signature, body) {
             body: data
         };
         
+        var result = false;
         //返信処理
         request.post(options, function(error, response, body) {
-            var result = false;
+            
             if(!error && response.statusCode == 200) {
                 result = true;
             }
-            callback(result);
         });
+        callback(result);
     });
     }
 
