@@ -131,49 +131,52 @@ function validate_signature(signature, body) {
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
 
-var fs = require('fs');
-var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
+// var fs = require('fs');
+// var button = JSON.parse(fs.readFileSync('./config/common.json', 'utf8'));
 
-//LINEボタン発生処理
-postBtn = function(req, user_id, reqText, callback) {
-    require('dotenv').config();
-    var resText = ['相手を選択してください'];
-    //ヘッダー部を定義
-    var headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
-    };
+nameButton.getUserButton(user_id, (result) => {
+    var button = JSON.parse(result);
 
-    //返信内容を定義
-    var data = {
-        'replyToken': req.body['events'][0]['replyToken'],
-        'messages': [{
-            'type': 'text',
-            'text': resText[0],
-            'quickReply': {
-                "items": button['stage1'][1]
-            }   
-        },
-    ]};
-    //オプションを定義
-    var options = {
-        url: 'https://api.line.me/v2/bot/message/reply',
-        proxy: process.env.FIXIE_URL,
-        headers: headers,
-        json: true,
-        body: data
-    };
-    
-    //返信処理
-    request.post(options, function(error, response, body) {
-        if(!error && response.statusCode == 200) {
-            callback(true);
-        } else {
-            callback(false);
-        }
-    });
-}
+    //LINEボタン発生処理
+    postBtn = function(req, user_id, reqText, callback) {
+        require('dotenv').config();
+        var resText = ['相手を選択してください'];
+        //ヘッダー部を定義
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+        };
 
+        //返信内容を定義
+        var data = {
+            'replyToken': req.body['events'][0]['replyToken'],
+            'messages': [{
+                'type': 'text',
+                'text': resText[0],
+                'quickReply': {
+                    "items": button
+                }   
+            },
+        ]};
+        //オプションを定義
+        var options = {
+            url: 'https://api.line.me/v2/bot/message/reply',
+            proxy: process.env.FIXIE_URL,
+            headers: headers,
+            json: true,
+            body: data
+        };
+        
+        //返信処理
+        request.post(options, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        });
+    }
+});
 //LINEメッセージ送信処理
 postMsg = function(req, resText) {
     require('dotenv').config();
@@ -224,6 +227,7 @@ registAcount = function(user_id) {
                         console.log('名前,idに変更ありません。');
                     } else {
                         registDb.updateAcount(user_id, name);
+                        nameButton.updateButtonId(user_id, name);
                         console.log(name + 'の名前を変更しました');
                     }
                 })                               
