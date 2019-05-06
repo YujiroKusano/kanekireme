@@ -58,12 +58,12 @@ exports.updateButtonName = function(user_id, name) {
       );
   });
 }
-exports.getUserButton = function(callback) {
+exports.getUserButton = function(user_id, callback) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
       var collection = db.collection(userButton);
       // Find some documents if user_id and not stage
-      collection.find({}).toArray(function(err, getButton) {
+      collection.find({user_id: { $ne: user_id }}).toArray(function(err, getButton) {
           if(getButton != null) { //成功した場合
               callback( getButton );
           } else { //失敗した場合
