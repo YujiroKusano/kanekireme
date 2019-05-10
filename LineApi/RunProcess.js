@@ -44,7 +44,7 @@ exports.postChecker = function(req, res, callback) {
             if(reqText == '取り消し') { 
                 commonDb.resetStage(user_id);
                 var deleteText = '取り消し完了';
-                postMsg(req, deleteText, function(result) {
+                common.postMsg(req, deleteText, function(result) {
                     console.log('取り消し完了');
                 });
             }
@@ -98,23 +98,20 @@ exports.postChecker = function(req, res, callback) {
                         console.log('LineApi.common:Mode0: 対象外のモードです。');
                         return;
                     } else {
-
+                        //stageを1に進めるための処理
+                        commonDb.stage1(user_id, reqMode[reqText]);
                         //登録されたユーザーを取得
                         userBtnDb.getUserButton(user_id, function(button) {
-                            
+
                             //からではないことを確認
                             if(button != 0) {
-
+                            
                                 //相手を選択してくださいボタンを表示
                                 common.postBtn(req, user_id, button, function(result){
                                     callback(result);
                                 });
                             }
                         })
-
-                        
-                        //stageを1に進めるための処理
-                        commonDb.stage1(user_id, reqMode[reqText]);
                     }
   
                 } else if(mode == 2) { //借りる処理
