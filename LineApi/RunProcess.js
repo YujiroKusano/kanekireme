@@ -64,16 +64,16 @@ exports.postChecker = function(req, res, callback) {
                     //タイムアウトエラーの結果を送信する処理
                     var deleteText = '前の操作から一定時間経過したため前の操作を取り消しました。';
                     common.postMsg(req, deleteText, function(result) {
-                        callback(result)
+                        return;
                     })
                     console.log(deleteText);
                 }
-                callback(user_id);
+                callback(user_id, reqText);
             });
         }
     ],
     //処理開始
-    function(user_id) {
+    function(user_id, reqText) {
         //個人チャットの場合の処理
         if(req.body['events'][0]['source']['type'] == 'user') {
 
