@@ -67,7 +67,6 @@ exports.postChecker = function(req, res, callback) {
                         callback(result)
                     })
                     console.log(deleteText);
-                    callback(true);
                 }
             });
         }
