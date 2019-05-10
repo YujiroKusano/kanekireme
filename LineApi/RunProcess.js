@@ -16,7 +16,7 @@ exports.postChecker = function(req, res, callback) {
     async.waterfall([
 
         // 例外文字判定
-        function() {
+        function(callback) {
             //送られてきたuser_idを取得する
             var user_id = req.body['events'][0]['source']['userId'];
             
@@ -68,6 +68,7 @@ exports.postChecker = function(req, res, callback) {
                     })
                     console.log(deleteText);
                 }
+                callback(true);
             });
         }
     ],
