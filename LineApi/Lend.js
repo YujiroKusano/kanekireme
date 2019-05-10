@@ -2,8 +2,7 @@ var fs = require('fs');
 var button = JSON.parse(fs.readFileSync('./config/lend.json', 'utf8'));
 
 var common = require('./Common');
-var commondb = require('../Models/Common');
-var lenddb = require('../Models/Lend');
+var lendDb = require('../Models/Lend');
 
 //menu画面を返信する
 exports.postBtn = function(req, user_id, reqText, callback) {
@@ -18,7 +17,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         } else if(stage == 4) { //日付入力時の場合
             
             //Database登録処理
-            lenddb.runLendStage(user_id, reqText);
+            lendDb.runLendStage(user_id, reqText);
 
             // 日付ピッカーを送信
             common.postDPick(req, resText[stage], function(result){
