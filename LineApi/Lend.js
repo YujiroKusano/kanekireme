@@ -14,7 +14,15 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
         //返信内容を定義
         if(stage == 1) { // 金額入力時処理
-            console.log('金額入力フェー図')
+            
+            //Database登録処理
+            lendDb.runLendStage(user_id, reqText);
+
+            // ボタンを送信
+            common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
+                console.log('Lend:Button:Result: ' + result);
+                callback(result);
+            });
         } else if(stage == 2) { //日付入力時の場合
             
             //Database登録処理
