@@ -105,13 +105,15 @@ exports.postChecker = function(req, res, callback) {
 
                             //からではないことを確認
                             if(button != 0) {
-                            
+                                
                                 //相手を選択してくださいボタンを表示
-                                common.postBtn(req, user_id, button, function(result){
+                                var reqText = '相手を選択してください';
+                                common.postBtn(req, reqText, button, function(result){
                                     callback(result);
                                 });
                             }
                         })
+                        return;
                     }
   
                 } else if(mode == 2) { //借りる処理
