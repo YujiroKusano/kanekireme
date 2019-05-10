@@ -80,6 +80,13 @@ exports.postMsg = function(req, resText, callback) {
 
 //日付選択ピッカー処理
 exports.postDPick = function(req, resText, callback) {
+    require('dotenv').config();
+    //ヘッダー部を定義
+    var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
+    };
+    
     var data = {
         'replyToken': req.body['events'][0]['replyToken'],
         'messages': [{
