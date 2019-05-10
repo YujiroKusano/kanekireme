@@ -5,6 +5,7 @@ var async = require('async');
 var commonDb = require('../Models/Common');
 var registDb = require('../Models/Registration');
 var lendDb = require('../Models/Lend');
+var userBtnDb = require('../Models/UserBtn');
 
 var common = require('./Common');
 var lend = require('./Lend');
@@ -98,10 +99,19 @@ exports.postChecker = function(req, res, callback) {
                         return;
                     } else {
 
-                        //相手を選択してくださいボタンを表示
-                        common.postBtn(req, user_id, function(result){
-                           callback(result);
-                        });
+                        //登録されたユーザーを取得
+                        userBtnDb.getUserButton(user_id, function(button) {
+                            
+                            //からではないことを確認
+                            if(button != 0) {
+
+                                //相手を選択してくださいボタンを表示
+                                common.postBtn(req, user_id, button, function(result){
+                                    callback(result);
+                                });
+                            }
+                        })
+
                         
                         //stageを1に進めるための処理
                         commonDb.stage1(user_id, reqMode[reqText]);

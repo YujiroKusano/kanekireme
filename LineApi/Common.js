@@ -33,10 +33,9 @@ exports.postBtn = function(req, resText, button, callback) {
         request.post(options, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 console.log('POST::Button: 正常終了');
-                callback(true);
+
             } else {
                 console.log('POST::Button: 異常終了');
-                callback(false);
             }
         });
 }
