@@ -13,9 +13,9 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         var resText = ['相手を選択してください', '金額を入力してください', '詳細を入力してください', 'ボタンを押下してください', '処理が完了しました',];
 
         //返信内容を定義
-        if(stage == 3) { // 金額入力時処理
-
-        } else if(stage == 4) { //日付入力時の場合
+        if(stage == 1) { // 金額入力時処理
+            console.log('金額入力フェー図')
+        } else if(stage == 2) { //日付入力時の場合
             
             //Database登録処理
             lendDb.runLendStage(user_id, reqText);
