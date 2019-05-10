@@ -68,12 +68,12 @@ exports.postChecker = function(req, res, callback) {
                     })
                     console.log(deleteText);
                 }
-                callback(true);
+                callback(user_id);
             });
         }
     ],
     //処理開始
-    function() {
+    function(user_id) {
         //個人チャットの場合の処理
         if(req.body['events'][0]['source']['type'] == 'user') {
 
