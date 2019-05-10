@@ -56,7 +56,7 @@ exports.postChecker = function(req, res, callback) {
 
             //日付を確認してfalseが帰ってきた場合stage情報をリセット
             commonDb.checkdDate(user_id, function(result) { //callbackのため処理の中に記載
-                if(result == false) {
+                if(!result) {
 
                     //Stage情報をリセットする処理
                     commonDb.resetStage(user_id);
@@ -68,11 +68,8 @@ exports.postChecker = function(req, res, callback) {
                     })
                     console.log(deleteText);
                     callback(true);
-                    return;
                 }
             });
-
-        console.log('test');
         }
     ],
     //処理開始
