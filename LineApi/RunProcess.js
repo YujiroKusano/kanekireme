@@ -52,7 +52,7 @@ exports.postChecker = function(req, res, callback) {
             if(reqText == '完了') { return }
 
             //アカウント登録処理
-            common.registAcount(user_id);
+            registAcount(user_id);
 
             //日付を確認してfalseが帰ってきた場合stage情報をリセット
             commonDb.checkdDate(user_id, function(result) { //callbackのため処理の中に記載
@@ -157,6 +157,7 @@ function validate_signature(signature, body) {
     var buf1 = Buffer.from(JSON.stringify(body), 'utf8');
     return signature == crypto.createHmac('sha256', process.env.LINE_CHANNEL_SECRET).update(buf1).digest('base64');
 }
+
 //アカウント登録処理
 exports.registAcount = function(user_id) {
     regist.getName(user_id, function(name) { //LINEAPIから名前を取得
