@@ -159,7 +159,7 @@ function validate_signature(signature, body) {
 }
 
 //アカウント登録処理
-exports.registAcount = function(user_id) {
+function registAcount(user_id) {
     regist.getName(user_id, function(name) { //LINEAPIから名前を取得
         console.log('COMMON:LINEAPI: name: ' + name);
         registDb.alreadyId(user_id, function(result) { //既に登録されているuser_idか判断
