@@ -105,10 +105,8 @@ exports.resetStage = function(user_id){
         var collection = db.collection(users);
         
         // Find some documents if user_id and not stage
-        collection.remove({ 'user_id': user_id, 'stage': { $ne: 0 }}, 
-            
-            // リセットに失敗した場合
-            function(err, result) {
+        collection.remove({ 'user_id': user_id, 'stage': { $ne: 0 }}, function(err, result) {
+                // リセットに失敗した場合
                 if (err) {
                     console.log('reset::ERROR')
                 } 

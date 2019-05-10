@@ -177,6 +177,7 @@ function registAcount(user_id) {
                 registDb.insertAcount(user_id, name);
                 console.log('新規に' + name + 'を登録しました。');
             }
+            return;
         });
     });
 }
