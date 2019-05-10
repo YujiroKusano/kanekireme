@@ -71,6 +71,8 @@ exports.postChecker = function(req, res, callback) {
                     return;
                 }
             });
+
+        console.log('test');
         }
     ],
     //処理開始
