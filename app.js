@@ -4,7 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 //送られてきた内容を確認するモジュール
-var LineApi = require('./LineApi/Common');
+var LineApi = require('./LineApi/RunProcess');
 
 var app = express();
 app.set('port', (process.env.PORT || 8000));
