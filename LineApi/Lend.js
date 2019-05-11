@@ -8,8 +8,9 @@ var lendDb = require('../Models/Lend');
 //menu画面を返信する
 exports.postBtn = function(req, user_id, reqText, callback) {
     require('dotenv').config();
-    var reqText = reqText;
+    console.log(reqText);
     commonDb.getStage(user_id, function(stage) {
+        
         var resText = ['相手を選択してください', '金額を入力してください', '詳細を入力してください', 'ボタンを押下してください', '処理が完了しました',];
 
         //返信内容を定義

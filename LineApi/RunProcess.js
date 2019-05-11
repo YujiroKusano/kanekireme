@@ -21,6 +21,9 @@ exports.postChecker = function(req, res, callback) {
             //送られてきたuser_idを取得する
             var user_id = req.body['events'][0]['source']['userId'];
             
+            // reqTextを初期化
+            var reqText = 'default';
+
             //環境変数を読み込む処理
             require('dotenv').config();
             
@@ -32,9 +35,9 @@ exports.postChecker = function(req, res, callback) {
 
             //送られてきたデータがメッセージまたは、日付ピッカー以外の場合処理を終了する
             if(req.body['events'][0]['type'] === 'message'){
-                var reqText = req.body['events'][0]['message']['text'];
+                reqText = req.body['events'][0]['message']['text'];
             } else if (req.body['events'][0]['type'] === 'postback') {
-                var reqText = req.body['events'][0]['postback']['params']['date'];
+                reqText = req.body['events'][0]['postback']['params']['date'];
             } else {
                 console.log('MessageError:: データ不正');
                 return;
