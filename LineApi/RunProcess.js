@@ -69,7 +69,7 @@ exports.postChecker = function(req, res, callback) {
                     var deleteText = '前の操作から一定時間経過したため前の操作を取り消しました。';
                     common.postMsg(req, deleteText, function(result) {
                         return;
-                    })
+                    });
                     console.log(deleteText);
                 }
                 callback(user_id, reqText);
@@ -101,8 +101,10 @@ exports.postChecker = function(req, res, callback) {
                         console.log('LineApi.common:Mode0: 対象外のモードです。');
                         return;
                     } else {
+
                         //stageを1に進めるための処理
                         commonDb.stage1(user_id, reqMode[reqText]);
+                        
                         //登録されたユーザーを取得
                         userBtnDb.getUserButton(user_id, function(button) {
 
@@ -114,8 +116,19 @@ exports.postChecker = function(req, res, callback) {
                                 common.postBtn(req, reqText, button, function(result){
                                     callback(result);
                                 });
+                                
+                            } else { //相手が存在しない時の処理
+
+                                //Stage情報をリセットする処理
+                                commonDb.resetStage(user_id);
+
+                                //タイムアウトエラーの結果を送信する処理
+                                var deleteText = '相手が存在しません';
+                                common.postMsg(req, deleteText, function(result) {
+                                    return;
+                                });
                             }
-                        })
+                        });
                         return;
                     }
   
