@@ -60,9 +60,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
         } else if(stage == 4){ //日付 -> 完了ボタンを表示
  
-            //日付確認バリデーション
-            var toString = Object.prototype.toString;
-            if(toString.call(new Date) == toString.call(reqText)) {
+            if(req.body['events'][0]['type'] === 'postback') {
 
                 //日付をDatabaseに登録
                 lendDb.runLendStage(user_id, reqText);
@@ -72,6 +70,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                     console.log('Lend:Button:Result: ' + result);
                     callback(result);
                 });
+
             } else { //日付以外のデータが送信された場合
 
                 //エラーメッセージを送信
