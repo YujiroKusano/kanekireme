@@ -29,7 +29,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             if(!isNaN(Number(reqText))){
 
                 // 日付ピッカーを送信
-                common.postBtn(req, resText[stage], function(result){
+                common.postBtn(req, resText[stage],  button['stage'][stage], function(result){
                     console.log('Lend:DayPicker:Result: ' + result);
                     callback(result);
                 });
