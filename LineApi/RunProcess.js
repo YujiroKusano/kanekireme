@@ -116,7 +116,7 @@ exports.postChecker = function(req, res, callback) {
                                 common.postBtn(req, reqText, button, function(result){
                                     callback(result);
                                 });
-                                
+
                             } else { //相手が存在しない時の処理
 
                                 //Stage情報をリセットする処理
@@ -194,12 +194,14 @@ function registAcount(user_id) {
                         console.log('名前,idに変更ありません。');
                     } else {
                         registDb.updateAcount(user_id, name);
-                        nameButton.updateButtonId(user_id, name);
+                        userBtnDb.updateButtonId(user_id, name);
                         console.log(name + 'の名前を変更しました');
                     }
                 })                               
             } else {
-                nameButton.insertAcount(user_id, name);
+                userBtnDb.insertAcount(user_id, name);
+
+                //nameButton.insertAcount(user_id, name);
                 registDb.insertAcount(user_id, name);
                 console.log('新規に' + name + 'を登録しました。');
             }
