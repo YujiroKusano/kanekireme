@@ -2,7 +2,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-
+var mongo = require('./Models/Common');
 //送られてきた内容を確認するモジュール
 var LineApi = require('./LineApi/RunProcess');
 
