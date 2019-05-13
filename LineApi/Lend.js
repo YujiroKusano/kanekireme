@@ -4,7 +4,7 @@ var button = JSON.parse(fs.readFileSync('./config/lend.json', 'utf8'));
 var common = require('./Common');
 var commonDb = require('../Models/Common');
 var lendDb = require('../Models/Lend');
-
+var registDb = require('../Models/Registration');
 //menu画面を返信する
 exports.postBtn = function(req, user_id, reqText, callback) {
     require('dotenv').config();
@@ -16,9 +16,12 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         //返信内容を定義
         if(stage == 1) { // 名前登録 -> 金額入力時処理
 
-            // 名前Database登録処理
-            lendDb.runLendStage(user_id, reqText);
-
+            // 相手のIDをデータベースに登録
+            registDb.getAcountId(reqText, function(result) {
+                // 名前Database登録処理
+                lendDb.runLendStage(user_id, result);
+            });
+            
             // 金額ボタンを送信
             common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
                 console.log('Lend:Button:Result: ' + result);
@@ -47,6 +50,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                     callback(result);
                 });
             }
+
         } else if(stage == 3) { // 詳細 -> 日付入力ボタンを表示
             
             // 詳細をDatabaseに登録
@@ -60,6 +64,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
         } else if(stage == 4){ //日付 -> 完了ボタンを表示
  
+            //requestの中身が日付ッピッカーから入力された情報かを判定
             if(req.body['events'][0]['type'] === 'postback') {
 
                 //日付をDatabaseに登録
