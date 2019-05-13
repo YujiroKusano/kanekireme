@@ -25,7 +25,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 callback(result);
             });
 
-        } else if(stage == 2) { // 金額 -> 日付入力時の場合
+        } else if(stage == 3) { // 金額 -> 日付入力時の場合
             
             //送られてきたテキストが数字だった場合
             if(!isNaN(Number(reqText))){
