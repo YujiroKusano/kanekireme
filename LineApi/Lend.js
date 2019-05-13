@@ -42,7 +42,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             } else {
                 
                 //stage情報を一つ下げる
-                commonDb.cancelStage(user_id);
+                // commonDb.cancelStage(user_id);
 
                 //エラーメッセージを送信
                 var resText = '正しい値を入力してください';
