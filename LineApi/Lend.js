@@ -25,8 +25,13 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 callback(result);
             });
 
-        } else if(stage == 2) { // 金額 -> 詳細入力時の場合
+        } else if(stage == 2) { // 金額 -> 詳細入力ボタンを表示
+
+            // 金額が正常に入力されているかを判定
             if(!isNaN(Number(reqText))){
+
+                // 金額をDatabaseに登録
+                lendDb.runLendStage(user_id, reqText);
 
                 // 日付ピッカーを送信
                 common.postBtn(req, resText[stage],  button['stage'][stage], function(result){
@@ -34,21 +39,18 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                     callback(result);
                 });
 
-                // 金額Database登録処理
-                lendDb.runLendStage(user_id, reqText);
-
             } else {
                 
-                //stage情報を一つ下げる
-                // commonDb.cancelStage(user_id);
-
                 //エラーメッセージを送信
-                var resText = '正しい値を入力してください';
+                var resText = '正しい金額を入力してください';
                 common.postMsg(req, resText, function(result) {
                     callback(result);
                 });
             }
-        } else if(stage == 3) { // 詳細 -> 日付入力時の場合
+        } else if(stage == 3) { // 詳細 -> 日付入力ボタンを表示
+            
+            // 詳細をDatabaseに登録
+            lendDb.runLendStage(user_id, reqText);
 
             // 日付ピッカーを送信
             common.postDPick(req, resText[stage], function(result){
@@ -56,19 +58,30 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 callback(result);
             });
 
-            // 詳細Database登録処理
-            lendDb.runLendStage(user_id, reqText);
+        } else if(stage == 4){ //日付 -> 完了ボタンを表示
+ 
+            //日付確認バリデーション
+            var toString = Object.prototype.toString;
+            if(toString.call(new Date) == toString.call(reqText)) {
 
-        } else {
+                //日付をDatabaseに登録
+                lendDb.runLendStage(user_id, reqText);
 
-            //Database登録処理
-            lendDb.runLendStage(user_id, reqText);
+                // 完了ボタンを送信
+                common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
+                    console.log('Lend:Button:Result: ' + result);
+                    callback(result);
+                });
+            } else { //日付以外のデータが送信された場合
 
-            // ボタンを送信
-            common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
-                console.log('Lend:Button:Result: ' + result);
-                callback(result);
-            });
+                //エラーメッセージを送信
+                var resText = '正しい日付を入力してください';
+                common.postMsg(req, resText, function(result) {
+                    callback(result);
+                });
+
+            }
+
         }
     });
 }
