@@ -27,6 +27,6 @@ app.post('/callback', function(req, res) {
 });
 
 app.listen(app.get('port'), function() {
-    mongo.connectUsersDb();
+    //mongo.connectUsersDb();
     console.log('Node app is running');
 });

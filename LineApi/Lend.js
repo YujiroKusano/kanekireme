@@ -28,7 +28,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         } else if(stage == 2) { // 金額 -> 日付入力時の場合
             
             //送られてきたテキストが数字だった場合
-            if(isNaN(Number(reqText))){
+            if(!isNaN(Number(reqText))){
 
                 // 日付ピッカーを送信
                 common.postDPick(req, resText[stage], function(result){
@@ -52,6 +52,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             }
 
         } else {
+
             //Database登録処理
             lendDb.runLendStage(user_id, reqText);
 

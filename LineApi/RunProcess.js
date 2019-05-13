@@ -125,7 +125,7 @@ exports.postChecker = function(req, res, callback) {
                                 //タイムアウトエラーの結果を送信する処理
                                 var deleteText = '相手が存在しません';
                                 common.postMsg(req, deleteText, function(result) {
-                                    return;
+                                    callback(result);
                                 });
                             }
                         });
@@ -142,8 +142,6 @@ exports.postChecker = function(req, res, callback) {
                     
                 } else if(mode == 4) { //返済処理
 
-                } else if(mode == 5) { //アカウント登録ボタン
-                    
                 }
             });
 
@@ -201,7 +199,6 @@ function registAcount(user_id) {
             } else {
                 userBtnDb.insertAcount(user_id, name);
 
-                //nameButton.insertAcount(user_id, name);
                 registDb.insertAcount(user_id, name);
                 console.log('新規に' + name + 'を登録しました。');
             }
