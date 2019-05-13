@@ -25,13 +25,11 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 callback(result);
             });
 
-        } else if(stage == 3) { // 金額 -> 日付入力時の場合
-            
-            //送られてきたテキストが数字だった場合
+        } else if(stage == 2) { // 金額 -> 詳細入力時の場合
             if(!isNaN(Number(reqText))){
 
                 // 日付ピッカーを送信
-                common.postDPick(req, resText[stage], function(result){
+                common.postBtn(req, resText[stage], function(result){
                     console.log('Lend:DayPicker:Result: ' + result);
                     callback(result);
                 });
@@ -50,6 +48,16 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                     callback(result);
                 });
             }
+        } else if(stage == 3) { // 詳細 -> 日付入力時の場合
+
+            // 日付ピッカーを送信
+            common.postDPick(req, resText[stage], function(result){
+                console.log('Lend:DayPicker:Result: ' + result);
+                callback(result);
+            });
+
+            // 詳細Database登録処理
+            lendDb.runLendStage(user_id, reqText);
 
         } else {
 
