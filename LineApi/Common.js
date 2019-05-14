@@ -131,8 +131,6 @@ exports.postDPick = function(req, resText, callback) {
 exports.SpecialpostMsg = function(req, data, callback) {
     require('dotenv').config();
 
-    console.log(data);
-    console.log(JSON.stringify(data));
     //ヘッダー部を定義
     var headers = {
         'Content-Type': 'application/json',
