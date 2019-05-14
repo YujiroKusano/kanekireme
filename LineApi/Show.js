@@ -6,8 +6,7 @@ exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
     showModels.getPartnerInfo(user_id, function(result){
-        var data;
-        console.log('result: ' + JSON.stringify(result));
+        let data = {};
         for(var element in result){
             registDb.getAcountName(result[element]['_id'], function(name) {
                 console.log('name: ' + name );
