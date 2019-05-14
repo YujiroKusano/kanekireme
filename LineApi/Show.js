@@ -7,7 +7,7 @@ exports.postdbs = function(req, user_id, callback) {
     var showModels = require('../Models/Show');
     showModels.getPartnerInfo(user_id, function(result){
         var data = new Map();
-        for(var element in result){
+        for(var element in JSON.stringify(result)){
             console.log('result: ' + result);
             console.log('element: ' + element);
             registDb.getAcountName(element['_id'], function(name) {
