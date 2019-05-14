@@ -16,10 +16,7 @@ exports.postdbs = function(req, user_id, callback) {
                     registDb.getAcountName(result[element]['_id'], function(name) {
                         console.log('name: ' + name );
                         console.log('money: ' + result[element]['money']);
-                       
-                        resText += name + ': ' +result[element]['money'] + '\n';
-                   
-                        console.log("rpdata" + JSON.stringify(rpdata));
+                        resText += name + ': ' +result[element]['money'] + '\n';                   
                     })
                 }
                 callback(null, resText);
