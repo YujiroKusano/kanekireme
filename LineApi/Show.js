@@ -25,7 +25,7 @@ exports.postdbs = function(req, user_id, callback) {
                         }
 
                         // 返信内容にユーザー情報を付与
-                        rpdata.push(JSON.stringify(rcdata));
+                        rpdata.push(rcdata);
                         console.log("rpdata" + JSON.stringify(rpdata));
                     })
                 }
