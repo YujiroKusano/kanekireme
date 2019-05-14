@@ -15,7 +15,7 @@ exports.postdbs = function(req, user_id, callback) {
                 data.set(name,  result[element]['money']);
             })
         }
-        console.log(Map.stringify(data));
+        console.log(JSON.stringify(data));
         common.postMsg(req, JSON.stringify(data), function(result){
             callback(result)
         });
