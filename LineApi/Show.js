@@ -30,15 +30,15 @@ exports.postdbs = function(req, user_id, callback) {
                         rpdata.push(rcdata);
                     })
                 }
-                callback(rpdata);
+                callback(null, rpdata);
             });
-        },
+        }],
         function(rpdata){
             common.SpecialpostMsg(req, rpdata, function(result){
                 callback(result)
             });
         }
-    ])
+    )
 }
 
 // exports.postdbs = function(req, user_id, callback) {
