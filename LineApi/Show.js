@@ -30,6 +30,8 @@ exports.postdbs = function(req, user_id, callback) {
                         rpdata.push(rcdata);
                     })
                 }
+                console.log("rpdata" + rpdata);
+                console.log("rpdata" + JSON.parse(rpdata));
                 callback(null, rpdata);
             });
         }],
