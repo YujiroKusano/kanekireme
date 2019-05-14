@@ -10,7 +10,7 @@ exports.postdbs = function(req, user_id, callback) {
     async.waterfall([
         function (callback) {
             //返信内容を定義
-            var rpdata = [ ];
+            var rpdata = [];
             showModels.getPartnerInfo(user_id, function(result){
 
                 for(var element in result){
@@ -25,8 +25,8 @@ exports.postdbs = function(req, user_id, callback) {
                         }
 
                         // 返信内容にユーザー情報を付与
-                        rpdata.push(rcdata);
-                        console.log("rpdata" + JSON.stringify(rpdata));
+                        rpdata.push(JSON.stringify(rcdata));
+                        console.log("rpdata" + JSON.stringify(rpdata);
                     })
                 }
                 callback(null, rpdata);

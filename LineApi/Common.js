@@ -128,7 +128,7 @@ exports.postDPick = function(req, resText, callback) {
 
 }
 
-exports.SpecialpostMsg = function(req, data, callback) {
+exports.SpecialpostMsg = function(req, rpdata, callback) {
     require('dotenv').config();
 
     //ヘッダー部を定義
@@ -136,7 +136,10 @@ exports.SpecialpostMsg = function(req, data, callback) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
     };
-
+    var data = [{
+        'replyToken': req.body['events'][0]['replyToken'],
+        rpdata
+    }];
     //オプションを定義
     var options = {
         url: 'https://api.line.me/v2/bot/message/reply',
