@@ -8,7 +8,7 @@ exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
     async.waterfall([
-        function(callback) {
+        function (callback) {
             //返信内容を定義
             var rpdata = [{
                 'replyToken': req.body['events'][0]['replyToken']
@@ -32,13 +32,13 @@ exports.postdbs = function(req, user_id, callback) {
                 }
                 callback(rpdata);
             });
+        },
+        function(rpdata){
+            common.SpecialpostMsg(req, rpdata, function(result){
+                callback(result)
+            });
         }
-    ],
-    function(rpdata){
-        common.SpecialpostMsg(req, rpdata, function(result){
-            callback(result)
-        });
-    });
+    ])
 }
 
 // exports.postdbs = function(req, user_id, callback) {
