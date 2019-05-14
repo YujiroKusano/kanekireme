@@ -7,7 +7,7 @@ exports.postdbs = function(req, user_id, callback) {
     var showModels = require('../Models/Show');
     showModels.getPartnerInfo(user_id, function(result){
         var data = new Map();
-        console.log('result: ' + result);
+        console.log('result: ' + JSON.stringify(result));
         for(var element in result){
             console.log('element: ' + element);
             registDb.getAcountName(element, function(name) {
@@ -16,7 +16,7 @@ exports.postdbs = function(req, user_id, callback) {
                 data.set(name, element['money']);
             })
         }
-        common.postMsg(req, JSON.stringify(data), function(result){
+        common.postMsg(req, data, function(result){
             callback(result)
         });
     })
