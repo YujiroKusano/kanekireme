@@ -25,6 +25,8 @@ exports.postdbs = function(req, user_id, callback) {
                                 "text": name + ': ' +result[element]['money']
                             }]
                         }
+
+                        // 返信内容にユーザー情報を付与
                         rpdata.push(rcdata);
                     })
                 }

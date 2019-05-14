@@ -152,7 +152,7 @@ exports.SpecialpostMsg = function(req, data, callback) {
             console.log('POST::Message: 正常終了');
             callback(true);
         } else {
-            console.log('POST::Message: 異常終了: ' + response);
+            console.log('POST::Message: 異常終了: ' + JSON.stringify(response));
             callback(false);
         }
     });
