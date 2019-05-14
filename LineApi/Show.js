@@ -22,7 +22,7 @@ exports.postdbs = function(req, user_id, callback) {
                 callback(null, resText);
             });
         },
-        function(err, resText, callback){
+        function(err, resText){
             console.log(resText)
             common.postMsg(req, resText, function(result){
                 callback(result)
