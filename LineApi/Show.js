@@ -11,8 +11,8 @@ exports.postdbs = function(req, user_id, callback) {
         for(var element in result){
             registDb.getAcountName(result[element]['_id'], function(name) {
                 console.log('name: ' + name );
-                console.log('money' + element['money']);
-                data.set(name, element['money']);
+                console.log('money: ' + result[element]['money']);
+                data.set(name, result[element]['money']);
             })
         }
         common.postMsg(req, data, function(result){
