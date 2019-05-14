@@ -11,9 +11,7 @@ exports.postdbs = function(req, user_id, callback) {
         function(callback) {
             showModels.getPartnerInfo(user_id, function(result){
                 //返信内容を定義
-                var rpdata = [{
-                    'replyToken': req.body['events'][0]['replyToken']
-                }];
+
 
                 for(var element in result){
                     registDb.getAcountName(result[element]['_id'], function(name) {
@@ -25,7 +23,7 @@ exports.postdbs = function(req, user_id, callback) {
                                 "text": name + ': ' +result[element]['money']
                             }]
                         }
-                        rpdata.push(rcdata);
+                        rpdata.push(name + ': ' +result[element]['money']);
                     })
                 }
                 callback(rpdata);
