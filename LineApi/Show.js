@@ -1,33 +1,41 @@
 var common = require('./Common');
 var registDb = require('../Models/Registration');
 
+var async = require('async');
+
 //一覧を返信する
 exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
-    showModels.getPartnerInfo(user_id, function(result){
-        //返信内容を定義
-        var rpdata = [{
-            'replyToken': req.body['events'][0]['replyToken']
-        }];
+    async.waterfall([
+        function() {
+            showModels.getPartnerInfo(user_id, function(result){
+                //返信内容を定義
+                var rpdata = [{
+                    'replyToken': req.body['events'][0]['replyToken']
+                }];
 
-        for(var element in result){
-            registDb.getAcountName(result[element]['_id'], function(name) {
-                console.log('name: ' + name );
-                console.log('money: ' + result[element]['money']);
-                var rcdata = [{
-                    'messages': [{
-                        "type": "text",
-                        "text": name + ': ' +result[element]['money']
-                    }]
-                }]
-                rpdata.push(rcdata);
-            })
+                for(var element in result){
+                    registDb.getAcountName(result[element]['_id'], function(name) {
+                        console.log('name: ' + name );
+                        console.log('money: ' + result[element]['money']);
+                        var rcdata = [{
+                            'messages': [{
+                                "type": "text",
+                                "text": name + ': ' +result[element]['money']
+                            }]
+                        }]
+                        rpdata.push(rcdata);
+                    })
+                }
+            });
         }
+    ],
+    function(){
         common.postMsg(req, JSON.stringify(rpdata), function(result){
             callback(result)
         });
-    })
+    });
 }
 
 // exports.postdbs = function(req, user_id, callback) {
