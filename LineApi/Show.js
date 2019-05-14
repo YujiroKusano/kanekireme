@@ -8,7 +8,7 @@ exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
     async.waterfall([
-        function() {
+        function(callback) {
             showModels.getPartnerInfo(user_id, function(result){
                 //返信内容を定義
                 var rpdata = [{
