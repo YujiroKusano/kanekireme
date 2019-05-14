@@ -1,5 +1,5 @@
 var common = require('./Common');
-var request = require('request');
+var registDb = require('../Models/Registration');
 
 //一覧を返信する
 exports.postdbs = function(req, user_id, callback) {
@@ -7,7 +7,13 @@ exports.postdbs = function(req, user_id, callback) {
     var showModels = require('../Models/Show');
     showModels.getPartnerInfo(user_id, function(result){
         common.postMsg(req, JSON.stringify(result), function(result){
-            callback(result)
+            var data = new Map();
+            result['_id'].forEach(element => {
+                registDb.getAcountName(element, function(name) {
+                    data.set(name, element['money']);
+                })
+            });
+            callback(data)
         });
     })
 }
