@@ -24,7 +24,7 @@ exports.postdbs = function(req, user_id, callback) {
                 rpdata.push(rcdata);
             })
         }
-        common.SpecialpostMsg(req, rpdata, function(result){
+        common.postMsg(req, JSON.stringify(rpdata), function(result){
             callback(result)
         });
     })
