@@ -32,7 +32,8 @@ exports.postdbs = function(req, user_id, callback) {
                 callback(null, rpdata);
             });
         }],
-        function(rpdata){
+        function(err, rpdata){
+            console.log(JSON.stringify(rpdata))
             common.SpecialpostMsg(req, rpdata, function(result){
                 callback(result)
             });
