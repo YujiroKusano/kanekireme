@@ -11,7 +11,7 @@ exports.postdbs = function(req, user_id, callback) {
             'replyToken': req.body['events'][0]['replyToken']
         };
 
-        var rrdata = JSON.parse(rpdata);
+        var rrdata = JSON.stringify(rpdata);
         for(var element in result){
             registDb.getAcountName(result[element]['_id'], function(name) {
                 console.log('name: ' + name );
