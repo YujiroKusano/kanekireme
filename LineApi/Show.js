@@ -25,9 +25,9 @@ exports.postdbs = function(req, user_id, callback) {
                 callback(null, resText);
             });
         },
-        function(err, rpdata){
-            console.log(JSON.stringify(rpdata))
-            common.postMsg(req, rpdata, function(result){
+        function(err, resText){
+            console.log(resText)
+            common.postMsg(req, resText, function(result){
                 callback(result)
             });
         }
