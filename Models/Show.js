@@ -22,7 +22,7 @@ exports.getPartnerInfo = function(user_id, callback) {
         // Get the documents collection
         var collection = db.collection('users');
         collection.aggregate([
-           // { $match: { 'partner_name': user_id } },
+           // { $match: { 'partner_name': { $ne: user_id } },
             { $group: {  _id: "$partner_name", money: { $sum: '$money' } } },
             // { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {

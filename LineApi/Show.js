@@ -6,13 +6,13 @@ exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
     showModels.getPartnerInfo(user_id, function(result){
-        var data = new Map();
+        var data;
         console.log('result: ' + JSON.stringify(result));
         for(var element in result){
             registDb.getAcountName(result[element]['_id'], function(name) {
                 console.log('name: ' + name );
                 console.log('money: ' + result[element]['money']);
-                data.set(name,  result[element]['money']);
+                data[name] = result[element]['money'];
             })
         }
         console.log(JSON.stringify(data));
