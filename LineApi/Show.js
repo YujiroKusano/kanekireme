@@ -11,6 +11,7 @@ exports.postdbs = function(req, user_id, callback) {
             'replyToken': req.body['events'][0]['replyToken']
         };
 
+        var rrdata = JSON.parse(rpdata);
         for(var element in result){
             registDb.getAcountName(result[element]['_id'], function(name) {
                 console.log('name: ' + name );
@@ -21,10 +22,10 @@ exports.postdbs = function(req, user_id, callback) {
                         "text": name + ': ' +result[element]['money']
                     }]
                 }
-                rpdata.push(rcdata);
+                rrdata.push(rcdata);
             })
         }
-        common.postMsg(req, rpdata, function(result){
+        common.postMsg(req, rrdata, function(result){
             callback(result)
         });
     })
