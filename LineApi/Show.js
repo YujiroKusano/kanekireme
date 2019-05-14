@@ -10,7 +10,7 @@ exports.postdbs = function(req, user_id, callback) {
         for(var element in result['_id']){
             console.log('result: ' + result);
             console.log('element: ' + element);
-            registDb.getAcountName(element['_id'], function(name) {
+            registDb.getAcountName(element, function(name) {
                 console.log('name: ' + name );
                 console.log('money' + element['money']);
                 data.set(name, element['money']);
