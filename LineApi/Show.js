@@ -8,7 +8,10 @@ exports.postdbs = function(req, user_id, callback) {
     showModels.getPartnerInfo(user_id, function(result){
         var data = new Map();
         Object.keys(result).forEach(function (element) {
+            console.log('element: ' + element);
             registDb.getAcountName(element['_id'], function(name) {
+                console.log('name: ' + name );
+                console.log('money' + element['money']);
                 data.set(name, element['money']);
             })
         });
