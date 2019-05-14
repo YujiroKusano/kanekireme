@@ -34,7 +34,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             if(!isNaN(Number(reqText))){
 
                 // 金額をDatabaseに登録
-                lendDb.runLendStage(user_id, reqText);
+                lendDb.runLendStage(user_id, Number(reqText));
 
                 // 日付ピッカーを送信
                 common.postBtn(req, resText[stage],  button['stage'][stage], function(result){
