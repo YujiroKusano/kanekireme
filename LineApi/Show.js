@@ -28,10 +28,11 @@ exports.postdbs = function(req, user_id, callback) {
                         rpdata.push(rcdata);
                     })
                 }
+                callback(rpdata);
             });
         }
     ],
-    function(){
+    function(rpdata){
         common.postMsg(req, JSON.stringify(rpdata), function(result){
             callback(result)
         });
