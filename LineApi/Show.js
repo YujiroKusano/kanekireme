@@ -28,8 +28,8 @@ exports.postdbs = function(req, user_id, callback) {
                         rpdata.push(rcdata);
                     })
                 }
+                callback(rpdata);
             });
-            callback(rpdata);
         }
     ],
     function(rpdata){
