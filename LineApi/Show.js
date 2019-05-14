@@ -6,14 +6,14 @@ exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     var showModels = require('../Models/Show');
     showModels.getPartnerInfo(user_id, function(result){
-        common.postMsg(req, JSON.stringify(result), function(result){
-            var data = new Map();
-            result['_id'].forEach(element => {
-                registDb.getAcountName(element, function(name) {
-                    data.set(name, element['money']);
-                })
-            });
-            callback(data)
+        var data = new Map();
+        for(var [user_id, money] of result) {
+            registDb.getAcountName(user_id, function(name) {
+                data.set(name, money);
+            })
+        };
+        common.postMsg(req, JSON.stringify(data), function(result){
+            callback(result)
         });
     })
 }
