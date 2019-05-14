@@ -19,12 +19,12 @@ exports.postdbs = function(req, user_id, callback) {
                     registDb.getAcountName(result[element]['_id'], function(name) {
                         console.log('name: ' + name );
                         console.log('money: ' + result[element]['money']);
-                        var rcdata = [{
+                        var rcdata = {
                             'messages': [{
                                 "type": "text",
                                 "text": name + ': ' +result[element]['money']
                             }]
-                        }]
+                        }
                         rpdata.push(rcdata);
                     })
                 }
