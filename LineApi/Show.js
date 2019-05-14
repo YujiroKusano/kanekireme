@@ -10,9 +10,7 @@ exports.postdbs = function(req, user_id, callback) {
     async.waterfall([
         function (callback) {
             //返信内容を定義
-            var rpdata = [{
-                'replyToken': req.body['events'][0]['replyToken']
-            }];
+            var rpdata = [ ];
             showModels.getPartnerInfo(user_id, function(result){
 
                 for(var element in result){
