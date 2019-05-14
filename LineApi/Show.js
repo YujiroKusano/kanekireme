@@ -7,11 +7,10 @@ exports.postdbs = function(req, user_id, callback) {
     var showModels = require('../Models/Show');
     showModels.getPartnerInfo(user_id, function(result){
         //返信内容を定義
-        var rpdata = {
+        var rpdata = [{
             'replyToken': req.body['events'][0]['replyToken']
-        };
+        }];
 
-        var rrdata = JSON.stringify(rpdata);
         for(var element in result){
             registDb.getAcountName(result[element]['_id'], function(name) {
                 console.log('name: ' + name );
@@ -22,10 +21,10 @@ exports.postdbs = function(req, user_id, callback) {
                         "text": name + ': ' +result[element]['money']
                     }]
                 }
-                rrdata.push(rcdata);
+                rpdata.push(rcdata);
             })
         }
-        common.postMsg(req, rrdata, function(result){
+        common.postMsg(req, rpdata, function(result){
             callback(result)
         });
     })
