@@ -23,7 +23,7 @@ exports.getPartnerInfo = function(user_id, callback) {
         var collection = db.collection('users');
         collection.aggregate([
             { $match: { 'partner_name': { $ne: user_id } } },
-            { $group: { partner_name: '$partner_name', money: { $sum: '$money' } } },
+            { $group: {  money: { $sum: '$money' } } },
             { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {
             if(!err) { //成功した場合
