@@ -9,32 +9,25 @@ exports.postdbs = function(req, user_id, callback) {
     var showModels = require('../Models/Show');
     async.waterfall([
         function (callback) {
-            //返信内容を定義
-            var rpdata = [];
+            //返信内容を定義    
             showModels.getPartnerInfo(user_id, function(result){
-
+                var resText;
                 for(var element in result){
                     registDb.getAcountName(result[element]['_id'], function(name) {
                         console.log('name: ' + name );
                         console.log('money: ' + result[element]['money']);
-                        var rcdata = {
-                            'messages': [{
-                                "type": "text",
-                                "text": name + ': ' +result[element]['money']
-                            }]
-                        }
-
-                        // 返信内容にユーザー情報を付与
-                        rpdata.push(rcdata);
+                       
+                        resText += name + ': ' +result[element]['money'] + '\n';
+                   
                         console.log("rpdata" + JSON.stringify(rpdata));
                     })
                 }
-                callback(null, rpdata);
+                callback(null, resText);
             });
         },
         function(err, rpdata){
             console.log(JSON.stringify(rpdata))
-            common.SpecialpostMsg(req, rpdata, function(result){
+            common.postMsg(req, rpdata, function(result){
                 callback(result)
             });
         }
