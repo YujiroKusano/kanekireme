@@ -52,15 +52,27 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             }
 
         } else if(stage == 3) { // 詳細 -> 日付入力ボタンを表示
-            
-            // 詳細をDatabaseに登録
-            lendDb.runLendStage(user_id, reqText);
+            var str_obj = new String(reqText);
+            var len = str_obj.length;
 
-            // 日付ピッカーを送信
-            common.postDPick(req, resText[stage], function(result){
-                console.log('Lend:DayPicker:Result: ' + result);
-                callback(result);
-            });
+            if(len <= 30) {
+                // 詳細をDatabaseに登録
+                lendDb.runLendStage(user_id, reqText);
+
+                // 日付ピッカーを送信
+                common.postDPick(req, resText[stage], function(result){
+                    console.log('Lend:DayPicker:Result: ' + result);
+                    callback(result);
+                });
+            } else {
+                
+                //エラーメッセージを送信
+                var resText = '30文字以内で入力してください';
+                common.postMsg(req, resText, function(result) {
+                    callback(result);
+                });
+            }
+            
 
         } else if(stage == 4){ //日付 -> 完了ボタンを表示
  

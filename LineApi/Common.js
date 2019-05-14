@@ -72,7 +72,7 @@ exports.postMsg = function(req, resText, callback) {
             console.log('POST::Message: 正常終了');
             callback(true);
         } else {
-            console.log('POST::Message: 異常終了');
+            console.log('POST::Message: 異常終了: ' + resText);
             callback(false);
         }
     });
@@ -86,7 +86,7 @@ exports.postDPick = function(req, resText, callback) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
     };
-    
+
     var data = {
         'replyToken': req.body['events'][0]['replyToken'],
         'messages': [{
