@@ -12,11 +12,11 @@ exports.postdbs = function(req, user_id, callback) {
             registDb.getAcountName(result[element]['_id'], function(name) {
                 console.log('name: ' + name );
                 console.log('money: ' + result[element]['money']);
-                data[name] = result[element]['money'];
+                data.name = result[element]['money'];
             })
         }
-        console.log(JSON.stringify(data));
-        common.postMsg(req, JSON.stringify(data), function(result){
+        console.log(data);
+        common.postMsg(req, data, function(result){
             callback(result)
         });
     })
