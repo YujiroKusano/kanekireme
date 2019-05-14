@@ -28,11 +28,7 @@ exports.postdbs = function(req, user_id, callback) {
                 callback(result)
             });
         }
-    ],
-    function(err, result){
-        callback(result);
-    }
-
+    ]
     )
 }
 
