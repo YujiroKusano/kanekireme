@@ -36,7 +36,7 @@ getNextId = function(callback) {
 }
 
 // Stage1処理
-exports.stage1 = function(user_id, mode) {
+exports.stage1 = function(name, mode) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
 
         // Get the documents collection
@@ -48,7 +48,7 @@ exports.stage1 = function(user_id, mode) {
         // Insert some documents
         collection.insertMany([{  
             _id: getId,
-            user_id: user_id, 
+            user: name, 
             stage: 1,
             mode: mode,
             timeStamp: jsDate
