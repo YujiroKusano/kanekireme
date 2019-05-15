@@ -64,7 +64,7 @@ exports.alreadyName = function(name, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(acount);
-        collection.findOne({ name: name },function(err, docs) {
+        collection.findOne({ label: name },function(err, docs) {
             if(docs != null) {
                 callback(true);
             } else {
