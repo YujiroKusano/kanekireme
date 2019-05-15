@@ -191,7 +191,6 @@ function registAcount(user_id) {
                         //変更なし(名前もIDも両方登録されている状態);
                         console.log('名前,idに変更ありません。');
                     } else {
-                        registDb.updateAcount(user_id, name);
                         userBtnDb.updateButtonId(user_id, name);
                         console.log(name + 'の名前を変更しました');
                     }
