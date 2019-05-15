@@ -16,14 +16,11 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         //返信内容を定義
         if(stage == 1) { // 名前登録 -> 金額入力時処理
 
-            // // 相手のIDをデータベースに登録
-            // registDb.getAcountId(reqText, function(result) {
-            //     // 名前Database登録処理
-            //     lendDb.runLendStage(reqText, result);
-            // });
-            
-            // 名前Database登録処理
-            lendDb.runLendStage(user_id, reqText);
+            // 相手のIDをデータベースに登録
+            registDb.getAcountId(reqText, function(result) {
+                // 名前Database登録処理
+                lendDb.runLendStage(reqText, result, reqText);
+            });
 
             // 金額ボタンを送信
             common.postBtn(req, resText[stage], button['stage'][stage], function(result) {

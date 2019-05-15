@@ -26,7 +26,7 @@ exports.runLendStage = function(user_id, reqText)  {
   });
 }
   //stage2
-var stage2 = function(user_id, reqText) {
+var stage2 = function(user_id, partner_id, reqText) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
       console.log(user_id + ': stage1');
@@ -39,6 +39,7 @@ var stage2 = function(user_id, reqText) {
       { 
         $inc: { stage: 1 },
         $set: { 
+          partner_id: partner_id,
           partner_name: reqText,
           timeStamp: jsDate
           //last_date: jsDate.toDateString(),
