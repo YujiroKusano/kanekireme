@@ -19,7 +19,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             // 相手のIDをデータベースに登録
             registDb.getAcountId(reqText, function(result) {
                 // 名前Database登録処理
-                lendDb.runLendStage(reqText, result, reqText);
+                lendDb.runLendStage(user_id, result, reqText);
             });
 
             // 金額ボタンを送信

@@ -70,7 +70,6 @@ exports.getStage = function(user_id, callback) {
 
             if(getStatus != null) { //成功した場合
                 callback( getStatus.stage );
-
             } else { //失敗した場合
                 callback( 0 );
             }
