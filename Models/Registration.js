@@ -59,7 +59,7 @@ exports.getAcountId= function(name, callback) {
     });
 }
 
-
+//名前が登録されているかを確認
 exports.alreadyName = function(name, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
@@ -80,6 +80,8 @@ exports.alreadyName = function(name, callback) {
         });
     });
 }
+
+//IDが登録されているかを確認
 exports.alreadyId = function(user_id, callback) {
     require('dotenv').config();
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {

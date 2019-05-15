@@ -161,14 +161,24 @@ exports.SpecialpostMsg = function(req, rpdata, callback) {
     });
 }
 
-exports.updateButtonName = function(user_id, name) {
+exports.updateName = function(user_id, name) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(userButton);
         // Find some documents if user_id and not stage
         collection.update(
             { user_id: user_id },
-            { $set: { name: name } 
-          }
+            { $set: { name: name }}
+        );
+    });
+  }
+
+  exports.updateName = function(user_id, name) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        var collection = db.collection(userButton);
+        // Find some documents if user_id and not stage
+        collection.update(
+            { user_id: user_id },
+            { $set: { name: name }}
         );
     });
   }
