@@ -67,8 +67,8 @@ exports.alreadyName = function(name, callback) {
         collection.findOne({ 
             "action": {
                 "type": "message",
-                "label": "中村航太",
-                "text": "中村航太"
+                "label": name,
+                "text": name
             } 
         },
         function(err, docs) {
