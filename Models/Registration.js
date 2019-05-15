@@ -22,7 +22,7 @@ exports.updateAcount = function(user_id, name) {
         // Find some documents if user_id and not stage
         collection.update(
             { 'user_id': user_id },
-            { $set: { text  : name , label: name} }
+            { $set: { action: { type : 'message', text  : name , label: name } } }
         );
     });
 }
