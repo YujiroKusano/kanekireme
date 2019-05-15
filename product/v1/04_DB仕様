@@ -8,6 +8,9 @@
         “user_id”:  {    //stage1
             type: String,
         },
+        "name": {
+            type: String
+        },
         “stage”: {  //各stage
             type: Number,
             default: 1,
