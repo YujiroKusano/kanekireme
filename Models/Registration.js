@@ -49,7 +49,7 @@ exports.getAcountId= function(name, callback) {
         // Get the documents collection
         var collection = db.collection(acount);
         // Find some documents if user_id and not stage
-        collection.findOne({'name': name}, function(err, getStatus) {
+        collection.findOne({ action: { text  : name } }, function(err, getStatus) {
             if(getStatus != null) { //成功した場合
                 callback( getStatus.user_id );
             } else { //失敗した場合

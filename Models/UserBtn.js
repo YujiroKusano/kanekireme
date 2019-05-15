@@ -23,7 +23,7 @@ exports.insertAcount = function(user_id, name) {
   }
 
 
-exports.updateButtonId = function(user_id, name) {
+exports.updateButtonName = function(user_id, name) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(userButton);
         // Find some documents if user_id and not stage
@@ -40,7 +40,7 @@ exports.updateButtonId = function(user_id, name) {
         );
     });
 }
-exports.updateButtonName = function(user_id, name) {
+exports.updateButtonId = function(user_id, name) {
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       var collection = db.collection(userButton);
       // Find some documents if user_id and not stage
