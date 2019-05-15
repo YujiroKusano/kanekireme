@@ -101,11 +101,11 @@ exports.postChecker = function(req, res, callback) {
                         console.log('LineApi.common:Mode0: 対象外のモードです。');
                         return;
                     } else {
-                        regist.getName(user_id, function(name){
-                            //stageを1に進めるための処理
-                            commonDb.stage1(name, reqMode[reqText]);
-                        })
-                        
+  
+                        regist.getName(user_id, function(name) { //LINEAPIから名前を取得
+                        //stageを1に進めるための処理
+                            commonDb.stage1(user_id, name, reqMode[reqText]);
+                        });
                         //登録されたユーザーを取得
                         userBtnDb.getUserButton(user_id, function(button) {
 
