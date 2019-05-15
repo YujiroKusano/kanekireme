@@ -3,13 +3,13 @@ var MongoClient = require('mongodb').MongoClient
 
 
 var commondb = require('./Common');
-exports.runLendStage = function(user_id, reqText)  {
+exports.runLendStage = function(user_id, name, reqText)  {
   commondb.getStage(user_id, (stage) => {
     if(stage == 0) {
       console.log('Lend::stage情報不正: ' + reqText);
     } else if(stage == 1) {
       console.log('Lend::stage１:: stage2実行: ' + reqText);
-      stage2(user_id, reqText);
+      stage2(user_id, name, reqText);
     } else if(stage == 2) {
       console.log('Lend::stage2:: stage3実行: ' + reqText);
       stage3(user_id, reqText);
