@@ -23,8 +23,8 @@ exports.postBtn = function(req, user_id, reqText, callback) {
             // });
             
             // 名前Database登録処理
-            lendDb.runLendStage(reqText, result);
-            
+            lendDb.runLendStage(user_id, reqText);
+
             // 金額ボタンを送信
             common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
                 console.log('Lend:Button:Result: ' + result);
