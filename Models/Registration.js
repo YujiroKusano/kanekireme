@@ -22,7 +22,7 @@ exports.updateAcount = function(user_id, name) {
         // Find some documents if user_id and not stage
         collection.update(
             { 'user_id': user_id },
-            { $set: { name  : name } }
+            { $set: { text  : name , label: name} }
         );
     });
 }
@@ -35,7 +35,7 @@ exports.getAcountName = function(user_id, callback) {
         // Find some documents if user_id and not stage
         collection.findOne({'user_id': user_id}, function(err, getStatus) {
             if(getStatus != null) { //成功した場合
-                callback( getStatus.name );
+                callback( getStatus.action['text'] );
             } else { //失敗した場合
                 callback( 0 );
             }
