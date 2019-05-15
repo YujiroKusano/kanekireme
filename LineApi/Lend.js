@@ -32,7 +32,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
             // 金額が正常に入力されているかを判定
             if(!isNaN(Number(reqText))){
-
+                console.log('reqtext: 金額: ' + reqText);
                 // 金額をDatabaseに登録
                 lendDb.runLendStage(user_id, Number(reqText));
 
