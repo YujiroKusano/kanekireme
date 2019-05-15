@@ -192,7 +192,10 @@ function registAcount(user_id) {
                         //変更なし(名前もIDも両方登録されている状態);
                         console.log('名前,idに変更ありません。');
                     } else {
-                        userBtnDb.updateButtonId(user_id, name);
+                        // 名前が変更されていた時の処理
+                        commonDb.updateName(user_id, name);
+                        commonDb.updatePertnerName(user_id, name);
+                        userBtnDb.updateButtonName(user_id, name);
                         console.log(name + 'の名前を変更しました');
                     }
                 })                               

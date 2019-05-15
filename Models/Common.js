@@ -166,3 +166,25 @@ exports.checkdDate = function(user_id, callback) {
         });  
     });
 }
+
+exports.updateName = function(user_id, name) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        var collection = db.collection(users);
+        // Find some documents if user_id and not stage
+        collection.update(
+            { user_id: user_id },
+            { $set: { name: name } }
+        ) 
+    });
+}
+
+exports.updatePertnerName = function(user_id, name) {
+  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+      var collection = db.collection(users);
+      // Find some documents if user_id and not stage
+      collection.update(
+          { pertner_id: user_id },
+          { $set: { pertner_name: name } }
+      );
+  });
+}
