@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient
 
 
 var commondb = require('./Common');
-exports.runLendStage = function(user_id, pertner_id, reqText)  {
+exports.runLendStage = function(user_id, reqText, pertner_id,)  {
   commondb.getStage(user_id, (stage) => {
     if(stage == 0) {
       console.log('Lend::stage情報不正: ' + reqText);
