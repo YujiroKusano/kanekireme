@@ -198,8 +198,6 @@ function registAcount(user_id) {
                 })                               
             } else {
                 userBtnDb.insertAcount(user_id, name);
-
-                registDb.insertAcount(user_id, name);
                 console.log('新規に' + name + 'を登録しました。');
             }
             return;
