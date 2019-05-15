@@ -1,19 +1,19 @@
-var acount = 'acount';
+const acount = 'userButton';
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
-exports.insertAcount = function(user_id, name) {
+// exports.insertAcount = function(user_id, name) {
 
-    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-      // Get the documents collection
-      var collection = db.collection(acount);
-        // Insert some documents
-        collection.insertMany([{  
-            name: name,
-            user_id: user_id
-      }]);
-    });
-  }
+//     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+//       // Get the documents collection
+//       var collection = db.collection(acount);
+//         // Insert some documents
+//         collection.insertMany([{  
+//             name: name,
+//             user_id: user_id
+//       }]);
+//     });
+//   }
 
 
 exports.updateAcount = function(user_id, name) {
@@ -42,6 +42,7 @@ exports.getAcountName = function(user_id, callback) {
         });
     });
 }
+
 exports.getAcountId= function(name, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         assert.equal(null, err);
