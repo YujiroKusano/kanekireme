@@ -40,14 +40,13 @@ app.get('/showDb', function(req, res, err) {
 })
 
 app.get('/deleteDb', function(req, res, err) {
-
-        res.send(
-            "<H1><form method='post'>"+
-                "<input type='submit' name='action' value='送信'>"+
-            "</form></H1>"
-        );
-    
+    res.send(
+        "<H1><form method='post'>"+
+            "<input type='submit' name='action' value='データベース削除'>"+
+        "</form></H1>"
+    );
 })
+
 app.post('/deleteDb/', function(req, res) {
     test.deleteeAll(function(result){
         //res.send(result);
