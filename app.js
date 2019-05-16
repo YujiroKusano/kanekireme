@@ -49,3 +49,10 @@ app.get('/deleteDb', function(req, res, err) {
         );
     })
 })
+app.get('/deleteDb/送信', function(req, res, err) {
+    test.deleteeAll(function(result){
+        //res.send(result);
+        res.send("aaaaaa"
+        );
+    })
+})
