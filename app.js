@@ -43,9 +43,8 @@ app.get('/deleteDb', function(req, res, err) {
     test.deleteeAll(function(result){
         //res.send(result);
         res.send(
-            "<form>"+
-            "名前：<input type='text' name='namae'></input>"+
-            "<input type='submit' name='action' value='送信'>"+
+            "<form method='post'>"+
+                "<input type='submit' name='action' value='送信'>"+
             "</form>"
         );
     })
