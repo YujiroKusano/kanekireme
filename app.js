@@ -35,20 +35,22 @@ const test = require('./Models/Common');
 
 app.get('/showDb', function(req, res, err) {
     test.getAllDb(function(result){
-        res.send("<H!>"+ result + "</H1>");
+        res.send(result);
     })
 })
 
 app.get('/deleteDb', function(req, res, err) {
-    test.deleteeAll(function(result){
-        //res.send(result);
+
         res.send(
             "<H1><form method='post'>"+
                 "<input type='submit' name='action' value='送信'>"+
             "</form></H1>"
         );
-    })
+    
 })
 app.post('/deleteDb/', function(req, res) {
-    res.send('<H1>DELETED DATABASE!</H1>');
+    test.deleteeAll(function(result){
+        //res.send(result);
+        res.send('<H1>DELETEDDATABASE!</H1><br/>'+'<H1>' +result+ '</H1>');
+    })
 })
