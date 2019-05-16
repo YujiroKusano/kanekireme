@@ -7,7 +7,7 @@ exports.getUserInfo = function(user_id, callback) {
         // Get the documents collection
         var collection = db.collection('users');
         // Find some documents if user_id and not stage
-        collection.find({ 'user_id': user_id }).toArray(function(err, getStatus) {
+        collection.find({ 'Sign_id': user_id }).toArray(function(err, getStatus) {
             if(getStatus != null) { //成功した場合
                 callback( getStatus );
             } else { //失敗した場合
@@ -23,7 +23,7 @@ exports.getPartnerInfo = function(user_id, callback) {
         var collection = db.collection('users');
         collection.aggregate([
            // { $match: { 'partner_name': { $ne: user_id } },
-            { $group: {  _id: "$partner_name", money: { $sum: '$money' } } },
+            { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
             // { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {
             if(!err) { //成功した場合

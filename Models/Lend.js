@@ -36,7 +36,7 @@ exports.runLendStage = function(user_id, reqText, pertner_id,)  {
       jsDate.setHours(jsDate.getHours() + 9);
       // Update document where status is 1, set partner_id equal to 1
       collection.update(
-      { 'user_id': user_id, 'stage': 0},
+      { 'Sign_id': user_id, 'stage': 0},
       { 
         $inc: { stage: 1 },
         $set: { 
@@ -60,7 +60,7 @@ var stage2 = function(user_id, partner_id, reqText) {
       jsDate.setHours(jsDate.getHours() + 9);
       // Update document where status is 1, set partner_id equal to 1
       collection.update(
-      { 'user_id': user_id, 'stage': 1},
+      { 'Sign_id': user_id, 'stage': 1},
       { 
         $inc: { stage: 1 },
         $set: { 
@@ -83,7 +83,7 @@ var stage3 = function(user_id, reqText) {
     jsDate.setHours(jsDate.getHours() + 9);
     // Update document where status is 1, set partner_id equal to 1
     collection.update(
-    { 'user_id': user_id, 'stage': 2},
+    { 'Sign_id': user_id, 'stage': 2},
     { 
       $inc: { stage: 1 },
       $set: { 
@@ -105,7 +105,7 @@ var stage4 = function(user_id, reqText) {
     jsDate.setHours(jsDate.getHours() + 9);
     // Update document where status is 1, set partner_id equal to 1
     collection.update(
-    { 'user_id': user_id, 'stage': 3},
+    { 'Sign_id': user_id, 'stage': 3},
     { 
       $inc: { stage: 1 },
       $set: { 
@@ -127,7 +127,7 @@ var stage5 = function(user_id, reqDate) {
     jsDate.setHours(jsDate.getHours() + 9);
     // Update document where status is 1, set partner_id equal to 1
     collection.update(
-    { 'user_id': user_id, 'stage': 4},
+    { 'Sign_id': user_id, 'stage': 4},
     { 
       // $inc: { 
         

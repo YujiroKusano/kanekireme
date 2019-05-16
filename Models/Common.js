@@ -67,7 +67,7 @@ exports.getStage = function(user_id, callback) {
         var collection = db.collection(users);
 
         // Find some documents if user_id and not stage
-        collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
+        collection.findOne({'Sign_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
 
             if(getStatus != null) { //成功した場合
                 callback( getStatus.stage );
@@ -85,7 +85,7 @@ exports.getMode = function(user_id, callback) {
         var collection = db.collection(users);
 
         // Find some documents if user_id and not stage
-        collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
+        collection.findOne({'Sign_id': user_id, 'stage': { $ne: 0 }}, function(err, getStatus) {
 
             if(getStatus != null) { //成功した場合
                 callback( getStatus.mode );
@@ -105,7 +105,7 @@ exports.resetStage = function(user_id){
         var collection = db.collection(users);
         
         // Find some documents if user_id and not stage
-        collection.remove({ 'user_id': user_id, 'stage': { $ne: 0 }}, function(err, result) {
+        collection.remove({ 'Sign_id': user_id, 'stage': { $ne: 0 }}, function(err, result) {
                 // リセットに失敗した場合
                 if (err) {
                     console.log('reset::ERROR')
@@ -124,7 +124,7 @@ exports.cancelStage = function(user_id){
         var collection = db.collection(users);
         // Find some documents if user_id and not stage
         collection.update(
-            { 'user_id': user_id, 'stage': { $ne: 0 }},
+            { 'Sign_id': user_id, 'stage': { $ne: 0 }},
             { $inc: { stage: -1 } }
         );
     });
@@ -150,7 +150,7 @@ exports.checkdDate = function(user_id, callback) {
         jsDate.setMinutes(jsDate.getMinutes() - 8);
 
         // Stage情報を取得
-        collection.findOne({'user_id': user_id, 'stage': { $ne: 0 }},function(err, getStatus) {
+        collection.findOne({'Sign_id': user_id, 'stage': { $ne: 0 }},function(err, getStatus) {
 
             if(getStatus == null) { // Stage0以外のデータが存在しない場合
                 console.log('CheckDate:: Stage情報なし');
@@ -173,7 +173,7 @@ exports.updateName = function(user_id, name) {
         var collection = db.collection(users);
         // Find some documents if user_id and not stage
         collection.update(
-            { user_id: user_id },
+            { Sign_id: user_id },
             { $set: { name: name } }
         ) 
     });
@@ -184,8 +184,8 @@ exports.updatePertnerName = function(user_id, name) {
       var collection = db.collection(users);
       // Find some documents if user_id and not stage
       collection.update(
-          { pertner_id: user_id },
-          { $set: { pertner_name: name } }
+          { Rent_id: user_id },
+          { $set: { Rent_name: name } }
       );
   });
 }
