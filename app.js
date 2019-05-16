@@ -30,3 +30,17 @@ app.listen(app.get('port'), function() {
     //mongo.connectUsersDb();
     console.log('Node app is running');
 });
+
+const test = require('./Models/Common');
+
+app.get('/showDb', function(req, res, err) {
+    test.getAllDb(function(result){
+        res.send(result);
+    })
+})
+
+app.get('/deleteDb', function(req, res, err) {
+    test.deleteeAll(function(result){
+        res.send(result);
+    })
+})

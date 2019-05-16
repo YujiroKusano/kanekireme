@@ -25,6 +25,31 @@ exports.runLendStage = function(user_id, reqText, pertner_id,)  {
     }
   });
 }
+
+  //stage1
+  var stage1 = function(user_id, partner_id, reqText) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+      // Get the documents collection
+      console.log(user_id + ': stage1');
+      var collection = db.collection('users');
+      var jsDate = new Date();
+      jsDate.setHours(jsDate.getHours() + 9);
+      // Update document where status is 1, set partner_id equal to 1
+      collection.update(
+      { 'user_id': user_id, 'stage': 0},
+      { 
+        $inc: { stage: 1 },
+        $set: { 
+          Lend_id: partner_id,
+          Lend_name: reqText,
+          timeStamp: jsDate
+          //last_date: jsDate.toDateString(),
+          //last_time: jsDate.toLocaleTimeString()
+         } 
+      });
+    });
+};
+
   //stage2
 var stage2 = function(user_id, partner_id, reqText) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
@@ -39,8 +64,8 @@ var stage2 = function(user_id, partner_id, reqText) {
       { 
         $inc: { stage: 1 },
         $set: { 
-          partner_id: partner_id,
-          partner_name: reqText,
+          Rent_id: partner_id,
+          Rent_name: reqText,
           timeStamp: jsDate
           //last_date: jsDate.toDateString(),
           //last_time: jsDate.toLocaleTimeString()

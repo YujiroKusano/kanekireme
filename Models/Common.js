@@ -48,8 +48,9 @@ exports.stage1 = function(user_id, name, mode) {
         // Insert some documents
         collection.insertMany([{  
             _id: getId,
-            user_id: user_id, 
-            name: name,
+            Sign_id: user_id, 
+            Lend_id: user_id, 
+            Lend_name: name,
             stage: 1,
             mode: mode,
             timeStamp: jsDate
@@ -188,3 +189,43 @@ exports.updatePertnerName = function(user_id, name) {
       );
   });
 }
+
+
+//---------------------------------------------------------------------
+exports.getAllDb = function(callback) {
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+        assert.equal(null, err);
+        // Get the documents collection
+        var collection = db.collection('users');
+        // Find some documents if user_id and not stage
+        collection.find({ }).toArray(function(err, getStatus) {
+            if(getStatus != null) { //成功した場合
+                callback( getStatus );
+            } else { //失敗した場合
+                callback( 0 );
+            }
+        });
+    });
+}
+
+// Stage情報を初期化する処理
+exports.deleteeAll = function(callback){
+    MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+
+        // Get the documents collection
+        var collection = db.collection(users);
+        
+        // Find some documents if user_id and not stage
+        collection.remove({ }, function(err, result) {
+                // リセットに失敗した場合
+                if (err) {
+                    callback('reset::ERROR');
+                } else {
+                    callback('削除成功');
+                }
+            }
+        )}
+        
+    );
+}
+//---------------------------------------------------------------------
