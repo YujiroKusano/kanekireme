@@ -49,10 +49,6 @@ app.get('/deleteDb', function(req, res, err) {
         );
     })
 })
-app.get('/deleteDb/送信', function(req, res, err) {
-    test.deleteeAll(function(result){
-        //res.send(result);
-        res.send("aaaaaa"
-        );
-    })
+app.post('/deleteDb/', function(req, res) {
+    res.send('DELETED DATABASE!');
 })
