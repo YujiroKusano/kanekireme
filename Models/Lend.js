@@ -41,7 +41,7 @@ exports.runLendStage = function(user_id, reqText, pertner_id, name)  {
         $inc: { stage: 1 },
         $set: {
           Lend_id: user_id,
-          Lend_name: ,
+          Lend_name: name,
           Rent_id: partner_id,
           Rent_name: reqText,
           timeStamp: jsDate
