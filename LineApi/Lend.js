@@ -5,6 +5,8 @@ var common = require('./Common');
 var commonDb = require('../Models/Common');
 var lendDb = require('../Models/Lend');
 var registDb = require('../Models/Registration');
+
+var regist = require('./Registration');
 //menu画面を返信する
 exports.postBtn = function(req, user_id, reqText, callback) {
     require('dotenv').config();
