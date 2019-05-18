@@ -48,9 +48,7 @@ exports.stage1 = function(user_id, name, mode) {
         // Insert some documents
         collection.insertMany([{  
             _id: getId,
-            Sign_id: user_id, 
-            Lend_id: user_id, 
-            Lend_name: name,
+            Sign_id: user_id,
             stage: 1,
             mode: mode,
             timeStamp: jsDate

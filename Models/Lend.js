@@ -3,13 +3,13 @@ var MongoClient = require('mongodb').MongoClient
 
 
 var commondb = require('./Common');
-exports.runLendStage = function(user_id, reqText, pertner_id,)  {
+exports.runLendStage = function(user_id, reqText, pertner_id, name)  {
   commondb.getStage(user_id, (stage) => {
     if(stage == 0) {
       console.log('Lend::stage情報不正: ' + reqText);
     } else if(stage == 1) {
       console.log('Lend::stage１:: stage2実行: ' + reqText);
-      stage2(user_id, pertner_id, reqText);
+      stage2(user_id, pertner_id, reqText, name);
     } else if(stage == 2) {
       console.log('Lend::stage2:: stage3実行: ' + reqText);
       stage3(user_id, reqText);
@@ -27,7 +27,7 @@ exports.runLendStage = function(user_id, reqText, pertner_id,)  {
 }
 
   //stage1
-  var stage1 = function(user_id, partner_id, reqText) {
+  var stage1 = function(user_id, partner_id, reqText, name) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       // Get the documents collection
       console.log(user_id + ': stage1');
@@ -39,9 +39,11 @@ exports.runLendStage = function(user_id, reqText, pertner_id,)  {
       { 'Sign_id': user_id, 'stage': 0},
       { 
         $inc: { stage: 1 },
-        $set: { 
-          Lend_id: partner_id,
-          Lend_name: reqText,
+        $set: {
+          Lend_id: user_id,
+          Lend_name: ,
+          Rent_id: partner_id,
+          Rent_name: reqText,
           timeStamp: jsDate
           //last_date: jsDate.toDateString(),
           //last_time: jsDate.toLocaleTimeString()

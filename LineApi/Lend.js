@@ -18,8 +18,10 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
             // 相手のIDをデータベースに登録
             registDb.getAcountId(reqText, function(result) {
-                // 名前Database登録処理
-                lendDb.runLendStage(user_id, reqText, result);
+                regist.getName(user_id, function(name) { //LINEAPIから名前を取得    
+                    // 名前Database登録処理
+                    lendDb.runLendStage(user_id, reqText, result, name);
+                });
             });
 
             // 金額ボタンを送信
