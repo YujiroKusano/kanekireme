@@ -1,6 +1,7 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
+var regist = require('./Registration');
 
 var commondb = require('./Common');
 exports.runLendStage = function(user_id, reqText, pertner_id, name)  {
