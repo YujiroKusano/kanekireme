@@ -8,6 +8,9 @@ exports.postdbs = function(req, user_id, callback) {
     showModels.getRentInfo(user_id, function(result){
         var resText = '';
         for (test in result) {
+            if(test > 0) {
+                resText += '\n';
+            }
             resText += result[test]['_id'] + ' / ' + result[test]['money'];
         }
         common.postMsg(req, resText, function(result) {
