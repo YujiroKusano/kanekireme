@@ -10,7 +10,7 @@ exports.postdbs = function(req, user_id, callback) {
     };
     //返信内容を定義    
     showModels.getPartnerInfo(user_id, function(result){
-        common.postMsg(req, result, function(result) {
+        common.postMsg(req, JSON.stringify(result), function(result) {
             callback(null, result);
         })
     });
