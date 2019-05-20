@@ -24,33 +24,6 @@ exports.runLendStage = function(user_id, reqText, pertner_id, name)  {
     }
   });
 }
-
-//   //stage1
-//   var stage1 = function(user_id, partner_id, reqText, name) {
-//     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-//       // Get the documents collection
-//       console.log(user_id + ': stage1');
-//       var collection = db.collection('users');
-//       var jsDate = new Date();
-//       jsDate.setHours(jsDate.getHours() + 9);
-//       // Update document where status is 1, set partner_id equal to 1
-//       collection.update(
-//       { 'Sign_id': user_id, 'stage': 0},
-//       { 
-//         $inc: { stage: 1 },
-//         $set: {
-//           Lend_id: user_id,
-//           Lend_name: name,
-//           Rent_id: partner_id,
-//           Rent_name: reqText,
-//           timeStamp: jsDate
-//           //last_date: jsDate.toDateString(),
-//           //last_time: jsDate.toLocaleTimeString()
-//          } 
-//       });
-//     });
-// };
-
   //stage2
 var stage2 = function(user_id, partner_id, reqText, name) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
@@ -70,8 +43,6 @@ var stage2 = function(user_id, partner_id, reqText, name) {
           Rent_id: partner_id,
           Rent_name: reqText,
           timeStamp: jsDate
-          //last_date: jsDate.toDateString(),
-          //last_time: jsDate.toLocaleTimeString()
          } 
       });
     });
@@ -92,8 +63,6 @@ var stage3 = function(user_id, reqText) {
       $set: { 
         money: reqText,
         timeStamp: jsDate
-        //last_date: jsDate.toDateString(),
-        //last_time: jsDate.toLocaleTimeString()
        } 
     });
   });
@@ -114,8 +83,6 @@ var stage4 = function(user_id, reqText) {
       $set: { 
         detail: reqText,
         timeStamp: jsDate
-        //last_date: jsDate.toDateString(),
-        //last_time: jsDate.toLocaleTimeString()
        } 
     });
   });
@@ -132,37 +99,11 @@ var stage5 = function(user_id, reqDate) {
     collection.update(
     { 'Sign_id': user_id, 'stage': 4},
     { 
-      // $inc: { 
-        
-      // },
       $set: { 
         stage: 0, 
         date: reqDate,
         timeStamp: jsDate
-        //last_date: jsDate.toDateString(),
-        //last_time: jsDate.toLocaleTimeString()
        } 
     });
   });
 };
-
-// //stage5
-// var stage6 = function(user_id, reqDate) {
-//   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-//     // Get the documents collection
-//     var collection = db.collection('users');
-//     var jsDate = new Date();
-//     jsDate.setHours(jsDate.getHours() + 9);
-//     // Update document where status is 1, set partner_id equal to 1
-//     collection.update(
-//     { 'user_id': user_id, 'stage': 5},
-//     { 
-//      // $inc: {  },
-//       $set: { 
-//         stage: 0,
-//         last_date: jsDate.toDateString(),
-//         last_time: jsDate.toLocaleTimeString()
-//        } 
-//     });
-//   });
-// };

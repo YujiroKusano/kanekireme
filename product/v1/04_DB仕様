@@ -38,5 +38,6 @@
             type: String,
             maxLength: 30,
         },
-    }
+    },
+    
 }
