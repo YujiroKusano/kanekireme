@@ -10,7 +10,7 @@ exports.postdbs = function(req, user_id, callback) {
     };
     //返信内容を定義    
     showModels.getPartnerInfo(user_id, function(result){
-        var resText;
+        var resText = '';
         for (test in result) {
             resText += result[test]['_id'] + ' / ' + result[test]['money'] + '\n';
             console.log(result[test]['_id'] + ' / ' + result[test]['money'] + '\n');
