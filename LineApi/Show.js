@@ -12,7 +12,7 @@ exports.postdbs = function(req, user_id, callback) {
     showModels.getPartnerInfo(user_id, function(result){
         var resText;
         for (test in result) {
-            resText = result[test]['_id'] + ' / ' + result[test]['money'] + '\n';
+            resText += result[test]['_id'] + ' / ' + result[test]['money'] + '\n';
         }
         common.postMsg(req, resText, function(result) {
             callback(null, result);
