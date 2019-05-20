@@ -17,7 +17,7 @@ exports.getUserInfo = function(user_id, callback) {
     });
 }
 
-exports.getPartnerInfo = function(user_id, callback) {
+exports.getRentInfo = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         // Get the documents collection
         var collection = db.collection('users');
