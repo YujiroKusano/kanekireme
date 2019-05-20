@@ -20,24 +20,17 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
             regist.getName(user_id, function(name) { //LINEAPIから名前を取得 
 
-                if(!(name == undefined) || !(name == null)) {
-                    // 相手のIDをデータベースに登録
-                    registDb.getAcountId(reqText, function(result) {   
-                        // 名前Database登録処理
-                        lendDb.runLendStage(user_id, reqText, result, name);
-                    });
-                    // 金額ボタンを送信
-                    common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
-                        console.log('Lend:Button:Result: ' + result);
-                        callback(result);
-                    });
-                } else {
-                    //エラーメッセージを送信
-                    var resText = '正しいユーザーを入力してください';
-                    common.postMsg(req, resText, function(result) {
-                        callback(result);
-                    });
-                }
+                // 相手のIDをデータベースに登録
+                registDb.getAcountId(reqText, function(result) {   
+                    // 名前Database登録処理
+                    lendDb.runLendStage(user_id, reqText, result, name);
+                });
+                // 金額ボタンを送信
+                common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
+                    console.log('Lend:Button:Result: ' + result);
+                    callback(result);
+                });
+         
             });
 
             
