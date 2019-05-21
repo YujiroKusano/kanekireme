@@ -6,6 +6,7 @@ let commonDb = require('../Models/Common');
 let lendDb = require('../Models/Lend');
 let registDb = require('../Models/Registration');
 let userBtnDb = require('../Models/UserBtn');
+let registDb = require('../Models/Registration');
 
 //menu画面を返信する
 exports.postBtn = function(req, user_id, reqText, callback) {
@@ -18,7 +19,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         //返信内容を定義
         if(stage == 1) { // 名前登録 -> 金額入力時処理
 
-            userBtnDb.getUserName(user_id, function(name) { //LINEAPIから名前を取得 
+           registDb.getAcountName(user_id, function(name) { //LINEAPIから名前を取得 
 
                 // 相手のIDをデータベースに登録
                 registDb.getAcountId(reqText, function(result) {   
