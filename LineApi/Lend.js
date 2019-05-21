@@ -1,12 +1,12 @@
-var fs = require('fs');
-var button = JSON.parse(fs.readFileSync('./config/lend.json', 'utf8'));
+let fs = require('fs');
+let button = JSON.parse(fs.readFileSync('./config/lend.json', 'utf8'));
 
-var common = require('./Common');
-var commonDb = require('../Models/Common');
-var lendDb = require('../Models/Lend');
-var registDb = require('../Models/Registration');
+let common = require('./Common');
+let commonDb = require('../Models/Common');
+let lendDb = require('../Models/Lend');
+let registDb = require('../Models/Registration');
+let userBtnDb = require('../Models/UserBtn');
 
-var regist = require('./Registration');
 //menu画面を返信する
 exports.postBtn = function(req, user_id, reqText, callback) {
     require('dotenv').config();
@@ -18,7 +18,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
         //返信内容を定義
         if(stage == 1) { // 名前登録 -> 金額入力時処理
 
-            regist.getName(user_id, function(name) { //LINEAPIから名前を取得 
+            userBtnDb.getUserButton(user_id, function(name) { //LINEAPIから名前を取得 
 
                 // 相手のIDをデータベースに登録
                 registDb.getAcountId(reqText, function(result) {   
