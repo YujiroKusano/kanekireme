@@ -29,7 +29,7 @@ exports.getRentInfo = function(user_id, callback) {
             if(!err) { //成功した場合
                 callback( status );
             } else { //失敗した場合
-                console.log(err);
+                console.log('show::DB: ' + err);
                 callback( 0 );
             }
         });
