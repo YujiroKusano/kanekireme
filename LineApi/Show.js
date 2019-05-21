@@ -14,7 +14,7 @@ exports.postdbs = function(req, user_id, callback) {
             resText += result[test]['_id'] + ' / ' + result[test]['money'];
         }
         common.postMsg(req, resText, function(result) {
-            console.log(result)
+            console.log('itirann: ' + result)
             callback(null, result);
         })
     });

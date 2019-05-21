@@ -22,8 +22,8 @@ exports.getRentInfo = function(user_id, callback) {
         // Get the documents collection
         var collection = db.collection('users');
         collection.aggregate([
-           // { $match: { 'partner_name': { $ne: user_id } },
-            { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
+            { $match: { 'Rent_name': { $ne: user_id } } },
+            { $group: {  _id: "$Lent_name", money: { $sum: '$money' } } },
             // { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {
             if(!err) { //成功した場合
