@@ -65,7 +65,7 @@ exports.getUserButton = function(user_id, callback) {
       // Find some documents if user_id and not stage
       collection.find({user_id: { $ne: user_id }}).toArray(function(err, getButton) {
           if(getButton != null) { //成功した場合
-              callback( getButton['action'].text );
+              callback( getButton );
           } else { //失敗した場合
               callback( 0 );
           }
@@ -81,7 +81,7 @@ exports.getUserName = function(user_id, callback) {
       // Find some documents if user_id and not stage
       collection.find({ 'user_id': user_id }).toArray(function(err, getStatus) {
           if(getStatus != null) { //成功した場合
-              callback( getStatus );
+              callback( getStatus['action']['text'] );
           } else { //失敗した場合
               callback( 0 );
           }

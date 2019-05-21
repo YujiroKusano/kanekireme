@@ -128,39 +128,6 @@ exports.postDPick = function(req, resText, callback) {
 
 }
 
-exports.SpecialpostMsg = function(req, rpdata, callback) {
-    require('dotenv').config();
-
-    //ヘッダー部を定義
-    var headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS + '}',
-    };
-    var data = [{
-        'replyToken': req.body['events'][0]['replyToken'],
-        rpdata
-    }];
-    //オプションを定義
-    var options = {
-        url: 'https://api.line.me/v2/bot/message/reply',
-        proxy: process.env.FIXIE_URL,
-        headers: headers,
-        json: true,
-        body: data
-    };
-    
-    //返信処理
-    request.post(options, function(error, response, body) {
-        if(!error && response.statusCode == 200) {
-            console.log('POST::Message: 正常終了');
-            callback(true);
-        } else {
-            console.log('POST::Message: 異常終了: ' + JSON.stringify(response));
-            callback(false);
-        }
-    });
-}
-
 exports.updateName = function(user_id, name) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         var collection = db.collection(userButton);
