@@ -46,6 +46,7 @@ exports.getLentInfo = function(user_id, callback) {
             // { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {
             if(!err) { //成功した場合
+                console.log('show::db: ' + status)
                 callback( status );
             } else { //失敗した場合
                 console.log('show::DB: ' + err);
