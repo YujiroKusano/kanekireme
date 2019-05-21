@@ -6,7 +6,6 @@ let commonDb = require('../Models/Common');
 let lendDb = require('../Models/Lend');
 let registDb = require('../Models/Registration');
 let userBtnDb = require('../Models/UserBtn');
-let registDb = require('../Models/Registration');
 
 //menu画面を返信する
 exports.postBtn = function(req, user_id, reqText, callback) {
