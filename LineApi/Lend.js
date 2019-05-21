@@ -17,9 +17,7 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
         //返信内容を定義
         if(stage == 1) { // 名前登録 -> 金額入力時処理
-
             registDb.alreadyName(reqText,function(result) {
-                
                 if(result) {
                     registDb.getAcountName(user_id, function(name) { //LINEAPIから名前を取得 
                         // 相手のIDをデータベースに登録
