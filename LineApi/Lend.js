@@ -32,16 +32,13 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                         callback(result);
                     });
                 } else {
+                    var resText = '正しいユーザーを選択してください';
                     // 金額ボタンを送信
-                    common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
+                    common.postBtn(req, resText, button['stage'][stage], function(result) {
                         console.log('Lend:Button:Result: ' + result);
                         callback(result);
                     });
                     //エラーメッセージを送信
-                    var resText = '正しいユーザーを選択してください';
-                    common.postMsg(req, resText, function(result) {
-                        callback(result);
-                    });
                 }
          
             });
