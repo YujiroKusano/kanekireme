@@ -16,10 +16,13 @@ exports.postdbs = function(req, user_id, callback) {
         }
         if(resText != null) {
             common.postMsg(req, resText, function(result) {
-                callback(null, result);
+                callback(result);
             })
         } else {
-            console.log('itiran::error')
+            let eResText = 'えっっr'
+            common.postMsg(req, eResText, function(result) {
+                callback(result);
+            })
         }
 
     });
