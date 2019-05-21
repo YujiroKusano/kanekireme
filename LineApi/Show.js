@@ -5,7 +5,7 @@ var showModels = require('../Models/Show');
 exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     //返信内容を定義    
-    showModels.getRentInfo(user_id, function(result){
+    showModels.getLentInfo(user_id, function(result){
         var resText = '';
         for (test in result) {
             if(test > 0) {
