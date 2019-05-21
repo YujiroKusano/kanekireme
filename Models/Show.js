@@ -39,8 +39,8 @@ exports.getRentInfo = function(user_id, callback) {
 exports.getLentInfo = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         // Get the documents collection
-        var order = db.order('users');
-        order.aggregate([
+        var collection = db.collection('users');
+        collection.aggregate([
             { $match: { 'Lent_id':  user_id  } },
             { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
             // { $project: { partner_name: 1, money: 1 } }
