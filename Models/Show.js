@@ -45,11 +45,10 @@ exports.getLentInfo = function(user_id, callback) {
             { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
             // { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {
-            if(!err) { //成功した場合
-                console.log('show::db: ' + status)
+            if((status != null) || (status != undefined)) { //成功した場合
                 callback( status );
             } else { //失敗した場合
-                console.log('show::DB: ' + err);
+                console.error(err);
                 callback( 0 );
             }
         });
