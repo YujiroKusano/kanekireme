@@ -20,16 +20,29 @@ exports.postBtn = function(req, user_id, reqText, callback) {
 
            registDb.getAcountName(user_id, function(name) { //LINEAPIから名前を取得 
 
-                // 相手のIDをデータベースに登録
-                registDb.getAcountId(reqText, function(result) {   
-                    // 名前Database登録処理
-                    lendDb.runLendStage(user_id, reqText, result, name);
-                });
-                // 金額ボタンを送信
-                common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
-                    console.log('Lend:Button:Result: ' + result);
-                    callback(result);
-                });
+                if(name != 0) {
+                    // 相手のIDをデータベースに登録
+                    registDb.getAcountId(reqText, function(result) {   
+                        // 名前Database登録処理
+                        lendDb.runLendStage(user_id, reqText, result, name);
+                    });
+                    // 金額ボタンを送信
+                    common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
+                        console.log('Lend:Button:Result: ' + result);
+                        callback(result);
+                    });
+                } else {
+                    // 金額ボタンを送信
+                    common.postBtn(req, resText[stage], button['stage'][stage], function(result) {
+                        console.log('Lend:Button:Result: ' + result);
+                        callback(result);
+                    });
+                    //エラーメッセージを送信
+                    var resText = '正しいユーザーを選択してください';
+                    common.postMsg(req, resText, function(result) {
+                        callback(result);
+                    });
+                }
          
             });
 
@@ -50,7 +63,12 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                 });
 
             } else {
-                
+                                
+                //エラーメッセージを送信
+                var resText = '正しい金額を入力してください';
+                common.postMsg(req, resText, function(result) {
+                    callback(result);
+                });
             }
 
         } else if(stage == 3) { // 詳細 -> 日付入力ボタンを表示
