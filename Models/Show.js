@@ -41,7 +41,7 @@ exports.getLentInfo = function(user_id, callback) {
         // Get the documents collection
         var collection = db.collection('users');
         collection.aggregate([
-            //{ $match: { 'Lent_name':  user_id  } },
+            { $match: { 'Lent_id':  user_id  } },
             { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
             // { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {
