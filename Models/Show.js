@@ -39,13 +39,14 @@ exports.getRentInfo = function(user_id, callback) {
 exports.getLentInfo = function(user_id, callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         // Get the documents collection
-        var collection = db.collection('users');
-        collection.aggregate([
+        var articles = db.articles('users');
+        articles.aggregate([
             { $match: { 'Lent_id':  user_id  } },
             { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
             // { $project: { partner_name: 1, money: 1 } }
         ]).toArray(function(err, status) {
             if((status != null) || (status != undefined)) { //成功した場合
+
                 callback( status );
             } else { //失敗した場合
                 console.error(err);
