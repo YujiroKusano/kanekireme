@@ -33,12 +33,20 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                         callback(result);
                     });
                 } else {
-                    var eResText = '正しいユーザーを選択してください';
                     // 金額ボタンを送信
-                    common.postBtn(req, eResText, button['stage'][stage], function(result) {
-                        console.log('Lend:Button:Result: ' + result);
-                        callback(result);
-                    });
+                    userBtnDb.getUserButton(user_id, function(button) {
+
+                        //からではないことを確認
+                        if(button != 0) {
+                            //相手を選択してくださいボタンを表示
+                            var eResText = '正しいユーザーを選択してください';
+                            common.postBtn(req, eResText, button, function(result){
+                                callback(result);
+                            });
+                        } else {
+                            console.error('情報不正：ユーザ取得の際にDBが操作されました')
+                        }
+                    })
                     //エラーメッセージを送信
                 }
 
