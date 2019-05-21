@@ -32,9 +32,9 @@ exports.postBtn = function(req, user_id, reqText, callback) {
                         callback(result);
                     });
                 } else {
-                    var resText = '正しいユーザーを選択してください';
+                    var eResText = '正しいユーザーを選択してください';
                     // 金額ボタンを送信
-                    common.postBtn(req, resText, button['stage'][stage], function(result) {
+                    common.postBtn(req, eResText, button['stage'][stage], function(result) {
                         console.log('Lend:Button:Result: ' + result);
                         callback(result);
                     });
