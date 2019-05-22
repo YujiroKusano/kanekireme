@@ -44,7 +44,6 @@ exports.getLentInfo = function(user_id, callback) {
             { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
         ]).toArray(function(err, status) {
             if((status != null) || (status != undefined)) { //成功した場合
-
                 callback( status );
             } else { //失敗した場合
                 console.error(err);

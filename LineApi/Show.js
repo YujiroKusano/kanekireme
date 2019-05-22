@@ -6,7 +6,7 @@ exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     //返信内容を定義    
     showModels.getLentInfo(user_id, function(result){
-        console.log('itirann: ' + result)
+        console.log('itirann: ' + JSON.stringify(result));
         var resText = '';
         for (test in result) {
             if(result['Lend_id'] == user_id) {
