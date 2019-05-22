@@ -18,7 +18,6 @@ exports.postdbs = function(req, user_id, callback) {
                     if(RentResult[test]['_id'] == RentResult[test]['_id']) {
                         resText += LendResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentResult[test]['money'] * -1));
                     }
-                    resText += LendResult[test]['_id'] + ' / ' + LendResult[test]['money']
                 } else {
                     resText += LendResult[test]['_id'] + ' / ' + LendResult[test]['money']
                 }
