@@ -41,7 +41,7 @@ exports.getLentInfo = function(user_id, callback) {
         // Get the documents collection
         var collection = db.collection('users');
         collection.aggregate([
-            { $match: { Lend_id: { $ne: user_id} } },
+            { $match: { Lend_id: user_id } },
             { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } }
         ]).toArray(function(err, status) {
             if((status != null) || (status != undefined)) { //成功した場合
