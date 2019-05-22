@@ -38,7 +38,7 @@ exports.postdbs = function(req, user_id, callback) {
                         if(LendCnt > 0 || LendCnt > 0) {
                             resText += '\n';
                         }
-                        resText += LendResult[LendCnt]['_id'] + ' / ' + (LendResult[LendCnt]['money'] + (RentResult[RentCnt]['money'] * -1));
+                        resText += LendResult[LendCnt]['_id'] + ' / ¥' + (LendResult[LendCnt]['money'] + (RentResult[RentCnt]['money'] * -1));
                         findFlag = true;
                         break;
                     }
@@ -47,7 +47,7 @@ exports.postdbs = function(req, user_id, callback) {
                     if(LendCnt > 0 || LendCnt > 0) {
                         resText += '\n';
                     }
-                    resText += LendResult[LendCnt]['_id'] + ' / ' + LendResult[LendCnt]['money'];
+                    resText += LendResult[LendCnt]['_id'] + ' / ¥' + LendResult[LendCnt]['money'];
                 } else { //両方に存在した場合
                     findFlag = false;
                 }
@@ -63,7 +63,7 @@ exports.postdbs = function(req, user_id, callback) {
                     if(LendCnt > 0 || LendCnt > 0) {
                         resText += '\n';
                     }
-                    resText += RentResult[RentCnt]['_id'] + ' / ' + (RentResult[RentCnt]['money'] * -1);
+                    resText += RentResult[RentCnt]['_id'] + ' / ¥' + (RentResult[RentCnt]['money'] * -1);
                 } else { //両方に存在した場合
                     findFlag = false;
                 }
