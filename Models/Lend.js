@@ -38,10 +38,10 @@ var stage2 = function(user_id, partner_id, reqText, name) {
       { 
         $inc: { stage: 1 },
         $set: { 
-          Rent_id: user_id,
-          Rent_name: name,
-          pertner_id: partner_id,
-          pertner_name: reqText,
+          Lend_id: user_id,
+          Lend_name: name,
+          Rent_id: partner_id,
+          Rent_name: reqText,
           timeStamp: jsDate
          } 
       });
