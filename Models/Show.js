@@ -41,7 +41,8 @@ exports.getRentInfo = function(user_id, callback) {
         var collection = db.collection('users');
         collection.aggregate([
             { $match: { Rent_id: user_id } },
-            { $group: {  _id: '$Lend_name', money: { $sum: '$money' } } }
+            { $group: {  _id: '$Lend_name', money: { $sum: '$money' } } },
+            { $sort: { _id:1 } }
         ]).toArray(function(err, status) {
             if((status != null) || (status != undefined)) { //成功した場合
                 callback( status );
