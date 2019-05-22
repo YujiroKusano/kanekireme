@@ -188,7 +188,6 @@ exports.updatePertnerName = function(user_id, name) {
   });
 }
 
-
 //---------------------------------------------------------------------
 exports.getAllDb = function(callback) {
     MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
