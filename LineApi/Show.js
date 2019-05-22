@@ -14,7 +14,21 @@ exports.postdbs = function(req, user_id, callback) {
                 if(test > 0) {
                     resText += '\n';
                 }
-                resText += LendResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentResult[test]['money'] * -1));
+                if(RentResult[test]) {
+                    resText += LendResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentResult[test]['money'] * -1));
+                } else {
+                    resText += LendResult[test]['_id'] + ' / ' + LendResult[test]['money']
+                }
+            }
+            for (test in RentResult) {
+                if(test > 0) {
+                    resText += '\n';
+                }
+                if(LendResult[test]) {
+                    resText += RentResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentResult[test]['money'] * -1));
+                } else {
+                    resText += LendResult[test]['_id'] + ' / ' + RentResult[test]['money']
+                }
             }
             if(resText != null) {
                 common.postMsg(req, resText, function(result) {
