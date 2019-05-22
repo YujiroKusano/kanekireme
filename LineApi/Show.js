@@ -11,26 +11,7 @@ exports.postdbs = function(req, user_id, callback) {
             console.log('Rent: ' + JSON.stringify(RentResult));
             var resText = '';
             var findFlag = false;
-            // for (test in LendResult) {
-            //     if(test > 0) {
-            //         resText += '\n';
-            //     }
-            //     if(RentResult[test]) {
-            //         if(RentResult[test]['_id'] == LendResult[test]['_id']) {
-            //             resText += LendResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentResult[test]['money'] * -1));
-            //         }
-            //     } else {
-            //         resText += LendResult[test]['_id'] + ' / ' + LendResult[test]['money']
-            //     }
-            // }
-            // for (test in RentResult) {
-            //     if(!LendResult[test]) {
-            //         if(resText) {
-            //             resText += '\n';
-            //         }
-            //         resText += REndResult[test]['_id'] + ' / ' + (RentResult[test]['money'] * -1);
-            //     } 
-            // }
+           
             /**貸借計算処理 */
             for (LendCnt in LendResult) {
                 for (RentCnt in RentResult) {
