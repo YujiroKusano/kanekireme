@@ -21,10 +21,10 @@ exports.postdbs = function(req, user_id, callback) {
                 }
             }
             for (test in RentResult) {
-                if(resText) {
-                    resText += '\n';
-                }
                 if(!LendResult[test]) {
+                    if(resText) {
+                        resText += '\n';
+                    }
                     resText += REndResult[test]['_id'] + ' / ' + (RentResult[test]['money'] * -1);
                 } 
             }
