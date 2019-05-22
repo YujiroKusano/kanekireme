@@ -34,16 +34,19 @@ exports.postdbs = function(req, user_id, callback) {
             /**貸借計算処理 */
             for (LendCnt in LendResult) {
                 for (RentCnt in RentResult) {
-                    if(LendCnt > 0 || LendCnt > 0) {
-                        resText += '\n';
-                    }
                     if(RentResult[RentCnt]['_id'] == LendResult[LendCnt]['_id']) {  //両方に存在した場合
+                        if(LendCnt > 0 || LendCnt > 0) {
+                            resText += '\n';
+                        }
                         resText += LendResult[LendCnt]['_id'] + ' / ' + (LendResult[LendCnt]['money'] + (RentResult[RentCnt]['money'] * -1));
                         findFlag = true;
                         break;
                     }
                 }
                 if(!findFlag) { //Lendのみ存在していた場合
+                    if(LendCnt > 0 || LendCnt > 0) {
+                        resText += '\n';
+                    }
                     resText += LendResult[LendCnt]['_id'] + ' / ' + LendResult[LendCnt]['money'];
                 } else { //両方に存在した場合
                     findFlag = false;
@@ -57,6 +60,9 @@ exports.postdbs = function(req, user_id, callback) {
                     }
                 }
                 if(!findFlag) { //Rentのみ存在していた場合
+                    if(LendCnt > 0 || LendCnt > 0) {
+                        resText += '\n';
+                    }
                     resText += RentResult[RentCnt]['_id'] + ' / ' + (RentResult[RentCnt]['money'] * -1);
                 } else { //両方に存在した場合
                     findFlag = false;
