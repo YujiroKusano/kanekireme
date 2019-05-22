@@ -24,11 +24,9 @@ exports.postdbs = function(req, user_id, callback) {
                 if(resText) {
                     resText += '\n';
                 }
-                if(LendResult[test]) {
-                    resText += RentResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentResult[test]['money'] * -1));
-                } else {
+                if(!LendResult[test]) {
                     resText += REndResult[test]['_id'] + ' / ' + (RentResult[test]['money'] * -1);
-                }
+                } 
             }
             if(resText != null) {
                 common.postMsg(req, resText, function(result) {
