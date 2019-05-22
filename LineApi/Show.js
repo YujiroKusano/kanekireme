@@ -9,25 +9,24 @@ exports.postdbs = function(req, user_id, callback) {
         showModels.getRentInfo(user_id, function(RentResult) {
             console.log('Lend: ' + JSON.stringify(LendResult));
             console.log('Rent: ' + JSON.stringify(RentResult));
-            callback(true);
+            var resText = '';
+            for (test in LendResult) {
+                if(test > 0) {
+                    resText += '\n';
+                }
+                resText += result[test]['_id'] + ' / ' + (LendrResult[test]['money'] + (RentrResult[test]['money'] * -1));
+            }
+            if(resText != null) {
+                common.postMsg(req, resText, function(result) {
+                    callback(result);
+                })
+            } else {
+                let eResText = 'err'
+                common.postMsg(req, eResText, function(result) {
+                    callback(result);
+                })
+            }
         })
-        // var resText = '';
-        // for (test in result) {
-        //     if(test > 0) {
-        //         resText += '\n';
-        //     }
-        //     resText += result[test]['_id'] + ' / ' + result[test]['money'];
-        // }
-        // if(resText != null) {
-        //     common.postMsg(req, resText, function(result) {
-        //         callback(result);
-        //     })
-        // } else {
-        //     let eResText = 'err'
-        //     common.postMsg(req, eResText, function(result) {
-        //         callback(result);
-        //     })
-        // }
     });
 
 }
