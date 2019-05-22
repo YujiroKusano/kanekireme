@@ -182,8 +182,8 @@ exports.updatePertnerName = function(user_id, name) {
       var collection = db.collection(users);
       // Find some documents if user_id and not stage
       collection.update(
-          { Rent_id: user_id },
-          { $set: { Rent_name: name } }
+          { pertner_id: user_id },
+          { $set: { Pertner_name: name } }
       );
   });
 }

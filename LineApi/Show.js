@@ -9,7 +9,7 @@ exports.postdbs = function(req, user_id, callback) {
         console.log('itirann: ' + JSON.stringify(result));
         var resText = '';
         for (test in result) {
-            if((result['Lend_name'] != name) && (result['Rend_name'] != name) ) {
+            if((result['user_name'] != name) && (result['pertner_name'] != name) ) {
                 continue;
             }
             if(test > 0) {
