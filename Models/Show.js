@@ -42,6 +42,7 @@ exports.getLentInfo = function(user_id, callback) {
         var collection = db.collection('users');
         collection.aggregate([
             { $group: {  _id: "$Rent_name", money: { $sum: '$money' } } },
+            { $project: { _id: 1, Lent_id: 1, money: 1 } }
         ]).toArray(function(err, status) {
             if((status != null) || (status != undefined)) { //成功した場合
                 callback( status );
