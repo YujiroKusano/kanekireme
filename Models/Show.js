@@ -23,7 +23,7 @@ exports.getLendInfo = function(user_id, callback) {
         var collection = db.collection('users');
         collection.aggregate([
             { $match: { Lend_id: user_id } },
-            { $group: {  _id: Rent_name, money: { $sum: '$money' } } }
+            { $group: {  _id: '$Rent_name', money: { $sum: '$money' } } }
         ]).toArray(function(err, status) {
             if((status != null) || (status != undefined)) { //成功した場合
                 callback( status );
@@ -41,7 +41,7 @@ exports.getRentInfo = function(user_id, callback) {
         var collection = db.collection('users');
         collection.aggregate([
             { $match: { Rent_id: user_id } },
-            { $group: {  _id: Lend_name, money: { $sum: '$money' } } }
+            { $group: {  _id: '$Lend_name', money: { $sum: '$money' } } }
         ]).toArray(function(err, status) {
             if((status != null) || (status != undefined)) { //成功した場合
                 callback( status );
