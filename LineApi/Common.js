@@ -94,7 +94,7 @@ exports.postDPick = function(req, resText, callback) {
             "altText": '日付ピッカー',
             "template": {
                 "type": "buttons",
-                "title": '貸した日付',
+                "title": '貸借が発生した日付',
                 "text": resText,
                 "actions": [
                     {
