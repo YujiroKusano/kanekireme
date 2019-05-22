@@ -9,6 +9,9 @@ exports.postdbs = function(req, user_id, callback) {
         console.log('itirann: ' + result)
         var resText = '';
         for (test in result) {
+            if(result.user_id == user_id) {
+                continue;
+            }
             if(test > 0) {
                 resText += '\n';
             }
