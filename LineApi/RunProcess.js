@@ -4,11 +4,11 @@ var async = require('async');
 
 var commonDb = require('../Models/Common');
 var registDb = require('../Models/Registration');
-var lendDb = require('../Models/Lend');
 var userBtnDb = require('../Models/UserBtn');
 
 var common = require('./Common');
 var lend = require('./Lend');
+var Rent = require('./Rent');
 var show = require('./Show');
 var regist = require('./Registration');
 
@@ -134,7 +134,9 @@ exports.postChecker = function(req, res, callback) {
                     }
   
                 } else if(mode == 2) { //借りる処理
-
+                    Rent.postBtn(req, user_id, reqText, function(result) {
+                        callback(result);
+                    });
                 } else if(mode == 3) { //貸す処理
                     //Button表示処理＆返信テキスト処理
                     lend.postBtn(req, user_id, reqText, function(result) {
