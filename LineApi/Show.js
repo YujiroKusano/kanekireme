@@ -21,7 +21,7 @@ exports.postdbs = function(req, user_id, callback) {
                 }
             }
             for (test in RentResult) {
-                if(test > 0) {
+                if(resText) {
                     resText += '\n';
                 }
                 if(LendResult[test]) {
