@@ -14,7 +14,7 @@ exports.postdbs = function(req, user_id, callback) {
                 if(test > 0) {
                     resText += '\n';
                 }
-                resText += LendResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentrResult[test]['money'] * -1));
+                resText += LendResult[test]['_id'] + ' / ' + (LendResult[test]['money'] + (RentResult[test]['money'] * -1));
             }
             if(resText != null) {
                 common.postMsg(req, resText, function(result) {
