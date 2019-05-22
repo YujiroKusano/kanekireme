@@ -5,8 +5,8 @@ var showModels = require('../Models/Show');
 exports.postdbs = function(req, user_id, callback) {
     require('dotenv').config();
     //返信内容を定義    
-    showModels.getLentInfo(user_id, function(LendResult){
-        showModels.getLentInfo(user_id, function(RentResult) {
+    showModels.getLendInfo(user_id, function(LendResult){
+        showModels.getRentInfo(user_id, function(RentResult) {
             console.log('Lend: ' + JSON.stringify(LendResult));
             console.log('Rent: ' + JSON.stringify(RentResult));
             callback(true);
