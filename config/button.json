@@ -1,0 +1,49 @@
+{
+    "stage": [ 
+    [],
+    [
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "取り消し",
+                "text": "取り消し"
+            }
+        }
+    ],
+    [
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "取り消し",
+                "text": "取り消し"
+            }
+        }
+    ],
+    [],
+    [
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "完了",
+                "text": "完了"
+            }
+        }
+    ],
+    [
+        {
+            "type": "action",
+            "imageUrl": "",
+            "action": {
+                "type": "message",
+                "label": "完了",
+                "text": "完了"
+            }
+        }
+    ]
+]} 
