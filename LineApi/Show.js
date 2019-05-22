@@ -9,9 +9,6 @@ exports.postdbs = function(req, user_id, callback) {
         console.log('itirann: ' + JSON.stringify(result));
         var resText = '';
         for (test in result) {
-            if((result['user_name'] != name) && (result['pertner_name'] != name) ) {
-                continue;
-            }
             if(test > 0) {
                 resText += '\n';
             }
