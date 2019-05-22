@@ -22,7 +22,7 @@ exports.postdbs = function(req, user_id, callback) {
                 callback(result);
             })
         } else {
-            let eResText = 'えっっr'
+            let eResText = 'err'
             common.postMsg(req, eResText, function(result) {
                 callback(result);
             })
