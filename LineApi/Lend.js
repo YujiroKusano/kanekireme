@@ -1,5 +1,5 @@
 let fs = require('fs');
-let button = JSON.parse(fs.readFileSync('../config/button.json', 'utf8'));
+let button = JSON.parse(fs.readFileSync('./config/button.json', 'utf8'));
 
 let common = require('./Common');
 let commonDb = require('../Models/Common');
