@@ -100,7 +100,10 @@ exports.postChecker = function(req, res, callback) {
 
                     //モード選択時に対象外の文字が入力された時の判定処理
                     if(reqMode[reqText] == null || reqMode[reqText] == undefined) {
-                        console.log('LineApi.common:Mode0: 対象外のモードです。');
+                        var resText = "コマンド一覧";
+                        common.postBtn(req, resText, cmd, function(result) {
+                            callback(result)
+                        })
                         return;
                     } else {
   
@@ -148,10 +151,7 @@ exports.postChecker = function(req, res, callback) {
                 } else if(mode == 4) { //返済処理
 
                 } else {
-                    var resText = "コマンド一覧";
-                    common.postBtn(req, resText, cmd, function(result) {
-                        callback(result)
-                    })
+
                 }
             });
 
