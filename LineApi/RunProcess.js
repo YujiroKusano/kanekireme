@@ -12,6 +12,8 @@ var Rent = require('./Rent');
 var show = require('./Show');
 var regist = require('./Registration');
 
+var cmd = require('../config/cmd.json')
+
 //POSTされた情報を判定する
 exports.postChecker = function(req, res, callback) {
     async.waterfall([
@@ -145,6 +147,11 @@ exports.postChecker = function(req, res, callback) {
                     
                 } else if(mode == 4) { //返済処理
 
+                } else {
+                    var resText = "コマンド一覧";
+                    common.postBtn(req, resText, cmd, function(result) {
+                        callback(result)
+                    })
                 }
             });
 
